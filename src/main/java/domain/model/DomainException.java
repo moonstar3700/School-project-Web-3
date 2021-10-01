@@ -1,4 +1,4 @@
-package ucll.be.Groep1_17.domain.model;
+package domain.model;
 
 public class DomainException extends RuntimeException {
 	private static final long serialVersionUID = 1L;

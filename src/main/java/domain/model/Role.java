@@ -1,4 +1,4 @@
-package ucll.be.Groep1_17.domain.model;
+package domain.model;
 
 public enum Role {
     ADMIN("admin"), COORDINATOR("coordinator"), TRAINER("trainer");

@@ -1,4 +1,4 @@
-package ucll.be.Groep1_17.domain.model;
+package domain.model;
 
 public enum Group {
     RECREATION("recreation"), YOUTH("youth"), ELITE("elite");

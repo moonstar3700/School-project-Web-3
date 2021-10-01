@@ -1,4 +1,4 @@
-package ucll.be.Groep1_17.domain.model;
+package domain.model;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

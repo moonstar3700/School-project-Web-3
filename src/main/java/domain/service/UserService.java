@@ -1,8 +1,8 @@
-package ucll.be.Groep1_17.domain.service;
+package domain.service;
 
-import ucll.be.Groep1_17.domain.model.Group;
-import ucll.be.Groep1_17.domain.model.Role;
-import ucll.be.Groep1_17.domain.model.User;
+import domain.model.Group;
+import domain.model.Role;
+import domain.model.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
