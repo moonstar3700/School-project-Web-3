@@ -29,7 +29,7 @@
 		ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
 		dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
 		aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
-		qui ratione voluptatem sequi nesciunt. </main>
+		qui ratione voluptatem sequi nesciunt. Test. </main>
 		<footer> &copy; Webontwikkeling 3, UC Leuven-Limburg </footer>
 	</div>
 </body>
