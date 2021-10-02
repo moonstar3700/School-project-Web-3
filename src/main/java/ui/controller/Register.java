@@ -24,7 +24,7 @@ public class Register extends RequestHandler {
         if (errors.size() == 0) {
             try {
                 service.add(user);
-                return "Controller";
+                return "index.jsp";
             }
             catch (DbException exc ) {
                 errors.add(exc.getMessage());
