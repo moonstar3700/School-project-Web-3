@@ -21,7 +21,7 @@
 
                         <li id="actual"><a href="Controller">Home</a></li>
                         <li><a href="Controller?command=Overview">Overview</a></li>
-                        <li><a href="Controller?command=Register">Register</a></li>
+                        <li><a href="register.jsp">Register</a></li>
                         <li id="lastchild"></li>
                     </ul>
                 </nav>

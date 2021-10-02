@@ -81,7 +81,7 @@ public class User {
 
     public void setFirstName(String firstName) {
         if (firstName.isEmpty()) {
-            throw new IllegalArgumentException("No firstname given");
+            throw new IllegalArgumentException("No first name given");
         }
         this.firstName = firstName;
     }
