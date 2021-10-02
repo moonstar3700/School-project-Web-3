@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #FAEBD7;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+header {
+    background-color: #131415;
+}
+
+nav {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr 2fr;
+    grid-column: 2;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header ul {
+    grid-column: 2;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    display: flex-start;
+    justify-content: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+header li a {
+    display: block;
+    text-decoration: none;
+    color: #888888;
+    padding: 0px 10px;
+    font-weight: bold;
+    font-size: 100%;
+}
+
+header li a:hover {
+    color: #42FE10;
+}
+
+header li.hier a {
+    color: #568F46;
+    color: white;
+}
+
+header h1 {
+    color: whitesmoke;
+    text-align: center;
+    padding-top: 1rem;
+    padding-bottom: 0rem;
+}
+
+.item {
+    max-width: 100%;
+    width: auto;
+    margin: 0;
+}
+
+
+/* ???*/
+
+.container {
+    padding: 0;
+    margin: 0
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-rows: 1fr 5fr;
+    grid-column: 2;
+    background-color: #1c1c1c;
+}
+
+main h2,
+section {
+    grid-column: 2;
+}
+
+main h2 {
+    background-color: #131415;
+    margin: 0;
+    color: whitesmoke;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+main p {
+    color: #919191;
+}
+
+.grid,
+.grid1 {
+    background-color: #131415;
+}
+
+main section {
+    border: whitesmoke 2px;
+    border-style: solid;
+    padding: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    background-color: #313131;
+}
+
+footer {
+    background-color: #1c1c1c;
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr;
+    grid-column: 2;
+    padding-bottom: 4rem;
+    padding-top: 4rem;
+}
+
+footer p {
+    grid-column: 2;
+    color: #919191;
+    text-align: center;
+    border-bottom: #919191 solid 1px;
+}
