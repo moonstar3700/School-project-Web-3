@@ -38,7 +38,7 @@ public class User {
     }
 
     public void setEmail(String email) {
-        if (email.isEmpty()) {
+        if (email == null || email.isEmpty()) {
             throw new IllegalArgumentException("No email given");
         }
         String USERID_PATTERN =
@@ -69,7 +69,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        if (password.isEmpty()) {
+        if (password == null || password.isEmpty()) {
             throw new IllegalArgumentException("No password given");
         }
         this.password = password;
@@ -80,7 +80,7 @@ public class User {
     }
 
     public void setFirstName(String firstName) {
-        if (firstName.isEmpty()) {
+        if (firstName == null || firstName.isEmpty()) {
             throw new IllegalArgumentException("No first name given");
         }
         this.firstName = firstName;
@@ -91,7 +91,7 @@ public class User {
     }
 
     public void setLastName(String lastName) {
-        if (lastName.isEmpty()) {
+        if (lastName == null || lastName.isEmpty()) {
             throw new IllegalArgumentException("No last name given");
         }
         this.lastName = lastName;
@@ -102,10 +102,16 @@ public class User {
     }
 
     public void setGroup(Group group) {
+        if (group == null) {
+            throw new IllegalArgumentException("No group given");
+        }
         this.group = group;
     }
 
     public void setGroup(String group) {
+        if (group == null) {
+            throw new IllegalArgumentException("No group given");
+        }
         try {
             this.group = Group.valueOf(group.toUpperCase());
         } catch (IllegalArgumentException e) {
