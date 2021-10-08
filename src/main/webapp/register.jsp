@@ -54,9 +54,30 @@
                             <p><label for="group">Group</label>
                                 <!-- previous value bij select? -->
                                 <select id="group" name="group">
-                <option>Recreation</option>
-                <option>Youth</option>
-                <option>Elite</option>
+                                    <c:choose>
+                                        <c:when test="${groupPreviousValue eq 'Recreation'}">
+                                            <option selected="selected">Recreation</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option>Recreation</option>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <c:choose>
+                                        <c:when test="${groupPreviousValue eq 'Youth'}">
+                                            <option selected="selected">Youth</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option>Youth</option>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <c:choose>
+                                        <c:when test="${groupPreviousValue eq 'Elite'}">
+                                            <option selected="selected">Elite</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option>Elite</option>
+                                        </c:otherwise>
+                                    </c:choose>
             </select>
                             </p>
                             <p><input type="submit" id="signUp" value="Sign Up"></p>

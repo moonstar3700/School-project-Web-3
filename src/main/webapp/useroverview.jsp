@@ -53,14 +53,14 @@
                         <tbody>
                             <c:forEach var="user" items="${allUsers}">
                                 <tr>
-                                    <th>${user.userid}</th>
-                                    <th>${user.firstName}</th>
-                                    <th>${user.lastName}</th>
-                                    <th>${user.email}</th>
-                                    <th>${user.group}</th>
-                                    <th>${user.role}</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                                    <td>${user.userid}</td>
+                                    <td>${user.firstName}</td>
+                                    <td>${user.lastName}</td>
+                                    <td>${user.email}</td>
+                                    <td>${user.group}</td>
+                                    <td>${user.role}</td>
+                                    <td><a href="Controller?command=ToEdit&userid=${user.userid}">Edit</a></td>
+                                    <td>Delete</td>
                                 </tr>
                             </c:forEach>
                         </tbody>
