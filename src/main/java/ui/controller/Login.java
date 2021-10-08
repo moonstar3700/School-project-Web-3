@@ -13,28 +13,9 @@ public class Login extends RequestHandler{
 
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-        //checkEmail(request, errors);
-        List<User> list = service.getAll();
-        String mail = request.getParameter("email");
-        String password = request.getParameter("password");
-        try {
-            for (User u : list) {
-                if (mail.equals(u.getEmail())) {
-                    if (u.isCorrectPassword(password)) {
-                        HttpSession session = request.getSession();
-                        session.setAttribute("user", u);
-                        return "index.jsp";
-                    }
-                }
-            }
-        } catch (IllegalArgumentException exc) {
-            errors.add(exc.getMessage());
-            return "index.jsp";
-        }
+        checkEmail(request, errors);
 
-        return null;
-
-  /*      if (errors.size() == 0) {
+       if (errors.size() == 0) {
             try {
                 return "index.jsp";
             }
@@ -47,12 +28,32 @@ public class Login extends RequestHandler{
         else {
             request.setAttribute("errors", errors);
             return "index.jsp";
-        }*/
+        }
 
     }
 
     private void checkEmail(HttpServletRequest request, ArrayList<String> errors){
         List<User> list = service.getAll();
+        String mail = request.getParameter("email");
+        String password = request.getParameter("password");
+
+        try {
+            for (User u : list) {
+                if (mail.equals(u.getEmail())) {
+                    if (u.isCorrectPassword(password)) {
+                        HttpSession session = request.getSession();
+                        session.setAttribute("user", u.getFirstName());
+                    }
+                    else throw new IllegalArgumentException("No valid password");
+                }
+                else {
+                    throw new IllegalArgumentException("No valid email");
+                }
+            }
+        } catch (IllegalArgumentException exc) {
+            errors.add(exc.getMessage()); }
+
+        /*List<User> list = service.getAll();
         String mail = request.getParameter("email");
         String password = request.getParameter("password");
         try {
@@ -69,9 +70,10 @@ public class Login extends RequestHandler{
             errors.add(exc.getMessage());
         }
 
-        }
+        }*/
 
     }
+}
 
 
 /*    private String helloagain(HttpServletRequest request, HttpServletResponse response) {

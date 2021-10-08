@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -31,24 +32,31 @@
     <div class="grid1">
     </div>
         <section>
-        /*    <c:if test="${not empty errors}">
+            <c:if test="${not empty user}">
+            <div class="alert alert-danger">
+                <p>Hello ${user}</p>
+            </div>
+            </c:if>
+
+            <c:if test="${not empty errors}">
                 <div class="alert alert-danger">
                     <ul>
                         <c:forEach items="${errors}" var="error">
                             <li>${error}</li>
                         </c:forEach>
                     </ul>
-                </div> */
+                </div>
             </c:if>
 
-            <form method="POST" action="Controller?command=Login" novalidate>
-            <p><label for="email">Email</label><input type="email" id="email" name="email" required></p>
-            <p><label for="password">Password</label><input type="password" id="password" name="password" required>
-            <p><input type="submit" id="login" value="Login"></p>
+            <c:if test="${empty user}">
+                <form method="POST" action="Controller?command=Login" novalidate>
+                    <p><label for="email">Email</label><input type="email" id="email" name="email" required></p>
+                    <p><label for="password">Password</label><input type="password" id="password" name="password" required>
+                    <p><input type="submit" id="login" value="Login"></p>
+                </form>
+            </c:if>
 
-            </form>
         </section>
-
 
 
 </main>
