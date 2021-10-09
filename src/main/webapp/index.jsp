@@ -38,6 +38,12 @@
             </div>
             </c:if>
 
+            <c:if  test="${not empty user}">
+                <form method="POST" action="Controller?command=Logout" novalidate>
+                    <p><input type="submit" id="Logout" value="Logout"></p>
+                </form>
+            </c:if>
+
             <c:if test="${not empty errors}">
                 <div class="alert alert-danger">
                     <ul>

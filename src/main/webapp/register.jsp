@@ -8,7 +8,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <meta charset="UTF-8">
             <title>Sign Up</title>
-            <link rel="stylesheet" type="text/css" href="">
+            <link rel="stylesheet" type="text/css" href="css/style3.css">
         </head>
 
         <body>

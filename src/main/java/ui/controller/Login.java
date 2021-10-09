@@ -19,7 +19,7 @@ public class Login extends RequestHandler{
             try {
                 return "index.jsp";
             }
-            catch (Exception exc ) {
+            catch (Exception exc) {
                 errors.add(exc.getMessage());
                 request.setAttribute("errors", errors);
                 return "index.jsp";
@@ -29,13 +29,13 @@ public class Login extends RequestHandler{
             request.setAttribute("errors", errors);
             return "index.jsp";
         }
-
     }
 
     private void checkEmail(HttpServletRequest request, ArrayList<String> errors){
         List<User> list = service.getAll();
         String mail = request.getParameter("email");
         String password = request.getParameter("password");
+        boolean check = false;
 
         try {
             for (User u : list) {
@@ -43,13 +43,12 @@ public class Login extends RequestHandler{
                     if (u.isCorrectPassword(password)) {
                         HttpSession session = request.getSession();
                         session.setAttribute("user", u.getFirstName());
+                        check = true;
                     }
-                    else throw new IllegalArgumentException("No valid password");
-                }
-                else {
-                    throw new IllegalArgumentException("No valid email");
                 }
             }
+            if (!check) {throw new IllegalArgumentException("No valid email or password");}
+
         } catch (IllegalArgumentException exc) {
             errors.add(exc.getMessage()); }
 
