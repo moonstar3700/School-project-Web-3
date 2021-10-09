@@ -23,6 +23,7 @@ public class Edit extends RequestHandler{
 
         if (errors.size() == 0) {
             try {
+                service.update(user);
                 return "Controller?command=Overview";
             }
             catch (Exception exc ) {
@@ -41,7 +42,7 @@ public class Edit extends RequestHandler{
         String firstName = request.getParameter("firstName");
         try {
             user.setFirstName(firstName);
-            request.setAttribute("firstNamePreviousValue", firstName);
+            request.setAttribute("firstNameP", firstName);
         }
         catch (Exception exc) {
             errors.add(exc.getMessage());
@@ -52,7 +53,7 @@ public class Edit extends RequestHandler{
         String lastName = request.getParameter("lastName");
         try {
             user.setLastName(lastName);
-            request.setAttribute("lastNamePreviousValue", lastName);
+            request.setAttribute("lastName", lastName);
         }
         catch (Exception exc) {
             errors.add(exc.getMessage());
@@ -69,7 +70,7 @@ public class Edit extends RequestHandler{
         }
         try {
             user.setEmail(email);
-            request.setAttribute("emailPreviousValue", email);
+            request.setAttribute("email", email);
         }
         catch (Exception exc) {
             errors.add(exc.getMessage());
@@ -80,7 +81,7 @@ public class Edit extends RequestHandler{
         String role = request.getParameter("role");
         try {
             user.setRole(role);
-            request.setAttribute("rolePreviousValue", role);
+            request.setAttribute("role", role);
         }
         catch (Exception exc) {
             errors.add(exc.getMessage());
@@ -91,7 +92,7 @@ public class Edit extends RequestHandler{
         String group = request.getParameter("group");
         try {
             user.setGroup(group);
-            request.setAttribute("groupPreviousValue", group);
+            request.setAttribute("group", group);
         }
         catch (Exception exc) {
             errors.add(exc.getMessage());
