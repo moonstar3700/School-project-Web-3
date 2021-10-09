@@ -13,6 +13,13 @@ public class Edit extends RequestHandler{
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         ArrayList<String> errors = new ArrayList<String>();
         int userid = Integer.parseInt(request.getParameter("userid"));
+        try {
+            service.get(userid);
+        }
+        catch (Exception exc ) {
+            request.setAttribute("errors", exc.getMessage());
+            return "Controller?command=Overview";
+        }
         User user = service.get(userid);
         setFirstName(user, request, errors);
         setLastName(user, request, errors);

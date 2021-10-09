@@ -13,6 +13,13 @@ public class ToEdit extends RequestHandler {
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         int userid = Integer.parseInt(request.getParameter("userid"));
         request.setAttribute("userid", userid);
+        try {
+            service.get(userid);
+        }
+        catch (Exception exc ) {
+            request.setAttribute("errors", exc.getMessage());
+            return "Controller?command=Overview";
+        }
         User user = service.get(userid);
         String firstName = user.getFirstName();
         request.setAttribute("firstName", firstName);

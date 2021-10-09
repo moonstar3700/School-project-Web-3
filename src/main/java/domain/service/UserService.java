@@ -21,7 +21,11 @@ public class UserService {
 
 
     public User get(int userid) {
-        return users.get(userid);
+       User user = users.get(userid);
+       if (user == null) {
+           throw new DbException("User does not exist.");
+       }
+       return user;
     }
 
     public List<User> getAll() {

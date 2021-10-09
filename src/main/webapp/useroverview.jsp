@@ -37,6 +37,16 @@
                         </div>
                     </div>
 
+                    <c:if test="${not empty errors}">
+                        <div class="alert alert-danger">
+                            <ul>
+                                <c:forEach items="${errors}" var="error">
+                                    <li>${error}</li>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                    </c:if>
+
                     <table>
                         <thead>
                             <tr>
