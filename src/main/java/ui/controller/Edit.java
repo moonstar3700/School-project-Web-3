@@ -13,6 +13,7 @@ public class Edit extends RequestHandler{
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         ArrayList<String> errors = new ArrayList<String>();
         int userid = Integer.parseInt(request.getParameter("userid"));
+        request.setAttribute("userid", userid);
         try {
             service.get(userid);
         }
@@ -49,7 +50,7 @@ public class Edit extends RequestHandler{
         String firstName = request.getParameter("firstName");
         try {
             user.setFirstName(firstName);
-            request.setAttribute("firstNameP", firstName);
+            request.setAttribute("firstName", firstName);
         }
         catch (Exception exc) {
             errors.add(exc.getMessage());
