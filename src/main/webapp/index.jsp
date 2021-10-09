@@ -24,7 +24,7 @@
         </ul>
     </nav>
 </header>
-<img class="item" src="images/indexf.jpg" alt="foto dojo">
+<img class="item" src="images/indexf1.jpg" alt="foto dojo">
 <main class="gridfield">
     <div class="grid">
     </div>
@@ -32,15 +32,16 @@
     <div class="grid1">
     </div>
         <section>
+
             <c:if test="${not empty user}">
-            <div class="alert alert-danger">
-                <p>Hello ${user}</p>
+            <div>
+                <p class="userwelcome">Welcome ${user}!</p>
             </div>
             </c:if>
 
             <c:if  test="${not empty user}">
                 <form method="POST" action="Controller?command=Logout" novalidate>
-                    <p><input type="submit" id="Logout" value="Logout"></p>
+                    <p><input type="submit" id="Logout" value="Log out"></p>
                 </form>
             </c:if>
 
@@ -61,6 +62,10 @@
                     <p><input type="submit" id="login" value="Login"></p>
                 </form>
             </c:if>
+
+            <div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci blanditiis dolor eum expedita facere id illo ipsa iste, libero magnam molestiae nam nobis non, nostrum, odio placeat quae quasi quia quibusdam sint velit voluptatem voluptatum? Ad culpa esse hic iusto maxime minus necessitatibus nihil nulla odio quae! Nulla, veritatis!</p>
+            </div>
 
         </section>
 

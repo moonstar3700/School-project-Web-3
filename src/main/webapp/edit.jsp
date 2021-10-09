@@ -25,7 +25,7 @@
 
 
     </header>
-    <img class="item" src="images/register.jpg" alt="foto dojo">
+    <img class="item" src="images/registers.jpg" alt="foto dojo">
     <main class="gridfield">
         <div class="grid">
         </div>
@@ -45,10 +45,9 @@
                 </div>
             </c:if>
 
-            <form method="POST" action="Controller?command=Edit" novalidate="novalidate">
+            <p> je id is ${userid}</p>
+            <form method="POST" action="Controller?command=Edit&userid=${userid}" novalidate="novalidate">
                 <!-- novalidate in order to be able to run tests correctly -->
-                <p><label for="userid">User id</label><input type="number" id="userid" name="userid" readonly="readonly"
-                                                                   value="${userid}"></p>
                 <p><label for="firstName">First Name</label><input type="text" id="firstName" name="firstName" required
                                                                    value="${firstName}"></p>
                 <p><label for="lastName">Last Name</label><input type="text" id="lastName" name="lastName" required

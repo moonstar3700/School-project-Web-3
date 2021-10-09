@@ -47,7 +47,7 @@ public class Login extends RequestHandler{
                     }
                 }
             }
-            if (!check) {throw new IllegalArgumentException("No valid email or password");}
+            if (!check) {throw new IllegalArgumentException("No valid email/password");}
 
         } catch (IllegalArgumentException exc) {
             errors.add(exc.getMessage()); }
