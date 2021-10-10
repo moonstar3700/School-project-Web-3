@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class RegisterTest {
+public class Register {
 	private WebDriver driver;
 	private String path = "http://localhost:8080/Controller";
 	
@@ -20,9 +20,9 @@ public class RegisterTest {
 		//System.setProperty("webdriver.chrome.driver", "/Users/.../web3pers/chromedriver");
 			// windows: gebruik dubbele \\ om pad aan te geven
 			// hint: zoek een werkende test op van web 2 ...
-		System.setProperty("webdriver.chrome.driver", "/Applications/chromedriver");
+		System.setProperty("webdriver.chrome.driver", "D:\\informatica cursus\\IT 2de jaar\\Web 3\\chrome driver\\chromedriver.exe");
 		driver = new ChromeDriver();
-		driver.get(path+"?action=signUp");
+		driver.get("http://localhost:8080/Groep1_17_war2/register.jsp");
 	}
 	
 	@After
@@ -35,14 +35,14 @@ public class RegisterTest {
 		submitForm("Jan", "Janssens", "jan.janssens@hotmail.com" , "1234");
 		
 		String title = driver.getTitle();
-		assertEquals("Overview",title);
+		assertEquals("Home",title);
 		
-		driver.get(path+"?action=overview");
+		driver.get("http://localhost:8080/Groep1_17_war2/Controller?command=Overview");
 		
 		ArrayList<WebElement> listItems=(ArrayList<WebElement>) driver.findElements(By.cssSelector("table tr"));
 		boolean found=false;
 		for (WebElement listItem:listItems) {
-				if (listItem.getText().contains("jan.janssens@hotmail.com") &&  listItem.getText().contains(" Jan Janssens") && listItem.getText().contains("trainer")) {
+				if (listItem.getText().contains("jan.janssens@hotmail.com") && listItem.getText().contains("Jan") && listItem.getText().contains("Janssens") && listItem.getText().contains("TRAINER")) {
 				    found=true;
 			}
 		}
@@ -58,7 +58,7 @@ public class RegisterTest {
 		assertEquals("Sign Up",title);
 		
 		WebElement errorMsg = driver.findElement(By.cssSelector("div.alert-danger ul li"));
-		assertEquals("No firstname given", errorMsg.getText());
+		assertEquals("No first name given", errorMsg.getText());
 
 		WebElement fieldFirstName=driver.findElement(By.id("firstName"));
 		assertEquals("",fieldFirstName.getAttribute("value"));
@@ -135,12 +135,12 @@ public class RegisterTest {
 	public void test_Register_UserAlreadyExists_ErrorMessageGiven(){
 		submitForm("Pieter", "Pieters", "pieter.pieters@hotmail.com", "1234");
 		
-		driver.get(path+"?action=signUp");
+		driver.get("http://localhost:8080/Groep1_17_war2/register.jsp");
 
 		submitForm( "Pieter", "Pieters", "pieter.pieters@hotmail.com", "1234");
 		
 		WebElement errorMsg = driver.findElement(By.cssSelector("div.alert-danger ul li"));
-		assertEquals("User already exists", errorMsg.getText());
+		assertEquals("Email already in use", errorMsg.getText());
 
 		WebElement fieldFirstName=driver.findElement(By.id("firstName"));
 		assertEquals("Pieter",fieldFirstName.getAttribute("value"));
