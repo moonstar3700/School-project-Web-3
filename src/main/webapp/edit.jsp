@@ -25,7 +25,7 @@
 
 
     </header>
-    <img class="item" src="images/registers.jpg" alt="foto dojo">
+    <img class="item" src="images/registerfix.jpg" alt="foto dojo">
     <main class="gridfield">
         <div class="grid">
         </div>

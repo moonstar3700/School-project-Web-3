@@ -117,6 +117,7 @@ textarea {
 
 input[type="text"],
 input[type="email"],
+input[type="password"],
 textarea {
     width: 100%;
 }
@@ -136,21 +137,16 @@ table {
     border-spacing: 0;
 }
 
+
+
 tr:nth-child(even) {
-    background-color: #1c1c1c;
+    background-color: #131415;
 }
 
-dt,
+td,
 th {
     text-align: left;
-}
-
-dt{
-
-}
-
-th {
-    padding: 1rem;
+    padding: 6px;
 }
 
 thead {
@@ -206,8 +202,34 @@ main {
     padding-left: 15%;
 }
 
+input[type="submit"] {
+    background-color: #1c1c1c;
+    width: 7.5rem;
+    padding: 3px;
+    color: whitesmoke;
+    margin-top: 10px;
+    font-weight: bolder;
+}
+
+input[type="submit"]:hover {
+    background-color: #42FE10;
+    cursor: pointer;
+    color: black;
+}
+
+.left, .right{
+    display: inline-block;
+    margin-top: 1rem;
+}
+.left{
+    margin-left: 5%;
+}
+.right{
+    margin-left: 1rem;
+}
 
 /*desktop*/
+
 
 @media screen and (min-width: 650px) {
     nav {
@@ -217,22 +239,25 @@ main {
         margin-left: auto;
         margin-right: auto;
     }
+
     header li a {
         padding: 0px 10px;
     }
+
     header ul {
         grid-column: 2;
         flex-direction: row;
         padding-top: 1rem;
         padding-bottom: 1rem;
     }
+
     .gridfield,
     .overviewgrid {
         display: grid;
         grid-template-columns: 1fr 4fr 1fr;
     }
 
-    .userwelcome{
+    .userwelcome {
         padding-left: 3rem;
         font-size: 2rem;
 
@@ -243,15 +268,18 @@ main {
         grid-column: 2;
         background-color: #1c1c1c;
     }
+
     .maintitle,
     section {
         grid-column: 2;
         margin-left: 0%;
     }
+
     .maintitle {
         padding-left: 0%;
         top: 50%;
     }
+
     main section {
         padding: 2rem;
         margin-top: 3rem;
@@ -259,28 +287,58 @@ main {
         margin-left: 0%;
         margin-right: 0%;
     }
+
     label,
     input,
     textarea {
         display: inline-block;
     }
+
     label {
         width: 100px;
         text-align: right;
         margin-right: 10px;
     }
+
     input[type="text"],
     input[type="email"],
     input[type="password"],
     textarea {
         width: 400px;
     }
+
     input[type="submit"] {
         margin-left: 112px;
+        background-color: #1c1c1c;
+        width: 7.5rem;
+        padding: 3px;
+        color: whitesmoke;
+        margin-top: 10px;
+        font-weight: bolder;
     }
+
+    input[type="submit"]:hover {
+        background-color: #42FE10;
+        cursor: pointer;
+        color: black;
+    }
+
+    .left, .right {
+        display: inline-block;
+    }
+
+    #cancel {
+        margin-left: 0;
+    }
+
+    #delete {
+        margin-left: 0;
+    }
+
     textarea {
         vertical-align: middle;
     }
+
     footer {
         display: grid;
         grid-template-columns: 2fr 1fr 2fr;
@@ -288,6 +346,7 @@ main {
         padding-bottom: 3rem;
         padding-top: 4rem;
     }
+
     footer p {
         grid-column: 2;
         text-align: center;

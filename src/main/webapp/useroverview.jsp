@@ -25,7 +25,7 @@
 
 
                 </header>
-                <img class="item" src="images/overview.jpg" alt="foto dojo">
+                <img class="item" src="images/overviewfix.jpg" alt="foto dojo">
                 <main>
                     <div class="overviewgrid">
                         <div class="grid">
