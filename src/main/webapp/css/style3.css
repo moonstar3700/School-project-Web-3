@@ -66,6 +66,11 @@ main section {
     margin-right: 5%;
 }
 
+.introtext{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
 .alert-danger {
     padding: 0.5em;
     background-color: #f2dede;

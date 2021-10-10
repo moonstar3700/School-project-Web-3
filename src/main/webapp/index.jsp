@@ -64,7 +64,7 @@
             </c:if>
 
             <div>
-                <p>Welcome bij Dojo Kamiyama. Hier kunt u trainingen plannen.</p>
+                <p class="introtext">Welcome bij Dojo Kamiyama. Hier kunt u trainingen plannen.</p>
             </div>
 
         </section>
