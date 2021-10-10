@@ -24,7 +24,7 @@
         </ul>
     </nav>
 </header>
-<img class="item" src="images/indexf1.jpg" alt="foto dojo">
+<img class="item" src="images/indexfix.jpg" alt="foto dojo">
 <main class="gridfield">
     <div class="grid">
     </div>
@@ -64,7 +64,7 @@
             </c:if>
 
             <div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci blanditiis dolor eum expedita facere id illo ipsa iste, libero magnam molestiae nam nobis non, nostrum, odio placeat quae quasi quia quibusdam sint velit voluptatem voluptatum? Ad culpa esse hic iusto maxime minus necessitatibus nihil nulla odio quae! Nulla, veritatis!</p>
+                <p>Welcome bij Dojo Kamiyama. Hier kunt u trainingen plannen.</p>
             </div>
 
         </section>

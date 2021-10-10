@@ -26,10 +26,10 @@ public class RegisterTest {
         driver.get("http://localhost:8080/Groep1_17_war2/register.jsp");
     }
 
-    /*@After
+    @After
     public void clean() {
         driver.quit();
-    }*/
+    }
 
     @Test
     public void test_Register_AllFieldsFilledInCorrectly_UserIsRegistered_and_RoleIsTrainer() {
