@@ -21,9 +21,11 @@ public class RegisterTest {
         //System.setProperty("webdriver.chrome.driver", "/Users/.../web3pers/chromedriver");
         // windows: gebruik dubbele \\ om pad aan te geven
         // hint: zoek een werkende test op van web 2 ...
-        System.setProperty("webdriver.chrome.driver", "D:\\informatica cursus\\IT 2de jaar\\Web 3\\chrome driver\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:/Users/Sarah/Toegepaste Informatica/1ste Fase/Webontwikkeling 2/chromedriver.exe");
+        // System.setProperty("webdriver.chrome.driver", "D:\\informatica cursus\\IT 2de jaar\\Web 3\\chrome driver\\chromedriver.exe");
         driver = new ChromeDriver();
-        driver.get("http://localhost:8080/Groep1_17_war2/register.jsp");
+        driver.get("http://localhost:8080/Groep1_17_war_exploded/register.jsp");
+        // driver.get("http://localhost:8080/Groep1_17_war2/register.jsp");
     }
 
     @After
@@ -32,7 +34,7 @@ public class RegisterTest {
     }
 
     @Test
-    public void test_Register_AllFieldsFilledInCorrectly_UserIsRegistered_and_RoleIsTrainer() {
+    public void test_ARegister_AllFieldsFilledInCorrectly_UserIsRegistered_and_RoleIsTrainer() {
         //submitForm("Jan", "Janssens", "jan.janssens@hotmail.com" , "1234");
 
         RegisterPage registerpage = PageFactory.initElements(driver, RegisterPage.class);
