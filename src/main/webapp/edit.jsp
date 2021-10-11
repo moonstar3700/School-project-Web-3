@@ -45,7 +45,7 @@
                 </div>
             </c:if>
 
-            <p> je id is ${userid}</p>
+            <p> ID: ${userid}</p>
             <form method="POST" action="Controller?command=Edit&userid=${userid}" novalidate="novalidate">
                 <!-- novalidate in order to be able to run tests correctly -->
                 <p><label for="firstName">First Name</label><input type="text" id="firstName" name="firstName" required
