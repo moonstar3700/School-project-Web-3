@@ -20,7 +20,7 @@
     <nav>
         <ul>
 
-            <li id="actual"><a href="Controller">Home</a></li>
+            <li><a id="click" href="Controller">Home</a></li>
             <li><a href="Controller?command=Overview">Overview</a></li>
             <li><a href="register.jsp">Register</a></li>
         </ul>

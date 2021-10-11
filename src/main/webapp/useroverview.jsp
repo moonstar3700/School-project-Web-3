@@ -69,8 +69,8 @@
                                     <td>${user.email}</td>
                                     <td>${user.group}</td>
                                     <td>${user.role}</td>
-                                    <td><a href="Controller?command=ToEdit&userid=${user.userid}">Edit</a></td>
-                                    <td><a href="Controller?command=ConfirmDelete&userid=${user.userid}">Delete</a></td>
+                                    <td><a id="edit" href="Controller?command=ToEdit&userid=${user.userid}">Edit</a></td>
+                                    <td><a id="delete" href="Controller?command=ConfirmDelete&userid=${user.userid}">Delete</a></td>
                                 </tr>
                             </c:forEach>
                         </tbody>
