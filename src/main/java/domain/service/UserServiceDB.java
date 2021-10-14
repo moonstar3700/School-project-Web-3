@@ -1,6 +1,7 @@
 package domain.service;
 
 import domain.model.User;
+import util.DBConnectionService;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -11,8 +12,8 @@ public class UserServiceDB implements UserService {
     private String schema;
 
     public UserServiceDB(){
-        this.connection = DbConnectionService.getDbConnection();
-        this.schema = DbConnectionService.getSchema();
+        this.connection = DBConnectionService.getDbConnection();
+        this.schema = DBConnectionService.getSchema();
     }
 
     @Override
@@ -73,8 +74,8 @@ public class UserServiceDB implements UserService {
      * Reconnects application to db
      */
     private void reConnect() {
-        DbConnectionService.disconnect();   // close connection with db properly
-        DbConnectionService.reconnect();      // reconnect application to db server
-        this.connection = DbConnectionService.getDbConnection();    // assign connection to DBSQL
+        DBConnectionService.disconnect();   // close connection with db properly
+        DBConnectionService.reconnect();      // reconnect application to db server
+        this.connection = DBConnectionService.getDBConnection();    // assign connection to DBSQL
     }
 }

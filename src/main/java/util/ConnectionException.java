@@ -1,6 +1,6 @@
 package util;
 
-public class ConnectionException {
+public class ConnectionException extends RuntimeException {
     public ConnectionException(Exception e) {
     }
 }
