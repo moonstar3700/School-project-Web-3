@@ -1,20 +1,20 @@
 package ui.controller;
 
-import domain.service.UserService;
+import domain.service.UserServiceInMemory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public abstract class RequestHandler {
-    protected UserService service;
+    protected UserServiceInMemory service;
 
     public abstract String handleRequest (HttpServletRequest request, HttpServletResponse response);
 
-    public UserService getService() {
+    public UserServiceInMemory getService() {
         return service;
     }
 
-    public void setService(UserService service) {
+    public void setService(UserServiceInMemory service) {
         this.service = service;
     }
 }

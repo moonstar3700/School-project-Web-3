@@ -1,10 +1,10 @@
 package ui.controller;
 
-import domain.service.UserService;
+import domain.service.UserServiceInMemory;
 
 public class HandlerFactory {
 
-    public RequestHandler getHandler(String command, UserService service) {
+    public RequestHandler getHandler(String command, UserServiceInMemory service) {
         RequestHandler handler = null;
         try {
             Class handlerClass = Class.forName("ui.controller." + command);
