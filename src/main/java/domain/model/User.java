@@ -26,6 +26,15 @@ public class User {
         this.setUserid(userid);
     }
 
+    public User(String email, String password, String firstName, String lastName, String group, String role){
+        setEmail(email);
+        setPassword(password);
+        setFirstName(firstName);
+        setLastName(lastName);
+        setGroup(group);
+        setRole(role);
+    }
+
     public User() {
     }
 
