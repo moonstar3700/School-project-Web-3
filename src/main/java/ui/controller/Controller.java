@@ -1,6 +1,6 @@
 package ui.controller;
 
-import domain.service.UserServiceInMemory;
+import domain.service.AppService;
 
 import java.io.*;
 import javax.servlet.RequestDispatcher;
@@ -11,7 +11,7 @@ import javax.servlet.annotation.*;
 @WebServlet("/Controller")
 public class Controller extends HttpServlet {
 
-    private UserServiceInMemory service = new UserServiceInMemory();
+    private AppService service = new AppService();
     private HandlerFactory handlerFactory = new HandlerFactory();
 
     public Controller() {

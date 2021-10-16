@@ -12,7 +12,7 @@ public class UserServiceDB implements UserService {
     private String schema;
 
     public UserServiceDB(){
-        this.connection = DBConnectionService.getDbConnection();
+        this.connection = DBConnectionService.getDBConnection();
         this.schema = DBConnectionService.getSchema();
     }
 
