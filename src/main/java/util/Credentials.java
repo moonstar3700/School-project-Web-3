@@ -7,4 +7,5 @@ public abstract class Credentials {
         dbProperties.setProperty("user", "r123456");
         dbProperties.setProperty("password", "dagadegijniebepalen!");
     }
+
 }

@@ -13,19 +13,7 @@
 </head>
 
 <body>
-<header>
-    <h1>
-        <span>Dojo Kamiyama</span>
-    </h1>
-    <nav>
-        <ul>
-
-            <li><a id="click" href="Controller">Home</a></li>
-            <li><a href="Controller?command=Overview">Overview</a></li>
-            <li><a href="register.jsp">Register</a></li>
-        </ul>
-    </nav>
-</header>
+<%@ include file="header.jsp" %>
 <img class="item" src="images/registerfix.jpg" alt="foto dojo">
 <main class="gridfield">
     <div class="grid">

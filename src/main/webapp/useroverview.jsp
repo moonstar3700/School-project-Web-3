@@ -13,18 +13,9 @@
 
         <body>
             <div id="container">
-                <header>
-                    <h1>Dojo Kamiyama</h1>
-                    <nav>
-                        <ul>
-                            <li><a href="Controller">Home</a></li>
-                            <li id="actual"><a href="Controller?command=Overview">Overview</a></li>
-                            <li><a href="register.jsp">Register</a></li>
-                        </ul>
-                    </nav>
-
-
-                </header>
+                <jsp:include page="header.jsp">
+                    <jsp:param name="actual" value="Users"/>
+                </jsp:include>
                 <img class="item" src="images/overviewfix.jpg" alt="foto dojo">
                 <main>
                     <div class="overviewgrid">
