@@ -4,10 +4,16 @@ import domain.model.User;
 import util.DBConnectionService;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserServiceDB implements UserService {
+    private final Map<Integer, User> users = new HashMap<Integer, User>();
     private Connection connection;
     private String schema;
 
@@ -18,6 +24,21 @@ public class UserServiceDB implements UserService {
 
     @Override
     public void add(User user) {
+        String query = String.format("insert into %s.user (email,password,firstname,lastname,\"group\",role) values (?,?,?,?,?,?)", schema);
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, user.getEmail());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getFirstName());
+            preparedStatement.setString(4, user.getLastName());
+            preparedStatement.setString(5, user.getGroup().getStringValue());
+            preparedStatement.setString(6, user.getRole().getStringValue());
+            preparedStatement.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
     }
 
@@ -28,11 +49,35 @@ public class UserServiceDB implements UserService {
 
     @Override
     public List<User> getAll() {
-        return null;
+        String query = String.format("SELECT * from %s.user order by id;", schema);
+
+        PreparedStatement statementInsert = null;
+        try {
+            statementInsert = connection.prepareStatement(query);
+            ResultSet resultSet = statementInsert.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String email = resultSet.getString("email");
+                String password = resultSet.getString("password");
+                String firstname = resultSet.getString("firstname");
+                String lastname = resultSet.getString("lastname");
+                String group = resultSet.getString("group");
+                String role = resultSet.getString("role");
+                User user = new User (id, email, password, firstname, lastname, group, role);
+                users.put(id, user);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return new ArrayList<User>(users.values());
     }
 
     @Override
     public void update(User user) {
+        if (user == null) {
+            throw new DbException("No user given");
+        }
 
     }
 
@@ -43,7 +88,7 @@ public class UserServiceDB implements UserService {
 
     @Override
     public int getNumberOfUsers() {
-        return 0;
+        return users.size();
     }
 
     /**
