@@ -44,19 +44,23 @@ public class UserServiceDB implements UserService {
 
     @Override
     public User get(int userid) {
-        return null;
+        User user = users.get(userid);
+        if (user == null) {
+            throw new DbException("User does not exist.");
+        }
+        return user;
     }
 
     @Override
     public List<User> getAll() {
-        String query = String.format("SELECT * from %s.user order by id;", schema);
+        String query = String.format("SELECT * from %s.user order by user_id;", schema);
 
         PreparedStatement statementInsert = null;
         try {
             statementInsert = connection.prepareStatement(query);
             ResultSet resultSet = statementInsert.executeQuery();
             while (resultSet.next()) {
-                int id = resultSet.getInt("id");
+                int id = resultSet.getInt("user_id");
                 String email = resultSet.getString("email");
                 String password = resultSet.getString("password");
                 String firstname = resultSet.getString("firstname");
@@ -77,6 +81,22 @@ public class UserServiceDB implements UserService {
     public void update(User user) {
         if (user == null) {
             throw new DbException("No user given");
+        }
+        String userid = String.valueOf(user.getUserid());
+        String query = String.format("update %s.user set email = ?, password = ?, firstname = ?, lastname = ?, group = ?, role = ? where user_id = ?", schema);
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, "'"+user.getEmail()+"'");
+            preparedStatement.setString(2, "'"+user.getPassword()+"'");
+            preparedStatement.setString(3, "'"+user.getFirstName()+"'");
+            preparedStatement.setString(4, "'"+user.getLastName()+"'");
+            preparedStatement.setString(5, "'"+user.getGroup().getStringValue()+"'");
+            preparedStatement.setString(6, "'"+user.getRole().getStringValue()+"'");
+            preparedStatement.setString(7, "'"+userid+"'");
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
 
     }
