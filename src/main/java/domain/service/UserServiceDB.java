@@ -82,17 +82,17 @@ public class UserServiceDB implements UserService {
         if (user == null) {
             throw new DbException("No user given");
         }
-        String userid = String.valueOf(user.getUserid());
+        int userid = user.getUserid();
         String query = String.format("update %s.user set email = ?, password = ?, firstname = ?, lastname = ?, group = ?, role = ? where user_id = ?", schema);
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, "'"+user.getEmail()+"'");
-            preparedStatement.setString(2, "'"+user.getPassword()+"'");
-            preparedStatement.setString(3, "'"+user.getFirstName()+"'");
-            preparedStatement.setString(4, "'"+user.getLastName()+"'");
-            preparedStatement.setString(5, "'"+user.getGroup().getStringValue()+"'");
-            preparedStatement.setString(6, "'"+user.getRole().getStringValue()+"'");
-            preparedStatement.setString(7, "'"+userid+"'");
+            preparedStatement.setString(1, user.getEmail());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getFirstName());
+            preparedStatement.setString(4, user.getLastName());
+            preparedStatement.setString(5, user.getGroup().getStringValue());
+            preparedStatement.setString(6, user.getRole().getStringValue());
+            preparedStatement.setInt(7, userid);
             preparedStatement.executeUpdate();
 
         } catch (SQLException throwables) {
@@ -103,7 +103,14 @@ public class UserServiceDB implements UserService {
 
     @Override
     public void delete(int userid) {
-
+        String query = String.format("delete from %s.user where user_id = ?", schema);
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, userid);
+            preparedStatement.execute();
+        }catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     @Override
