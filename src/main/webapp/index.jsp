@@ -27,7 +27,7 @@
 
             <c:if test="${not empty user}">
             <div>
-                <p class="userwelcome">Welcome ${user}!</p>
+                <p class="userwelcome">Welcome ${user.firstName}!</p>
             </div>
             </c:if>
 

@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 public class MatchOverview extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute("allMatches", service.getAll());
+        request.setAttribute("allMatches", service.getAllMatches());
         return "matchoverview.jsp";
     }
 }

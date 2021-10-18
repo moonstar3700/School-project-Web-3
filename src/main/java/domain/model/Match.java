@@ -1,28 +1,37 @@
 package domain.model;
 
-import javax.ejb.Local;
-import java.sql.Time;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.time.LocalTime;
 
 public class Match {
     private int matchid;
     private LocalDate date, winnerRegistration;
-    private LocalDateTime time;
+    private LocalTime time;
     private String home,away, winner;
     private User creator;
+    private Group group;
 
-    public Match(LocalDate date, LocalDateTime time, String home, String away) {
+    public Match(LocalDate date, LocalTime time, String home, String away) {
         setDate(date);
         setTime(time);
         setHome(home);
         setAway(away);
 
+
     }
+
 
     public Match() {
 
+    }
+
+    public Match(String date, String time, String home, String away) {
+        setDate(LocalDate.parse(date));
+        setTime(LocalTime.parse(time));
+        setHome(home);
+        setAway(away);
     }
 
     public int getMatchid() {
@@ -52,11 +61,11 @@ public class Match {
         this.winnerRegistration = winnerregistration;
     }
 
-    public LocalDateTime getTime() {
+    public LocalTime getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(LocalTime time) {
         this.time = time;
     }
 
@@ -102,5 +111,16 @@ public class Match {
             throw new DomainException("No creator selected");
         }
         this.creator = creator;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        if (group == null) {
+            throw new IllegalArgumentException("No group given");
+        }
+        this.group = group;
     }
 }

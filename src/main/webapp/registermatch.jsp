@@ -26,6 +26,7 @@
                     <div class="grid1">
                     </div>
                     <section>
+                        <c:if test="${not empty user}">
                         <c:if test="${not empty errors}">
                             <div class="alert alert-danger">
                                 <ul>
@@ -45,6 +46,10 @@
                             <p><input type="submit" id="addMatch" value="Add Match"></p>
 
                         </form>
+                        </c:if>
+                        <c:if test="${empty user}">
+                        <p>U moet ingelogd zijn om een wedstrijd aan te maken.</p>
+                        </c:if>
                     </section>
 
                 </main>

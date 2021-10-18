@@ -42,7 +42,7 @@ public class Login extends RequestHandler{
                 if (mail.equals(u.getEmail())) {
                     if (u.isCorrectPassword(password)) {
                         HttpSession session = request.getSession();
-                        session.setAttribute("user", u.getFirstName());
+                        session.setAttribute("user", u);
                         check = true;
                     }
                 }

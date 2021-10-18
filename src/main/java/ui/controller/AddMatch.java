@@ -1,11 +1,14 @@
 package ui.controller;
 
 import domain.model.Match;
+import domain.model.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class AddMatch extends RequestHandler {
@@ -13,30 +16,33 @@ public class AddMatch extends RequestHandler {
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         ArrayList<String> errors = new ArrayList<>();
         Match match = new Match();
-        setHome(match, request, response);
-        setAway(match, request, response);
-        setDate(match, request, response);
-        setTime(match, request, response);
-
+        setHome(match, request, response, errors);
+        setAway(match, request, response, errors);
+        setDate(match, request, response, errors);
+        setTime(match, request, response, errors);
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        match.setCreator(user);
+        match.setGroup(user.getGroup());
 
         if (errors.size() == 0) {
             try {
                 service.addMatch(match);
-                return "index.jsp";
+                return "Controller?command=MatchOverview";
             }
             catch (Exception exc ) {
                 errors.add(exc.getMessage());
                 request.setAttribute("errors", errors);
-                return "register.jsp";
+                return "registermatch.jsp";
             }
         }
         else {
             request.setAttribute("errors", errors);
-            return "register.jsp";
+            return "registermatch.jsp";
         }
     }
 
-    private void setHome(Match match, HttpServletRequest request, HttpServletResponse response) {
+    private void setHome(Match match, HttpServletRequest request, HttpServletResponse response, ArrayList<String> errors) {
         String home = request.getParameter("home");
         try {
             match.setHome(home);
@@ -47,7 +53,7 @@ public class AddMatch extends RequestHandler {
         }
     }
 
-    private void setAway(Match match, HttpServletRequest request, HttpServletResponse response) {
+    private void setAway(Match match, HttpServletRequest request, HttpServletResponse response, ArrayList<String> errors) {
         String away = request.getParameter("away");
         try {
             match.setAway(away);
@@ -58,7 +64,7 @@ public class AddMatch extends RequestHandler {
         }
     }
 
-    private void setDate(Match match, HttpServletRequest request, HttpServletResponse response) {
+    private void setDate(Match match, HttpServletRequest request, HttpServletResponse response, ArrayList<String> errors) {
         LocalDate date = LocalDate.parse(request.getParameter("date"));
         try {
             match.setDate(date);
@@ -69,8 +75,8 @@ public class AddMatch extends RequestHandler {
         }
     }
 
-    private void setTime(Match match, HttpServletRequest request, HttpServletResponse response) {
-        LocalDateTime time = LocalDateTime.parse(request.getParameter("time"));
+    private void setTime(Match match, HttpServletRequest request, HttpServletResponse response, ArrayList<String> errors) {
+        LocalTime time = LocalTime.parse(request.getParameter("time"));
         try {
             match.setTime(time);
             request.setAttribute("timePreviousValue", time);

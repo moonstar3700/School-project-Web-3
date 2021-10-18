@@ -6,8 +6,8 @@ import domain.model.User;
 import java.util.List;
 
 public class AppService {
-    private UserService users = new UserServiceDB();
-    private MatchService matches = new MatchServiceDB();
+    private UserService users = new UserServiceInMemory();
+    private MatchService matches = new MatchServiceInMemory();
 
     public void add(User user) {
         users.add(user);
@@ -41,7 +41,7 @@ public class AppService {
     public void updateMatch(Match match) {
         matches.update(match);
     }
-    public void deleteMatch(Match match) {
-        matches.delete(match);
+    public void deleteMatch(int matchid) {
+        matches.delete(matchid);
     }
 }

@@ -22,8 +22,8 @@ public class MatchServiceDB implements MatchService {
     }
 
     @Override
-    public void get(int matchid) {
-
+    public Match get(int matchid) {
+        return null;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class MatchServiceDB implements MatchService {
     }
 
     @Override
-    public void delete(Match match) {
+    public void delete(int matchid) {
 
     }
 
