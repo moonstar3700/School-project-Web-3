@@ -18,7 +18,7 @@ public class DBConnectionManager {
         Properties dbProperties = new Properties();
         try {
             Class.forName("util.Secret");  // implementation of abstract class Credentials
-            Credentials.setPass(dbProperties);
+            Secret.setPass(dbProperties);
         } catch (ClassNotFoundException e) {
             System.out.println("Class Secret with credentials not found!");
             throw new ConnectionException(e);

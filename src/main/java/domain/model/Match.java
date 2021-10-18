@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class Match {
     private int matchid;
-    private LocalDate date, winnerregistration;
+    private LocalDate date, winnerRegistration;
     private LocalDateTime time;
     private String home,away, winner;
     private User creator;
@@ -18,6 +18,10 @@ public class Match {
         setTime(time);
         setHome(home);
         setAway(away);
+
+    }
+
+    public Match() {
 
     }
 
@@ -41,11 +45,11 @@ public class Match {
     }
 
     public LocalDate getWinnerregistration() {
-        return winnerregistration;
+        return winnerRegistration;
     }
 
     public void setWinnerregistration(LocalDate winnerregistration) {
-        this.winnerregistration = winnerregistration;
+        this.winnerRegistration = winnerregistration;
     }
 
     public LocalDateTime getTime() {

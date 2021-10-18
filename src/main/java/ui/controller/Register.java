@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Register extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-        ArrayList<String> errors = new ArrayList<String>();
+        ArrayList<String> errors = new ArrayList<>();
         User user = new User();
         setFirstName(user, request, errors);
         setLastName(user, request, errors);

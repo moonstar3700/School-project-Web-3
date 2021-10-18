@@ -5,6 +5,7 @@
         <ul>
             <li><a ${param.current eq 'Home'?"id = actual":""} href="Controller">Home</a></li>
             <li ><a ${param.current eq 'Users'?"id = actual":""} href="Controller?command=UserOverview">Users</a></li>
+            <li ><a ${param.current eq 'Add Match'?"id = actual":""} href="registermatch.jsp">Add Match</a></li>
             <li ><a ${param.current eq 'Matches'?"id = actual":""} href="Controller?command=MatchOverview">Matches</a></li>
             <li><a ${param.current eq 'Register'?"id = actual":""} href="register.jsp">Register</a></li>
         </ul>
