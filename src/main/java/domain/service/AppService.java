@@ -6,7 +6,7 @@ import domain.model.User;
 import java.util.List;
 
 public class AppService {
-    private UserService users = new UserServiceInMemory();
+    private UserService users = new UserServiceDB();
     private MatchService matches = new MatchServiceInMemory();
 
     public void add(User user) {

@@ -83,15 +83,16 @@ public class UserServiceDB implements UserService {
             throw new DbException("No user given");
         }
         int userid = user.getUserid();
-        String query = String.format("update %s.user set email = ?, password = ?, firstname = ?, lastname = ?, group = ?, role = ? where user_id = ?", schema);
+        String query = String.format("update %s.user set email = ?, password = ?, firstname = ?, " +
+                "lastname = ?, group = ?, role = ? where user_id = ?", schema);
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, user.getEmail());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getFirstName());
             preparedStatement.setString(4, user.getLastName());
-            preparedStatement.setString(5, user.getGroup().getStringValue());
-            preparedStatement.setString(6, user.getRole().getStringValue());
+            preparedStatement.setString(5, String.valueOf(user.getGroup()));
+            preparedStatement.setString(6, String.valueOf(user.getRole()));
             preparedStatement.setInt(7, userid);
             preparedStatement.executeUpdate();
 
