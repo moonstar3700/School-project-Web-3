@@ -19,7 +19,7 @@ public class Edit extends RequestHandler{
         }
         catch (Exception exc ) {
             request.setAttribute("errors", exc.getMessage());
-            return "Controller?command=Overview";
+            return "Controller?command=UserOverview";
         }
         User user = service.get(userid);
         setFirstName(user, request, errors);
@@ -32,7 +32,7 @@ public class Edit extends RequestHandler{
         if (errors.size() == 0) {
             try {
                 service.update(user);
-                return "Controller?command=Overview";
+                return "Controller?command=UserOverview";
             }
             catch (Exception exc ) {
                 errors.add(exc.getMessage());
