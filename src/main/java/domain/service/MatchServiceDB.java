@@ -21,7 +21,7 @@ public class MatchServiceDB implements MatchService {
 
     @Override
     public void add(Match match) {
-        String query = String.format("insert into %s.match (matchdate,matchtime,home,away,userid) values (?,?,?,?,?)", schema);
+        String query = String.format("insert into %s.match (matchdate,matchtime,home,away,user_id) values (?,?,?,?,?)", schema);
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
