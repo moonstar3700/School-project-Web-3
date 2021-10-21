@@ -84,7 +84,7 @@ public class UserServiceDB implements UserService {
         }
         int userid = user.getUserid();
         String query = String.format("update %s.user set email = ?, password = ?, firstname = ?, " +
-                "lastname = ?, group = ?, role = ? where user_id = ?", schema);
+                "lastname = ?, \"group\" = ?, \"role\" = ? where user_id = ?", schema);
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, user.getEmail());
