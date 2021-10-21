@@ -36,6 +36,8 @@
                             </div>
                         </c:if>
 
+                        <p>Hier kan u zich registreren als trainer. Als u een andere rol wenst, kan dit later worden aangepast.</p>
+
                         <form method="POST" action="Controller?command=Register" novalidate="novalidate">
                             <!-- novalidate in order to be able to run tests correctly -->
                             <p><label for="firstName">First Name</label><input type="text" id="firstName" name="firstName" required value="${firstNamePreviousValue}"> </p>

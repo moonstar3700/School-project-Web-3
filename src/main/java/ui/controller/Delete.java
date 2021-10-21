@@ -9,6 +9,13 @@ public class Delete extends RequestHandler{
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         int userid = Integer.parseInt(request.getParameter("userid"));
+        try {
+            service.get(userid);
+        }
+        catch (Exception exc) {
+            request.setAttribute("errors", exc.getMessage());
+            return "Controller?command=UserOverview";
+        }
         service.delete(userid);
         return "Controller?command=UserOverview";
     }

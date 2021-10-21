@@ -1,13 +1,16 @@
 package domain.service;
 
 import domain.model.Match;
+import domain.model.User;
 import util.DBConnectionService;
 
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MatchServiceDB implements MatchService {
+    private final Map<Integer, Match> matches = new HashMap<Integer, Match>();
     private Connection connection;
     private String schema;
 
@@ -18,12 +21,29 @@ public class MatchServiceDB implements MatchService {
 
     @Override
     public void add(Match match) {
+        String query = String.format("insert into %s.match (matchdate,matchtime,home,away,userid) values (?,?,?,?,?)", schema);
 
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setDate(1, Date.valueOf(match.getDate()));
+            preparedStatement.setTime(2, Time.valueOf(match.getTime()));
+            preparedStatement.setString(3, match.getHome());
+            preparedStatement.setString(4, match.getAway());
+            preparedStatement.setInt(5, match.getCreator().getUserid());
+            preparedStatement.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     @Override
     public Match get(int matchid) {
-        return null;
+        Match match = matches.get(matchid);
+        if (match == null) {
+            throw new DbException("Match does not exist.");
+        }
+        return match;
     }
 
     @Override

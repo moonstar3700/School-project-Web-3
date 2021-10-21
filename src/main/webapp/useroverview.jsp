@@ -38,6 +38,8 @@
                         </div>
                     </c:if>
 
+                    <c:if test="${not empty allUsers}">
+
                     <table>
                         <thead>
                             <tr>
@@ -66,6 +68,11 @@
                             </c:forEach>
                         </tbody>
                     </table>
+                    </c:if>
+
+                    <c:if test="${empty allUsers}">
+                    <p>Er zijn momenteel geen gebruikers geregistreerd. U kan zich <a href="register.jsp">hier registeren</a>.</p>
+                    </c:if>
                 </main>
                 <footer>
                     <p>

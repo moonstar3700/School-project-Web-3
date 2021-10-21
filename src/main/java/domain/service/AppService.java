@@ -7,7 +7,8 @@ import java.util.List;
 
 public class AppService {
     private UserService users = new UserServiceDB();
-    private MatchService matches = new MatchServiceInMemory();
+    //private MatchService matches = new MatchServiceInMemory();
+    private MatchService matches = new MatchServiceDB();
 
     public void add(User user) {
         users.add(user);

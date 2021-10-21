@@ -37,6 +37,8 @@
                             </div>
                         </c:if>
 
+                            <p>Hier kan u nieuwe wedstrijden toevoegen. Wedstrijden worden altijd toegevoegd voor uw eigen groep.</p>
+
                         <form method="POST" action="Controller?command=AddMatch" novalidate="novalidate">
                             <!-- novalidate in order to be able to run tests correctly -->
                             <p><label for="home">Home Team</label><input type="text" id="home" name="home" required value="${homePreviousValue}"> </p>

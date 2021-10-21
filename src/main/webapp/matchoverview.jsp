@@ -38,7 +38,7 @@
             </div>
         </c:if>
 
-
+        <c:if test="${not empty allMatches}">
         <table>
             <thead>
             <tr>
@@ -77,6 +77,11 @@
             </c:forEach>
             </tbody>
         </table>
+        </c:if>
+
+        <c:if test="${empty allMatches}">
+            <p>Er zijn momenteel geen wedstrijden geregistreerd. U kan <a href="registermatch.jsp">hier wedstrijden toevoegen</a>.</p>
+        </c:if>
     </main>
     <footer>
         <p>
