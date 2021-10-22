@@ -4,6 +4,8 @@ import domain.model.Group;
 import domain.model.Role;
 import domain.model.User;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +15,7 @@ public class UserServiceInMemory implements UserService{
     private final Map<Integer, User> users = new HashMap<Integer, User>();
     private int userid = 1;    // als je later werkt met externe databank, wordt dit userid automatisch gegenereerd
 
-    public UserServiceInMemory() {
+    public UserServiceInMemory() throws UnsupportedEncodingException, NoSuchAlgorithmException {
         User administrator = new User("admin@ucll.be", "t", "Ad", "Ministrator", Group.ELITE);
         administrator.setRole(Role.ADMIN);
         add(administrator);

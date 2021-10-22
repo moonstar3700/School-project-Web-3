@@ -3,6 +3,8 @@ package domain.service;
 import domain.model.User;
 import util.DBConnectionService;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -73,6 +75,10 @@ public class UserServiceDB implements UserService {
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
         return new ArrayList<User>(users.values());
     }

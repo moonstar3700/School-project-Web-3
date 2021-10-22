@@ -10,13 +10,23 @@ public class ConfirmDelete extends RequestHandler{
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         int userid = Integer.parseInt(request.getParameter("userid"));
         request.setAttribute("userid", userid);
-        User user = service.get(userid);
-        String firstName = user.getFirstName();
-        request.setAttribute("firstName", firstName);
-        String lastName = user.getLastName();
-        request.setAttribute("lastName", lastName);
-        String group = user.getGroup().getStringValue();
-        request.setAttribute("group", group);
-        return "confirmdelete.jsp";
+        try {
+            User user = service.get(userid);
+            String firstName = user.getFirstName();
+            request.setAttribute("firstName", firstName);
+            String lastName = user.getLastName();
+            request.setAttribute("lastName", lastName);
+            String group = user.getGroup().getStringValue();
+            request.setAttribute("group", group);
+            return "confirmdelete.jsp";
+        }
+        catch (Exception exc) {
+            request.setAttribute("errors", exc.getMessage());
+            return "Controller?command=UserOverview";
+        }
+
+
+
+
     }
 }

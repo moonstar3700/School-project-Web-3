@@ -25,6 +25,14 @@ header li.hier a {
     color: white;
 }
 
+table a {
+    color: #C1D8FF;
+}
+
+table a:hover {
+    color: #42FE10;
+}
+
 header h1 {
     color: whitesmoke;
     text-align: center;

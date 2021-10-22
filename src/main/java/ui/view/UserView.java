@@ -4,6 +4,8 @@ import domain.model.Group;
 import domain.model.User;
 import util.Secret;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Properties;
 import java.sql.*;
 
@@ -62,6 +64,10 @@ public class UserView {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             System.out.println("Connection no succes");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
     }
 }
