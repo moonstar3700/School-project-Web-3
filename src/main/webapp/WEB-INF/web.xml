@@ -14,7 +14,7 @@
     <welcome-file-list>
         <welcome-file>Controller</welcome-file>
     </welcome-file-list>
-   <!-- <error-page>
+  <!--  <error-page>
         <exception-type>java.lang.Throwable</exception-type>
         <location>/error.jsp</location>
     </error-page>
