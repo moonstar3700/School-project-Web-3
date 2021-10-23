@@ -1,6 +1,8 @@
 package domain.model;
 
 
+import domain.service.UserServiceDB;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -12,12 +14,24 @@ public class Match {
     private String home,away, winner;
     private User creator;
     private Group group;
+    private int userid;
 
     public Match(LocalDate date, LocalTime time, String home, String away) {
         setDate(date);
         setTime(time);
         setHome(home);
         setAway(away);
+    }
+
+    public Match(int id, LocalDate date, LocalTime time, String home, String away, User user, Group group) {
+        this.matchid = id;
+        this.date = date;
+        this.time = time;
+        this.home = home;
+        this.away = away;
+        this.creator = user;
+        this.group = group;
+        //alleen gebruikt voor match uit db, zodat datum fout niet gegooid wordt.
     }
 
 
@@ -111,6 +125,10 @@ public class Match {
         this.creator = creator;
     }
 
+    public void setCreatorId(int userid) {
+        this.userid = userid;
+    }
+
     public Group getGroup() {
         return group;
     }
@@ -120,5 +138,16 @@ public class Match {
             throw new IllegalArgumentException("No group given");
         }
         this.group = group;
+    }
+
+    public void setGroup(String group) {
+        if (group == null) {
+            throw new IllegalArgumentException("No group given");
+        }
+        try {
+            this.group = Group.valueOf(group.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new DomainException("There is no group with value " + group);
+        }
     }
 }

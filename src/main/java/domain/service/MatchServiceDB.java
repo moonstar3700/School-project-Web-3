@@ -1,10 +1,17 @@
 package domain.service;
 
+import domain.model.Group;
 import domain.model.Match;
 import domain.model.User;
 import util.DBConnectionService;
 
+import javax.validation.constraints.Null;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +20,7 @@ public class MatchServiceDB implements MatchService {
     private final Map<Integer, Match> matches = new HashMap<Integer, Match>();
     private Connection connection;
     private String schema;
+    private UserServiceDB users;
 
     public MatchServiceDB(){
         this.connection = DBConnectionService.getDBConnection();
@@ -48,7 +56,39 @@ public class MatchServiceDB implements MatchService {
 
     @Override
     public List<Match> getAll() {
-        return null;
+        String query = String.format("SELECT * from %s.match order by matchdate, matchtime;", schema);
+
+        PreparedStatement statementInsert = null;
+        try {
+            statementInsert = connection.prepareStatement(query);
+            ResultSet resultSet = statementInsert.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("match_id");
+                LocalDate matchDate = resultSet.getDate("matchdate").toLocalDate();
+                LocalTime matchTime = resultSet.getTime("matchtime").toLocalTime();
+                String home = resultSet.getString("home");
+                String away = resultSet.getString("away");
+                int userid = resultSet.getInt("user_id"); //user table querying en gewoon elke user maken?
+                User user;
+                try {
+                    user = users.get(userid); //dit is het niet maar ik weet effe niet wat het wel moet zijn
+                }
+                catch (NullPointerException exc) {
+                    user = new User("deleted@user.com", "deleted", "Deleted", "User", Group.ELITE); //group moet eigenlijk in match table
+                }
+                Group group = user.getGroup();
+                Match match = new Match(id, matchDate, matchTime, home, away, user, group);
+                matches.put(id, match);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (UnsupportedEncodingException e) { //zonder dit geeft het foutmelding
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) { //zonder dit geeft het foutmelding
+            e.printStackTrace();
+        }
+        return new ArrayList<Match>(matches.values());
     }
 
     @Override

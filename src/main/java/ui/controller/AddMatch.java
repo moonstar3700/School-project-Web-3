@@ -1,5 +1,6 @@
 package ui.controller;
 
+import domain.model.DomainException;
 import domain.model.Match;
 import domain.model.User;
 
@@ -30,7 +31,7 @@ public class AddMatch extends RequestHandler {
                 service.addMatch(match);
                 return "Controller?command=MatchOverview";
             }
-            catch (Exception exc ) {
+            catch (DomainException exc ) {
                 errors.add(exc.getMessage());
                 request.setAttribute("errors", errors);
                 return "registermatch.jsp";
@@ -48,7 +49,7 @@ public class AddMatch extends RequestHandler {
             match.setHome(home);
             request.setAttribute("homePreviousValue", home);
         }
-        catch (Exception exc) {
+        catch (DomainException exc) {
             errors.add(exc.getMessage());
         }
     }
@@ -59,7 +60,7 @@ public class AddMatch extends RequestHandler {
             match.setAway(away);
             request.setAttribute("awayPreviousValue", away);
         }
-        catch (Exception exc) {
+        catch (DomainException exc) {
             errors.add(exc.getMessage());
         }
     }
@@ -70,7 +71,7 @@ public class AddMatch extends RequestHandler {
             match.setDate(date);
             request.setAttribute("datePreviousValue", date);
         }
-        catch (Exception exc) {
+        catch (DomainException exc) {
             errors.add(exc.getMessage());
         }
     }
@@ -81,7 +82,7 @@ public class AddMatch extends RequestHandler {
             match.setTime(time);
             request.setAttribute("timePreviousValue", time);
         }
-        catch (Exception exc) {
+        catch (DomainException exc) {
             errors.add(exc.getMessage());
         }
     }
