@@ -18,8 +18,6 @@ public class Match {
         setTime(time);
         setHome(home);
         setAway(away);
-
-
     }
 
 
