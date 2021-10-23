@@ -21,8 +21,6 @@ public class Match {
         setTime(time);
         setHome(home);
         setAway(away);
-
-
     }
 
     public Match(int id, LocalDate date, LocalTime time, String home, String away, User user, Group group) {
