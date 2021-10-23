@@ -1,5 +1,6 @@
 package domain.service;
 
+import domain.model.DomainException;
 import domain.model.Group;
 import domain.model.Match;
 import domain.model.User;
@@ -22,14 +23,14 @@ public class MatchServiceDB implements MatchService {
     private String schema;
     private UserServiceDB users;
 
-    public MatchServiceDB(){
+    public MatchServiceDB() {
         this.connection = DBConnectionService.getDBConnection();
         this.schema = DBConnectionService.getSchema();
     }
 
     @Override
     public void add(Match match) {
-        String query = String.format("insert into %s.match (matchdate,matchtime,home,away,user_id) values (?,?,?,?,?)", schema);
+        String query = String.format("insert into %s.match (matchdate,matchtime,home,away,user_id,match_group) values (?,?,?,?,?,?)", schema);
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -38,6 +39,7 @@ public class MatchServiceDB implements MatchService {
             preparedStatement.setString(3, match.getHome());
             preparedStatement.setString(4, match.getAway());
             preparedStatement.setInt(5, match.getCreator().getUserid());
+            preparedStatement.setString(6, match.getCreator().getGroup().getStringValue());
             preparedStatement.execute();
 
         } catch (SQLException throwables) {
@@ -68,14 +70,16 @@ public class MatchServiceDB implements MatchService {
                 LocalTime matchTime = resultSet.getTime("matchtime").toLocalTime();
                 String home = resultSet.getString("home");
                 String away = resultSet.getString("away");
-                int userid = resultSet.getInt("user_id"); //user table querying en gewoon elke user maken?
+                int userid = resultSet.getInt("user_id");
                 User user;
                 try {
                     user = users.get(userid); //dit is het niet maar ik weet effe niet wat het wel moet zijn
-                }
-                catch (NullPointerException exc) {
+
+                } catch (NullPointerException exc) {
                     user = new User("deleted@user.com", "deleted", "Deleted", "User", Group.ELITE); //group moet eigenlijk in match table
                 }
+                String groupstring = resultSet.getString("match_group");
+                user.setGroup(groupstring);
                 Group group = user.getGroup();
                 Match match = new Match(id, matchDate, matchTime, home, away, user, group);
                 matches.put(id, match);
@@ -83,9 +87,9 @@ public class MatchServiceDB implements MatchService {
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        } catch (UnsupportedEncodingException e) { //zonder dit geeft het foutmelding
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) { //zonder dit geeft het foutmelding
+        } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
         return new ArrayList<Match>(matches.values());
@@ -93,16 +97,48 @@ public class MatchServiceDB implements MatchService {
 
     @Override
     public void update(Match match) {
+        if (match == null) {
+            throw new DbException("No user given");
+        }
+        int matchid = match.getMatchid();
+        if (match.getWinner() == null) {
+            String query = String.format("update %s.match set home = ?, away = ?, matchdate = ?, matchtime = ?,  where match_id = ?", schema);
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1, match.getHome());
+                preparedStatement.setString(2, match.getAway());
+                preparedStatement.setDate(3, Date.valueOf(match.getDate()));
+                preparedStatement.setTime(4, Time.valueOf(match.getTime()));
+                preparedStatement.setInt(5, matchid);
+                preparedStatement.executeUpdate();
 
-    }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        } else {
 
-    @Override
-    public void delete(int matchid) {
+            String query = String.format("update %s.match set home = ?, away = ?, matchdate = ?, matchtime = ?, winner = ?, winnerregistration = ? where match_id = ?", schema);
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setString(1, match.getHome());
+                preparedStatement.setString(2, match.getAway());
+                preparedStatement.setDate(3, Date.valueOf(match.getDate()));
+                preparedStatement.setTime(4, Time.valueOf(match.getTime()));
+                preparedStatement.setString(5, match.getWinner());
+                preparedStatement.setDate(6, Date.valueOf(match.getWinnerregistration()));
+                preparedStatement.setInt(7, matchid);
+                preparedStatement.executeUpdate();
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
 
     }
 
     /**
      * Check the connection and reconnect when necessary
+     *
      * @return the connection with the db, if there is one
      */
     private Connection getConnection() {

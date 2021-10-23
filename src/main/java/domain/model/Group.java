@@ -10,4 +10,5 @@ public enum Group {
     }
 
     public String getStringValue() {return stringValue;}
+
 }

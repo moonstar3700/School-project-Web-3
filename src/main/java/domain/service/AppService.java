@@ -33,16 +33,14 @@ public class AppService {
         matches.add(match);
     }
 
-    public void getMatch(int matchid) {
-        matches.get(matchid);
+    public Match getMatch(int matchid) {
+        return matches.get(matchid);
+
     }
     public List<Match> getAllMatches() {
         return matches.getAll();
     }
     public void updateMatch(Match match) {
         matches.update(match);
-    }
-    public void deleteMatch(int matchid) {
-        matches.delete(matchid);
     }
 }

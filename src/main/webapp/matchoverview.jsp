@@ -39,48 +39,142 @@
         </c:if>
 
         <c:if test="${not empty allMatches}">
-        <table>
-            <thead>
-            <tr>
-                <th>Group</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Home</th>
-                <th>Away</th>
-                <th>Winner</th>
-                <th>Registered on</th>
-                <th>Creator</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-            </thead>
-            <tbody>
+
+            <h3>Elite</h3>
             <c:forEach var="match" items="${allMatches}">
-                <tr>
-                    <td>${match.group}</td>
-                    <td>${match.date}</td>
-                    <td>${match.time}</td>
-                    <td>${match.home}</td>
-                    <td>${match.away}</td>
-                    <c:if test="${not empty match.winner}">
-                        <td>${match.winner}</td>
-                        <td>${match.winnerregistration}</td>
-                    </c:if>
-                    <c:if test="${empty match.winner}">
-                        <td>Deze match heeft nog geen geregistreerd resultaat</td>
-                        <td>Deze match heeft nog geen geregistreerd resultaat</td>
-                    </c:if>
-                    <td>${match.creator.firstName} ${match.creator.lastName}</td>
-                    <td><a id="edit" href="Controller?command=ToEdit&userid=${match.matchid}">Edit</a></td>
-                    <td><a id="delete" href="Controller?command=ConfirmDelete&userid=${match.matchid}">Delete</a></td>
-                </tr>
+                <c:if test="${match.group eq 'ELITE'}">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Group</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Home</th>
+                            <th>Away</th>
+                            <th>Winner</th>
+                            <th>Registered on</th>
+                            <th>Creator</th>
+                            <th>Edit</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>${match.group}</td>
+                            <td>${match.date}</td>
+                            <td>${match.time}</td>
+                            <td>${match.home}</td>
+                            <td>${match.away}</td>
+                            <c:if test="${not empty match.winner}">
+                                <td>${match.winner}</td>
+                                <td>${match.winnerregistration}</td>
+                            </c:if>
+                            <c:if test="${empty match.winner}">
+                                <td>Deze match heeft nog geen geregistreerd resultaat</td>
+                                <td>Deze match heeft nog geen geregistreerd resultaat</td>
+                            </c:if>
+                            <td>${match.creator.firstName} ${match.creator.lastName}</td>
+                            <td><a id="edit1" href="Controller?command=ToEditMatch&matchid=${match.matchid}">Edit</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </c:if>
             </c:forEach>
-            </tbody>
-        </table>
+
+            <h3>Youth</h3>
+
+            <c:forEach var="match" items="${allMatches}">
+                <c:if test="${match.group eq 'YOUTH'}">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Group</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Home</th>
+                            <th>Away</th>
+                            <th>Winner</th>
+                            <th>Registered on</th>
+                            <th>Creator</th>
+                            <th>Edit</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr>
+                            <td>${match.group}</td>
+                            <td>${match.date}</td>
+                            <td>${match.time}</td>
+                            <td>${match.home}</td>
+                            <td>${match.away}</td>
+                            <c:if test="${not empty match.winner}">
+                                <td>${match.winner}</td>
+                                <td>${match.winnerregistration}</td>
+                            </c:if>
+                            <c:if test="${empty match.winner}">
+                                <td>Deze match heeft nog geen geregistreerd resultaat</td>
+                                <td>Deze match heeft nog geen geregistreerd resultaat</td>
+                            </c:if>
+                            <td>${match.creator.firstName} ${match.creator.lastName}</td>
+                            <td><a id="edit2" href="Controller?command=ToEditMatch&matchid=${match.matchid}">Edit</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </c:if>
+            </c:forEach>
+
+            <h3>Recreation</h3>
+
+            <c:forEach var="match" items="${allMatches}">
+                <c:if test="${match.group eq 'RECREATION'}">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Group</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Home</th>
+                            <th>Away</th>
+                            <th>Winner</th>
+                            <th>Registered on</th>
+                            <th>Creator</th>
+                            <th>Edit</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr>
+                            <td>${match.group}</td>
+                            <td>${match.date}</td>
+                            <td>${match.time}</td>
+                            <td>${match.home}</td>
+                            <td>${match.away}</td>
+                            <c:if test="${not empty match.winner}">
+                                <td>${match.winner}</td>
+                                <td>${match.winnerregistration}</td>
+                            </c:if>
+                            <c:if test="${empty match.winner}">
+                                <td>Deze match heeft nog geen geregistreerd resultaat</td>
+                                <td>Deze match heeft nog geen geregistreerd resultaat</td>
+                            </c:if>
+                            <td>${match.creator.firstName} ${match.creator.lastName}</td>
+                            <td><a id="edit3" href="Controller?command=ToEditMatch&matchid=${match.matchid}">Edit</a>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </c:if>
+            </c:forEach>
+
+
         </c:if>
 
         <c:if test="${empty allMatches}">
-            <p>Er zijn momenteel geen wedstrijden geregistreerd. U kan <a href="registermatch.jsp">hier wedstrijden toevoegen</a>.</p>
+            <p>Er zijn momenteel geen wedstrijden geregistreerd. U kan <a href="registermatch.jsp">hier wedstrijden
+                toevoegen</a>.</p>
         </c:if>
     </main>
     <footer>

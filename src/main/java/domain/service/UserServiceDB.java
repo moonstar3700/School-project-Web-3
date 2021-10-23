@@ -51,6 +51,31 @@ public class UserServiceDB implements UserService {
             throw new DbException("User does not exist.");
         }
         return user;
+
+        //moet dit niet met een query?
+
+        /* String query = String.format("SELECT * from %s.user where user_id = ?;", schema);
+        User user = null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, userid);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            int id = resultSet.getInt("user_id");
+            String email = resultSet.getString("email");
+            String password = resultSet.getString("password");
+            String firstname = resultSet.getString("firstname");
+            String lastname = resultSet.getString("lastname");
+            String group = resultSet.getString("group");
+            String role = resultSet.getString("role");
+            user = new User (id, email, password, firstname, lastname, group, role);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return user; */
     }
 
     @Override
