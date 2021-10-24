@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -19,7 +20,7 @@
         <div class="grid">
         </div>
         <h2 class="maintitle">
-            Edit ${param.group} match: ${param.home} vs ${param.away}
+            Edit match: ${home} vs ${away}
         </h2>
         <div class="grid1">
         </div>
@@ -34,7 +35,11 @@
                 </div>
             </c:if>
 
-            <c:if test="${date < now}">
+            <fmt:parseDate value="${date}"  type="date" pattern="yyyy-MM-dd" var="parsedDate" />
+            <fmt:formatDate value="${parsedDate}" type="date" pattern="dd-MM-yyyy" var="stdDatum" />
+            <jsp:useBean id="now" class="java.util.Date" />
+
+            <c:if test="${parsedDate < now}">
 
                 <form method="POST"
                       action="Controller?command=EditMatch&matchid=${matchid}&date=${date}&time=${time}"
@@ -48,7 +53,7 @@
                     <p>Time: ${time}</p>
                     <p>Winner:</p>
                     <input type="radio" id="winner1"
-                           name="winner" value="away">
+                           name="winner" value="home">
                     <label for="winner1">Home</label>
 
                     <input type="radio" id="winner2"
@@ -62,7 +67,7 @@
             </c:if>
 
 
-            <c:if test="${date > now}">
+            <c:if test="${parsedDate > now}">
 
                 <p> ID: ${matchid}</p>
                 <form method="POST" action="Controller?command=EditMatch&matchid=${matchid}" novalidate="novalidate">

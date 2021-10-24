@@ -10,4 +10,6 @@ public interface MatchService {
     Match get(int matchid);
     List<Match> getAll();
     void update(Match match);
+
+    Match search(String home, String away, String group);
 }

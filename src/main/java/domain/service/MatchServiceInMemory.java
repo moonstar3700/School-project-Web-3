@@ -53,6 +53,11 @@ public class MatchServiceInMemory implements MatchService{
         matches.put(match.getMatchid(), match); // user updaten: userid blijft behouden
     }
 
+    @Override
+    public Match search(String home, String away, String group) {
+        return null;
+    }
+
     public void delete(int matchid) {
         matches.remove(matchid);   // userid gaat verloren, maar wordt niet ingenomen door eventuele nieuwe user
     }

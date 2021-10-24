@@ -43,8 +43,8 @@ public class AppService {
         matches.add(match);
     }
 
-    public void getMatch(int matchid) {
-        matches.get(matchid);
+    public Match getMatch(int matchid) {
+        return matches.get(matchid);
     }
 
 
@@ -80,4 +80,7 @@ public class AppService {
         return trainings.getDurations();
     }
 
+    public Match searchMatches(String home, String away, String group) {
+        return matches.search(home, away, group);
+    }
 }

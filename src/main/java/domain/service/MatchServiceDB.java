@@ -71,17 +71,31 @@ public class MatchServiceDB implements MatchService {
                 String home = resultSet.getString("home");
                 String away = resultSet.getString("away");
                 int userid = resultSet.getInt("user_id");
-                User user;
+                String groupstring = resultSet.getString("match_group");
+                User user = null;
                 try {
-                    user = users.get(userid); //dit is het niet maar ik weet effe niet wat het wel moet zijn
+                    String queryu = String.format("SELECT * from %s.user where user_id = ?;", schema);
+                    PreparedStatement preparedStatement = connection.prepareStatement(queryu);
+                        preparedStatement.setInt(1, userid);
+                        ResultSet resultSetUser = preparedStatement.executeQuery();
+                    while (resultSetUser.next()) {
+                        int uid = resultSetUser.getInt("user_id");
+                        String email = resultSetUser.getString("email");
+                        String password = resultSetUser.getString("password");
+                        String firstname = resultSetUser.getString("firstname");
+                        String lastname = resultSetUser.getString("lastname");
+                        String group = resultSetUser.getString("group");
+                        String role = resultSetUser.getString("role");
+                        user = new User(uid, email, password, firstname, lastname, group, role);
+                    }
 
                 } catch (NullPointerException exc) {
-                    user = new User("deleted@user.com", "deleted", "Deleted", "User", Group.ELITE); //group moet eigenlijk in match table
+                    user = new User("deleted@user.com", "deleted", "Deleted", "User", Group.ELITE);
                 }
-                String groupstring = resultSet.getString("match_group");
                 user.setGroup(groupstring);
                 Group group = user.getGroup();
                 Match match = new Match(id, matchDate, matchTime, home, away, user, group);
+
                 matches.put(id, match);
             }
 
@@ -102,7 +116,7 @@ public class MatchServiceDB implements MatchService {
         }
         int matchid = match.getMatchid();
         if (match.getWinner() == null) {
-            String query = String.format("update %s.match set home = ?, away = ?, matchdate = ?, matchtime = ?,  where match_id = ?", schema);
+            String query = String.format("update %s.match set home = ?, away = ?, matchdate = ?, matchtime = ?  where match_id = ?", schema);
             try {
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setString(1, match.getHome());
@@ -117,16 +131,14 @@ public class MatchServiceDB implements MatchService {
             }
         } else {
 
-            String query = String.format("update %s.match set home = ?, away = ?, matchdate = ?, matchtime = ?, winner = ?, winnerregistration = ? where match_id = ?", schema);
+            String query = String.format("update %s.match set home = ?, away = ?, winner = ?, winnerregistration = ? where match_id = ?", schema);
             try {
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setString(1, match.getHome());
                 preparedStatement.setString(2, match.getAway());
-                preparedStatement.setDate(3, Date.valueOf(match.getDate()));
-                preparedStatement.setTime(4, Time.valueOf(match.getTime()));
-                preparedStatement.setString(5, match.getWinner());
-                preparedStatement.setDate(6, Date.valueOf(match.getWinnerregistration()));
-                preparedStatement.setInt(7, matchid);
+                preparedStatement.setString(3, match.getWinner());
+                preparedStatement.setDate(4, Date.valueOf(match.getWinnerregistration()));
+                preparedStatement.setInt(5, matchid);
                 preparedStatement.executeUpdate();
 
             } catch (SQLException throwables) {
@@ -135,6 +147,29 @@ public class MatchServiceDB implements MatchService {
         }
 
     }
+
+    @Override
+    public Match search(String home, String away, String group) {
+        String query = String.format("SELECT * from %s.match where home = ? and away = ? and match_group = ?", schema);
+        Match match = null;
+        try {
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, home);
+            preparedStatement.setString(2, away);
+            preparedStatement.setString(3, group.toLowerCase());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("match_id");
+                match = matches.get(id);
+
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return match;
+    }
+
 
     /**
      * Check the connection and reconnect when necessary
