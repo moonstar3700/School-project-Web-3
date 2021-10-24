@@ -9,9 +9,9 @@ import java.time.LocalTime;
 
 public class Match {
     private int matchid;
-    private LocalDate date, winnerRegistration;
+    private LocalDate date,winnerRegistration;
     private LocalTime time;
-    private String home,away, winner;
+    private String home,away,winner;
     private User creator;
     private Group group;
     private int userid;

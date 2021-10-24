@@ -35,8 +35,15 @@ public class AppService {
     public void addMatch(Match match) {
         matches.add(match);
     }
+//<<<<<<< HEAD
     public void getMatch(int matchid) {
         matches.get(matchid);
+//=======
+
+    public Match getMatch(int matchid) {
+        return matches.get(matchid);
+
+//>>>>>>> e108319b9b04a9138dd51ec9f969539dd114123d
     }
     public List<Match> getAllMatches() {
         return matches.getAll();
@@ -44,6 +51,7 @@ public class AppService {
     public void updateMatch(Match match) {
         matches.update(match);
     }
+//<<<<<<< HEAD
     public void deleteMatch(int matchid) {
         matches.delete(matchid);
     }
@@ -54,4 +62,6 @@ public class AppService {
     public void updateTraining(Training training){trainings.update(training);}
     public void deleteTraining(int trainingid){trainings.delete(trainingid);}
     public ArrayList<Integer> getDurations(){return trainings.getDurations();}
+//=======
+//>>>>>>> e108319b9b04a9138dd51ec9f969539dd114123d
 }
