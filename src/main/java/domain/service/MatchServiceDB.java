@@ -31,7 +31,12 @@ public class MatchServiceDB implements MatchService {
     @Override
     public void add(Match match) {
         String query = String.format("insert into %s.match (matchdate,matchtime,home,away,user_id,match_group) values (?,?,?,?,?,?)", schema);
-
+        List<Match> matchList= new ArrayList<Match>(matches.values());
+        for (Match m : matchList) {
+            if (m.getHome().equals(match.getHome()) && m.getAway().equals(match.getAway()) && m.getGroup() == match.getGroup()) {
+                throw new DbException("Match already exists");
+            }
+        }
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setDate(1, Date.valueOf(match.getDate()));
@@ -51,7 +56,7 @@ public class MatchServiceDB implements MatchService {
     public Match get(int matchid) {
         Match match = matches.get(matchid);
         if (match == null) {
-            throw new DbException("Match does not exist.");
+            throw new DbException("Match does not exist");
         }
         return match;
     }
@@ -72,6 +77,7 @@ public class MatchServiceDB implements MatchService {
                 String away = resultSet.getString("away");
                 int userid = resultSet.getInt("user_id");
                 String groupstring = resultSet.getString("match_group");
+                String winner = resultSet.getString("winner");
                 User user = null;
                 try {
                     String queryu = String.format("SELECT * from %s.user where user_id = ?;", schema);
@@ -95,7 +101,11 @@ public class MatchServiceDB implements MatchService {
                 user.setGroup(groupstring);
                 Group group = user.getGroup();
                 Match match = new Match(id, matchDate, matchTime, home, away, user, group);
-
+                if (winner != null) {
+                    LocalDate winnerregistration = resultSet.getDate("winnerregistration").toLocalDate();
+                    match.setWinner(winner);
+                    match.setWinnerregistration(winnerregistration);
+                }
                 matches.put(id, match);
             }
 
@@ -112,7 +122,13 @@ public class MatchServiceDB implements MatchService {
     @Override
     public void update(Match match) {
         if (match == null) {
-            throw new DbException("No user given");
+            throw new DbException("No match given");
+        }
+        List<Match> matchList= new ArrayList<Match>(matches.values());
+        for (Match m : matchList) {
+            if (m.getHome().equals(match.getHome()) && m.getAway().equals(match.getAway()) && m.getGroup() == match.getGroup()) {
+                throw new DbException("Match already exists");
+            }
         }
         int matchid = match.getMatchid();
         if (match.getWinner() == null) {

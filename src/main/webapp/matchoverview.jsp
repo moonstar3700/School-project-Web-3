@@ -44,7 +44,6 @@
 
             <h3>Elite</h3>
             <c:forEach var="match" items="${allMatches}">
-                Test: ${match.winner}
                 <c:if test="${match.group eq 'ELITE'}">
                     <table>
                         <thead>
@@ -54,8 +53,13 @@
                             <th>Time</th>
                             <th>Home</th>
                             <th>Away</th>
-                            <th>Winner</th>
-                            <th>Registered on</th>
+                            <c:if test="${not empty match.winner}">
+                                <th>Winner</th>
+                                <th>Registered on</th>
+                            </c:if>
+                            <c:if test="${empty match.winner}">
+                                <th>Winner</th>
+                            </c:if>
                             <th>Creator</th>
                             <th>Edit</th>
                         </tr>
@@ -72,8 +76,7 @@
                                 <td>${match.winnerregistration}</td>
                             </c:if>
                             <c:if test="${empty match.winner}">
-                                <td>Deze match heeft nog geen geregistreerd resultaat</td>
-                                <td>Deze match heeft nog geen geregistreerd resultaat</td>
+                                <td>Nog result yet</td>
                             </c:if>
                             <td>${match.creator.firstName} ${match.creator.lastName}</td>
                             <td><a id="edit1" href="Controller?command=ToEditMatch&matchid=${match.matchid}">Edit</a>
