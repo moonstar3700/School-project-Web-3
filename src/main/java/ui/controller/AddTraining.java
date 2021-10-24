@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AddTraining extends RequestHandler{
 
@@ -27,6 +28,7 @@ public class AddTraining extends RequestHandler{
         User user = (User) session.getAttribute("user");
         training.setCreator(user);
         training.setCreatorId(user);
+        checkTraining(training, request, response, errors);
 
         if (errors.size() == 0) {
             try {
@@ -52,6 +54,7 @@ public class AddTraining extends RequestHandler{
             request.setAttribute("datePreviousValue", date);
         }
         catch (DomainException exc) {
+            training.forceDate(date);
             errors.add(exc.getMessage());
         }
     }
@@ -77,4 +80,17 @@ public class AddTraining extends RequestHandler{
         }
     }
 
+    private void checkTraining(Training training, HttpServletRequest request, HttpServletResponse response, ArrayList<String> errors){
+            List<Training> list = service.getAllTrainings();
+            try {
+                for (Training item: list){
+                    if (item.getUserID() == training.getUserID()){
+                        item.checkTrainingMoment(training);
+                    }
+                }
+            }
+            catch (DomainException exc) {
+                errors.add(exc.getMessage());
+            }
+    }
 }

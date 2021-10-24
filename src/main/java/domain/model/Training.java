@@ -75,6 +75,13 @@ public class Training {
         if (date == null) {
             throw new DomainException("No date selected");
         }
+        if (date.isAfter(LocalDate.now())){
+            throw new DomainException("Date can't be in the future");
+        }
+        this.date = date;
+    }
+
+    public void forceDate(LocalDate date){
         this.date = date;
     }
 
@@ -82,12 +89,22 @@ public class Training {
         if (start == null) {
             throw new DomainException("No start time selected");
         }
+        if (getDate().isEqual(LocalDate.now())){
+            if (start.isAfter(LocalTime.now())){
+                throw new DomainException("Start time can't be in the future");
+            }
+        }
         this.start = start;
     }
 
     public void setEnd(LocalTime end) {
         if (end == null) {
             throw new DomainException("No end time selected");
+        }
+        if (getDate().isEqual(LocalDate.now())){
+            if (end.isBefore(this.start) || end.equals(this.start)){
+                throw new DomainException("End time must come after start time");
+            }
         }
         this.end = end;
     }
@@ -103,5 +120,17 @@ public class Training {
             throw new DomainException("No creator selected");
         }
         this.userID = user.getUserid();
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void checkTrainingMoment(Training training){
+        if (getDate().isEqual(training.getDate())){
+            if ((training.getStart().isAfter(getStart()) && training.getStart().isBefore(getEnd())) || (training.getEnd().isAfter(getStart()) && training.getEnd().isBefore(getEnd())) || training.getStart().isBefore(getStart()) && training.getEnd().isAfter(getEnd())){
+                throw new DomainException("Other training already exists in this timeframe");
+            } // more checks if start or end is the same
+        }
     }
 }

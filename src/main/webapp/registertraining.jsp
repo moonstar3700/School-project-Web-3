@@ -41,9 +41,9 @@
 
                         <form method="POST" action="Controller?command=AddTraining" novalidate="novalidate">
                             <!-- novalidate in order to be able to run tests correctly -->
-                            <p><label for="date">Date</label><input type="date" id="date" name="date" required value="${homePreviousValue}"> </p>
-                            <p><label for="start">Start time</label><input type="time" id="start" name="start" required value="${awayPreviousValue}"> </p>
-                            <p><label for="end">End time</label><input type="time" id="end" name="end" required value="${datePreviousValue}"></p>
+                            <p><label for="date">Date</label><input type="date" id="date" name="date" required value="${datePreviousValue}"> </p>
+                            <p><label for="start">Start time</label><input type="time" id="start" name="start" required value="${startPreviousValue}"> </p>
+                            <p><label for="end">End time</label><input type="time" id="end" name="end" required value="${endPreviousValue}"></p>
                             <p><input type="submit" id="addTraining" value="Add Training"></p>
 
                         </form>
