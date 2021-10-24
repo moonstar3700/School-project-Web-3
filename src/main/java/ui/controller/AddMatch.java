@@ -3,6 +3,7 @@ package ui.controller;
 import domain.model.DomainException;
 import domain.model.Match;
 import domain.model.User;
+import domain.service.DbException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,7 +32,7 @@ public class AddMatch extends RequestHandler {
                 service.addMatch(match);
                 return "Controller?command=MatchOverview";
             }
-            catch (DomainException exc ) {
+            catch (DbException exc ) {
                 errors.add(exc.getMessage());
                 request.setAttribute("errors", errors);
                 return "registermatch.jsp";

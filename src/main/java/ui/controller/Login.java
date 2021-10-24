@@ -4,6 +4,8 @@ import domain.model.User;
 import domain.service.DbException;
 
 import javax.servlet.http.*;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +17,7 @@ public class Login extends RequestHandler{
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         checkEmail(request, errors);
 
-       if (errors.size() == 0) {
+        if (errors.size() == 0) {
             try {
                 return "index.jsp";
             }
@@ -68,7 +70,6 @@ public class Login extends RequestHandler{
         catch (IllegalArgumentException exc) {
             errors.add(exc.getMessage());
         }
-
         }*/
 
     }
@@ -81,7 +82,6 @@ public class Login extends RequestHandler{
         person.setPassword("ttttttt");
         return "helloagain.jsp";
     }
-
     private String hello(HttpServletRequest request, HttpServletResponse response) {
         String name = request.getParameter("name");
         Person person = users.getUserWithName(name);

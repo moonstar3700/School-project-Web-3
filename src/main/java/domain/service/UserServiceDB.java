@@ -1,5 +1,6 @@
 package domain.service;
 
+import domain.model.Match;
 import domain.model.User;
 import util.DBConnectionService;
 
@@ -27,7 +28,12 @@ public class UserServiceDB implements UserService {
     @Override
     public void add(User user) {
         String query = String.format("insert into %s.user (email,password,firstname,lastname,\"group\",role) values (?,?,?,?,?,?)", schema);
-
+        List<User> userList= new ArrayList<User>(users.values());
+        for (User u : userList) {
+            if (u.getEmail().equals(user.getEmail())) {
+                throw new DbException("Email already in use");
+            }
+        }
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, user.getEmail());
@@ -112,6 +118,12 @@ public class UserServiceDB implements UserService {
     public void update(User user) {
         if (user == null) {
             throw new DbException("No user given");
+        }
+        List<User> userList= new ArrayList<User>(users.values());
+        for (User u : userList) {
+            if (u.getEmail().equals(user.getEmail())) {
+                throw new DbException("Email already in use");
+            }
         }
         int userid = user.getUserid();
         String query = String.format("update %s.user set email = ?, password = ?, firstname = ?, " +

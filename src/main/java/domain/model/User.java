@@ -88,7 +88,7 @@ public class User {
         if (password.isEmpty()) {
             throw new IllegalArgumentException("No password given");
         }
-        return getPassword().equals(password);
+        return this.password.equals(password);
     }
 
     public void setPassword(String password) {
@@ -101,25 +101,29 @@ public class User {
     private static String sha512(String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         MessageDigest crypt = MessageDigest.getInstance("SHA-512");
         crypt.reset();
-        byte[] passwordBytes = password.getBytes("UTF-8");
-        crypt.update(passwordBytes);
-        byte[] digest = crypt.digest();
-        return new BigInteger(1, digest).toString(16);
+
+        // encrypts
+        crypt.update(password.getBytes("UTF-8"));
+
+        //16 hexadecimal system the sixteen digits are "0–9" followed by "A–F".
+        String hashedPassword = new BigInteger(1, crypt.digest()).toString(16);
+        System.out.println(hashedPassword.length());
+        return hashedPassword;
     }
 
-    /*public void setPassword(String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+  /*  public void setPassword(String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         if (password == null || password.isEmpty()) {
             throw new IllegalArgumentException("No password given");
         }
         this.password = sha512(password);
-    }*/
+    }
 
-    /*public boolean isCorrectPassword(String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        if (password.isEmpty()) {
+    public boolean isCorrectPassword(String p) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        if (p.isEmpty()) {
             throw new IllegalArgumentException("No password given");
         }
-        String hashed = sha512(getPassword());
-        return hashed.equals(password);
+        String hashedPassword = sha512(p);
+        return this.password.equals(hashedPassword);
     }*/
 
     public String getFirstName() {
