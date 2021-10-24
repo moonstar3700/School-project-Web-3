@@ -68,7 +68,7 @@
         </c:if>
 
         <c:if test="${empty allTrainings}">
-            <p>Er zijn momenteel geen Trainingen geregistreerd. U kan <a href="registermatch.jsp">hier Trainingen toevoegen</a>.</p>
+            <p>Er zijn momenteel geen Trainingen geregistreerd. U kan <a href="registertraining.jsp">hier Trainingen toevoegen</a>.</p>
         </c:if>
     </main>
     <footer>

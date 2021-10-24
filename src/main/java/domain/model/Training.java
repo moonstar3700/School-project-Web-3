@@ -81,6 +81,10 @@ public class Training {
         this.date = date;
     }
 
+    public void forceDate(LocalDate date){
+        this.date = date;
+    }
+
     public void setStart(LocalTime start) {
         if (start == null) {
             throw new DomainException("No start time selected");
@@ -124,9 +128,9 @@ public class Training {
 
     public void checkTrainingMoment(Training training){
         if (getDate().isEqual(training.getDate())){
-            if ((training.getStart().isAfter(getStart()) && training.getStart().isBefore(getEnd())) || (training.getEnd().isAfter(getStart()) && training.getEnd().isBefore(getEnd()))){
-                throw new DomainException("Training can't be registered at this tiemframe");
-            }
+            if ((training.getStart().isAfter(getStart()) && training.getStart().isBefore(getEnd())) || (training.getEnd().isAfter(getStart()) && training.getEnd().isBefore(getEnd())) || training.getStart().isBefore(getStart()) && training.getEnd().isAfter(getEnd())){
+                throw new DomainException("Other training already exists in this timeframe");
+            } // more checks if start or end is the same
         }
     }
 }

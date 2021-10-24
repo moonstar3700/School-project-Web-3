@@ -54,6 +54,7 @@ public class AddTraining extends RequestHandler{
             request.setAttribute("datePreviousValue", date);
         }
         catch (DomainException exc) {
+            training.forceDate(date);
             errors.add(exc.getMessage());
         }
     }
