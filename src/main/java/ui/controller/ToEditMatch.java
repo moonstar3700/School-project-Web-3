@@ -26,10 +26,10 @@ public class ToEditMatch extends RequestHandler {
         request.setAttribute("home", home);
         String away = match.getAway();
         request.setAttribute("away", away);
-        LocalDate Date = match.getDate();
-        request.setAttribute("date", match.getDate());
-        LocalTime Time = match.getTime();
-        request.setAttribute("time", match.getTime());
+        LocalDate date = match.getDate();
+        request.setAttribute("date", date);
+        LocalTime time = match.getTime();
+        request.setAttribute("time", time);
         return "editMatch.jsp";
     }
 }

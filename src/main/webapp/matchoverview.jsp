@@ -39,9 +39,12 @@
         </c:if>
 
         <c:if test="${not empty allMatches}">
+            
+            <p><a href="searchMatch.jsp">Zoek een wedstrijd</a></p>
 
             <h3>Elite</h3>
             <c:forEach var="match" items="${allMatches}">
+                Test: ${match.winner}
                 <c:if test="${match.group eq 'ELITE'}">
                     <table>
                         <thead>

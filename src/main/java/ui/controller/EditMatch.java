@@ -12,7 +12,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditMatch extends RequestHandler{
+public class EditMatch extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         ArrayList<String> errors = new ArrayList<String>();
@@ -20,35 +20,33 @@ public class EditMatch extends RequestHandler{
         request.setAttribute("match", matchid);
         try {
             service.getMatch(matchid);
-        }
-        catch (DomainException exc ) {
+        } catch (DomainException exc) {
             request.setAttribute("errors", exc.getMessage());
             return "Controller?command=UserOverview";
         }
         Match match = service.getMatch(matchid);
         setHome(match, request, response, errors);
         setAway(match, request, response, errors);
-        setDate(match, request, response, errors);
-        setTime(match, request, response, errors);
+        if (request.getParameter("winner") == null) {
+            setDate(match, request, response, errors);
+            setTime(match, request, response, errors);
+        }
         if (request.getParameter("winner") != null) {
             setWinner(match, request, response, errors);
             setWinnerRegistration(match, request, response, errors);
         }
 
 
-
         if (errors.size() == 0) {
             try {
                 service.updateMatch(match);
                 return "Controller?command=MatchOverview";
-            }
-            catch (DomainException exc ) {
+            } catch (DomainException exc) {
                 errors.add(exc.getMessage());
                 request.setAttribute("errors", errors);
                 return "editMatch.jsp";
             }
-        }
-        else {
+        } else {
             request.setAttribute("errors", errors);
             return "editMatch.jsp";
         }
@@ -59,8 +57,7 @@ public class EditMatch extends RequestHandler{
         try {
             match.setHome(home);
             request.setAttribute("home", home);
-        }
-        catch (DomainException exc) {
+        } catch (DomainException exc) {
             errors.add(exc.getMessage());
         }
     }
@@ -70,8 +67,7 @@ public class EditMatch extends RequestHandler{
         try {
             match.setAway(away);
             request.setAttribute("away", away);
-        }
-        catch (DomainException exc) {
+        } catch (DomainException exc) {
             errors.add(exc.getMessage());
         }
     }
@@ -81,8 +77,7 @@ public class EditMatch extends RequestHandler{
         try {
             match.setDate(date);
             request.setAttribute("date", date);
-        }
-        catch (DomainException exc) {
+        } catch (DomainException exc) {
             errors.add(exc.getMessage());
         }
     }
@@ -92,8 +87,7 @@ public class EditMatch extends RequestHandler{
         try {
             match.setTime(time);
             request.setAttribute("time", time);
-        }
-        catch (DomainException exc) {
+        } catch (DomainException exc) {
             errors.add(exc.getMessage());
         }
     }
@@ -103,8 +97,7 @@ public class EditMatch extends RequestHandler{
         try {
             match.setWinner(winner);
             request.setAttribute("winner", winner);
-        }
-        catch (DomainException exc) {
+        } catch (DomainException exc) {
             errors.add(exc.getMessage());
         }
     }
@@ -113,8 +106,7 @@ public class EditMatch extends RequestHandler{
         LocalDate winnerRegistration = LocalDate.now();
         try {
             match.setWinnerregistration(winnerRegistration);
-        }
-        catch (DomainException exc) {
+        } catch (DomainException exc) {
             errors.add(exc.getMessage());
         }
     }
