@@ -150,7 +150,9 @@ table {
     border-spacing: 0;
 }
 
-
+#monthlyoverview{
+    margin-top: 1rem;
+}
 
 tr:nth-child(even) {
     background-color: #131415;

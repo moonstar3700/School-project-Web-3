@@ -1,14 +1,17 @@
 package domain.service;
 
 import domain.model.Match;
+import domain.model.Training;
 import domain.model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AppService {
     private UserService users = new UserServiceDB();
     //private MatchService matches = new MatchServiceInMemory();
     private MatchService matches = new MatchServiceDB();
+    private TrainingService trainings = new TrainingServiceDB();
 
     public void add(User user) {
         users.add(user);
@@ -32,7 +35,6 @@ public class AppService {
     public void addMatch(Match match) {
         matches.add(match);
     }
-
     public void getMatch(int matchid) {
         matches.get(matchid);
     }
@@ -45,4 +47,11 @@ public class AppService {
     public void deleteMatch(int matchid) {
         matches.delete(matchid);
     }
+
+    public void addTraining(Training training){trainings.add(training);}
+    public void getTraining(int trainingid){trainings.get(trainingid);}
+    public List<Training> getAllTrainings(){return trainings.getAll();}
+    public void updateTraining(Training training){trainings.update(training);}
+    public void deleteTraining(int trainingid){trainings.delete(trainingid);}
+    public ArrayList<Integer> getDurations(){return trainings.getDurations();}
 }

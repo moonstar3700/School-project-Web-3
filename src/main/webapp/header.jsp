@@ -8,6 +8,8 @@
             <li ><a ${param.current eq 'Add Match'?"id = actual":""} href="registermatch.jsp">Add Match</a></li>
             <li ><a ${param.current eq 'Matches'?"id = actual":""} href="Controller?command=MatchOverview">Matches</a></li>
             <li><a ${param.current eq 'Register'?"id = actual":""} href="register.jsp">Register</a></li>
+            <li><a ${param.current eq 'Add Trainings'?"id = actual":""}href="registertraining.jsp">Add training</a></li>
+            <li><a ${param.current eq 'Trainings'?"id = actual":""} href="Controller?command=TrainingOverview">Trainings</a></li>
         </ul>
     </nav>
 </header>
