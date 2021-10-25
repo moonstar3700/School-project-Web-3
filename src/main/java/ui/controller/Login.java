@@ -10,30 +10,52 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Login extends RequestHandler{
+public class Login extends RequestHandler {
     ArrayList<String> errors = new ArrayList<String>();
 
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-        checkEmail(request, errors);
-
+        User user = checkEmail(request, errors);
+        String password = request.getParameter("password");
         if (errors.size() == 0) {
             try {
-                return "index.jsp";
-            }
-            catch (Exception exc) {
+                if (user.isCorrectPassword(password)) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("user", user);
+                    return "index.jsp";
+                } else {
+                    errors.add("Incorrect password");
+                    request.setAttribute("errors", errors);
+                    return "index.jsp";
+                }
+            } catch (Exception exc) {
                 errors.add(exc.getMessage());
                 request.setAttribute("errors", errors);
                 return "index.jsp";
             }
-        }
-        else {
+        } else {
             request.setAttribute("errors", errors);
             return "index.jsp";
         }
     }
 
-    private void checkEmail(HttpServletRequest request, ArrayList<String> errors){
+
+
+    private User checkEmail(HttpServletRequest request, ArrayList<String> errors) {
+        String mail = request.getParameter("email");
+        User user = null;
+        try {
+            user = service.checkUserMail(mail);
+            request.setAttribute("emailPreviousValue", mail);
+            return user;
+        } catch (DbException exc) {
+            errors.add(exc.getMessage());
+        }
+        return user; //waarschijnlijk niet hoe het moet....
+    }
+
+
+   /* private void checkEmail(HttpServletRequest request, ArrayList<String> errors){
         List<User> list = service.getAll();
         String mail = request.getParameter("email");
         String password = request.getParameter("password");
@@ -52,7 +74,7 @@ public class Login extends RequestHandler{
             if (!check) {throw new IllegalArgumentException("No valid email/password");}
 
         } catch (IllegalArgumentException exc) {
-            errors.add(exc.getMessage()); }
+            errors.add(exc.getMessage()); } */
 
         /*List<User> list = service.getAll();
         String mail = request.getParameter("email");
@@ -72,7 +94,6 @@ public class Login extends RequestHandler{
         }
         }*/
 
-    }
 }
 
 

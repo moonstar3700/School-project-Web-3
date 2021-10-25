@@ -11,5 +11,6 @@ public interface UserService {
     List<User> getAll();
     void update(User user);
     void delete(int userid);
+    User checkEmail(String email);
     int getNumberOfUsers();
 }

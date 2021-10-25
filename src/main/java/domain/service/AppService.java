@@ -39,6 +39,10 @@ public class AppService {
         return users.getNumberOfUsers();
     }
 
+    public User checkUserMail(String mail) {
+        return users.checkEmail(mail);
+    }
+
     public void addMatch(Match match) {
         matches.add(match);
     }
