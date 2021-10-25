@@ -1,6 +1,5 @@
 package domain.service;
 
-import domain.model.Match;
 import domain.model.User;
 import util.DBConnectionService;
 
@@ -20,7 +19,7 @@ public class UserServiceDB implements UserService {
     private Connection connection;
     private String schema;
 
-    public UserServiceDB(){
+    public UserServiceDB() {
         this.connection = DBConnectionService.getDBConnection();
         this.schema = DBConnectionService.getSchema();
     }
@@ -28,7 +27,7 @@ public class UserServiceDB implements UserService {
     @Override
     public void add(User user) {
         String query = String.format("insert into %s.user (email,password,firstname,lastname,\"group\",role) values (?,?,?,?,?,?)", schema);
-        List<User> userList= new ArrayList<User>(users.values());
+        List<User> userList = new ArrayList<User>(users.values());
         for (User u : userList) {
             if (u.getEmail().equals(user.getEmail())) {
                 throw new DbException("Email already in use");
@@ -100,7 +99,7 @@ public class UserServiceDB implements UserService {
                 String lastname = resultSet.getString("lastname");
                 String group = resultSet.getString("group");
                 String role = resultSet.getString("role");
-                User user = new User (id, email, password, firstname, lastname, group, role);
+                User user = new User(id, email, password, firstname, lastname, group, role);
                 users.put(id, user);
             }
 
@@ -119,7 +118,7 @@ public class UserServiceDB implements UserService {
         if (user == null) {
             throw new DbException("No user given");
         }
-        List<User> userList= new ArrayList<User>(users.values());
+        List<User> userList = new ArrayList<User>(users.values());
         for (User u : userList) {
             if (u.getEmail().equals(user.getEmail())) {
                 throw new DbException("Email already in use");
@@ -152,10 +151,26 @@ public class UserServiceDB implements UserService {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, userid);
             preparedStatement.execute();
-        }catch (SQLException throwables) {
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
+
+    @Override
+    public User checkEmail(String email) {
+        List<User> userList = new ArrayList<User>(users.values());
+        User user = null;
+        for (User u : userList) {
+            if (email.equals(u.getEmail())) {
+                user = u;
+            }
+        }
+        if (user == null) {
+            throw new DbException("No user with this email");
+        }
+        return user;
+    }
+
 
     @Override
     public int getNumberOfUsers() {
@@ -164,6 +179,7 @@ public class UserServiceDB implements UserService {
 
     /**
      * Check the connection and reconnect when necessary
+     *
      * @return the connection with the db, if there is one
      */
     private Connection getConnection() {

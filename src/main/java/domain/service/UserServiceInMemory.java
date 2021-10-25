@@ -65,6 +65,11 @@ public class UserServiceInMemory implements UserService{
         users.remove(userid);   // userid gaat verloren, maar wordt niet ingenomen door eventuele nieuwe user
     }
 
+    @Override
+    public User checkEmail(String email) {
+        return null;
+    }
+
     public int getNumberOfUsers() {
         return users.size();
     }
