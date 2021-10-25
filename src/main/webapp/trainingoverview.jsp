@@ -39,7 +39,16 @@
         </c:if>
 
         <c:if test="${not empty allTrainings}">
-        <table>
+            <form method="POST" action="Controller?command=TrainingOverview" novalidate="novalidate">
+                <p><select name="filter" id="filter">
+                    <option value="training_id">id</option>
+                    <option value="training_date">date</option>
+                    <option value="training_start">start time</option>
+                    <option value="training_end">end time</option>
+                </select></p>
+                <p><input type="submit" id="filterButton" value="Filter"></p>
+            </form>
+            <table>
             <thead>
             <tr>
                 <th>TrainingID</th>

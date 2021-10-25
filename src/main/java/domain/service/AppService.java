@@ -87,4 +87,10 @@ public class AppService {
     public Match searchMatches(String home, String away, String group) {
         return matches.search(home, away, group);
     }
+
+    public List<Training> getAllTrainingsFilter(String filter){return trainings.getAllFiltered(filter);}
+
+    public ArrayList<Integer> getDurationsFilter() {
+        return trainings.getDurations();
+    }
 }
