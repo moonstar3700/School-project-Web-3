@@ -17,7 +17,8 @@ import static java.time.temporal.ChronoUnit.MINUTES;
 
 public class TrainingServiceDB implements TrainingService{
     private final Map<Integer, Training> trainings = new HashMap<Integer, Training>();
-    private ArrayList<Integer> durations = new ArrayList<>();
+    //private ArrayList<Integer> durationsArray = new ArrayList<>();
+    private Map<Integer,Integer> durations = new HashMap<>();
     private Connection connection;
     private String schema;
     private UserServiceDB users;
@@ -68,10 +69,11 @@ public class TrainingServiceDB implements TrainingService{
                 LocalTime start = resultSet.getTime("training_start").toLocalTime();
                 LocalTime end = resultSet.getTime("training_end").toLocalTime();
                 int duration = (int) MINUTES.between(start, end);
-                durations.add(duration);
+
                 //int duration2 = resultSet.getInt("duration");
                 int user_id = resultSet.getInt("user_id");
                 Training training = new Training(id, date, start, end, user_id);
+                durations.put(id, duration);
                 trainings.put(id, training);
             }
         } catch (SQLException throwables) {
@@ -82,7 +84,7 @@ public class TrainingServiceDB implements TrainingService{
 
     @Override
     public ArrayList<Integer> getDurations(){
-        return this.durations;
+        return new ArrayList<Integer>(durations.values());
     }
 
     @Override
@@ -98,6 +100,7 @@ public class TrainingServiceDB implements TrainingService{
             preparedStatement.setTime(2, Time.valueOf(training.getStart()));
             preparedStatement.setTime(3, Time.valueOf(training.getEnd()));
             preparedStatement.setInt(4, trainingid);
+            preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
         throwables.printStackTrace();
         }
