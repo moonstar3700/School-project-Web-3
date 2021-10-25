@@ -64,8 +64,8 @@ public class AppService {
         trainings.add(training);
     }
 
-    public void getTraining(int trainingid) {
-        trainings.get(trainingid);
+    public Training getTraining(int trainingid) {
+        return trainings.get(trainingid);
     }
 
     public List<Training> getAllTrainings() {

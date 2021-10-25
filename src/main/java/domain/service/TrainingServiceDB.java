@@ -46,8 +46,12 @@ public class TrainingServiceDB implements TrainingService{
     }
 
     @Override
-    public Training get(int training) {
-        return null;
+    public Training get(int trainingid) {
+        Training training = trainings.get(trainingid);
+        if (training == null) {
+            throw new DbException("Training does not exist.");
+        }
+        return training;
     }
 
     @Override
@@ -83,6 +87,20 @@ public class TrainingServiceDB implements TrainingService{
 
     @Override
     public void update(Training training) {
+        if (training == null){
+            throw new DbException("No training given");
+        }
+        int trainingid = training.getTrainingId();
+        String query = String.format("update %s.training set training_date = ?, training_start = ?, training_end = ? where training_id = ?", schema);
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setDate(1, Date.valueOf(training.getDate()));
+            preparedStatement.setTime(2, Time.valueOf(training.getStart()));
+            preparedStatement.setTime(3, Time.valueOf(training.getEnd()));
+            preparedStatement.setInt(4, trainingid);
+        } catch (SQLException throwables) {
+        throwables.printStackTrace();
+        }
     }
 
     @Override
