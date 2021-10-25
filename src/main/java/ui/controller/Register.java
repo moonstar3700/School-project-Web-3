@@ -26,6 +26,8 @@ public class Register extends RequestHandler {
         if (errors.size() == 0) {
             try {
                 service.add(user);
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user);
                 return "index.jsp";
             }
             catch (Exception exc ) {

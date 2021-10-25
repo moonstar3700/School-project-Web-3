@@ -27,7 +27,7 @@ public class UserServiceDB implements UserService {
     @Override
     public void add(User user) {
         String query = String.format("insert into %s.user (email,password,firstname,lastname,\"group\",role) values (?,?,?,?,?,?)", schema);
-        List<User> userList = new ArrayList<User>(users.values());
+        List<User> userList = getAll();    //new ArrayList<User>(users.values()); // getAll() ?
         for (User u : userList) {
             if (u.getEmail().equals(user.getEmail())) {
                 throw new DbException("Email already in use");
@@ -158,7 +158,7 @@ public class UserServiceDB implements UserService {
 
     @Override
     public User checkEmail(String email) {
-        List<User> userList = new ArrayList<User>(users.values());
+        List<User> userList = getAll();
         User user = null;
         for (User u : userList) {
             if (email.equals(u.getEmail())) {
@@ -170,7 +170,6 @@ public class UserServiceDB implements UserService {
         }
         return user;
     }
-
 
     @Override
     public int getNumberOfUsers() {

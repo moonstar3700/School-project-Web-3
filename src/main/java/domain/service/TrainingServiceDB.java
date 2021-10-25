@@ -33,6 +33,12 @@ public class TrainingServiceDB implements TrainingService{
     @Override
     public void add(Training training) {
         String query = String.format("insert into %s.training (training_date, training_start, training_end, user_id) values (?,?,?,?)", schema);
+        List<Training> list = getAll();
+        for (Training t: list){
+            if (training.getDate().equals(t.getDate())&&training.getStart().equals(t.getStart())&&training.getEnd().equals(t.getEnd())){
+                throw new DbException("Training already exists");
+            }
+        }
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setDate(1, Date.valueOf(training.getDate()));
@@ -59,7 +65,6 @@ public class TrainingServiceDB implements TrainingService{
     public List<Training> getAll() {
         String query = String.format("SELECT * from %s.training order by training_id;", schema);
         PreparedStatement statementInsert = null;
-
         try {
             statementInsert = connection.prepareStatement(query);
             ResultSet resultSet = statementInsert.executeQuery();

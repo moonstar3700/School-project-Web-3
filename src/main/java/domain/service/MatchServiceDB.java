@@ -124,7 +124,7 @@ public class MatchServiceDB implements MatchService {
         if (match == null) {
             throw new DbException("No match given");
         }
-        List<Match> matchList= new ArrayList<Match>(matches.values());
+        List<Match> matchList= getAll();   //new ArrayList<Match>(matches.values());
         for (Match m : matchList) {
             if (m.getHome().equals(match.getHome()) && m.getAway().equals(match.getAway()) && m.getGroup() == match.getGroup()) {
                 throw new DbException("Match already exists");
