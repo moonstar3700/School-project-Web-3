@@ -78,10 +78,10 @@ public class Register extends RequestHandler {
     private void setPassword(User user, HttpServletRequest request, ArrayList<String> errors) {
         String password = request.getParameter("password");
         try {
-            user.setPassword(password);
+            user.setHashedPassword(password);
             request.setAttribute("passwordPreviousValue", password);
         }
-        catch (IllegalArgumentException exc) {
+        catch (IllegalArgumentException | UnsupportedEncodingException | NoSuchAlgorithmException exc) {
             errors.add(exc.getMessage());
         }
     }

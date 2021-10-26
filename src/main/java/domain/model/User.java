@@ -18,7 +18,7 @@ public class User {
 
     public User(String email, String password, String firstName, String lastName, Group group) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         setEmail(email);
-        setPassword(password);
+        setPassword(password); //constructor wordt normaal alleen gebruikt voor gegevens uit db, waar wachtwoord al gehashd is
         setFirstName(firstName);
         setLastName(lastName);
         setGroup(group);
@@ -32,7 +32,7 @@ public class User {
 
     public User(String email, String password, String firstName, String lastName, String group, String role) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         setEmail(email);
-        setPassword(password);
+        setPassword(password); //constructor wordt normaal alleen gebruikt voor gegevens uit db, waar wachtwoord al gehashd is
         setFirstName(firstName);
         setLastName(lastName);
         setGroup(group);
@@ -42,7 +42,7 @@ public class User {
     public User(int id, String email, String password, String firstName, String lastName, String group, String role) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         setUserid(id);
         setEmail(email);
-        setPassword(password);
+        setPassword(password); //constructor wordt normaal alleen gebruikt voor gegevens uit db, waar wachtwoord al gehashd is
         setFirstName(firstName);
         setLastName(lastName);
         setGroup(group);
@@ -84,12 +84,12 @@ public class User {
         return password;
     }
 
-    public boolean isCorrectPassword(String password) {
+   /* public boolean isCorrectPassword(String password) {
         if (password.isEmpty()) {
             throw new IllegalArgumentException("No password given");
         }
         return this.password.equals(password);
-    }
+    } */
 
     public void setPassword(String password) {
         if (password == null || password.isEmpty()) {
@@ -111,10 +111,11 @@ public class User {
         return hashedPassword;
     }
 
-  /*  public void setPassword(String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+    public void setHashedPassword(String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         if (password == null || password.isEmpty()) {
             throw new IllegalArgumentException("No password given");
         }
+        String hashedPassword = sha512(password);
         this.password = sha512(password);
     }
 
@@ -124,7 +125,7 @@ public class User {
         }
         String hashedPassword = sha512(p);
         return this.password.equals(hashedPassword);
-    }*/
+    }
 
     public String getFirstName() {
         return firstName;
