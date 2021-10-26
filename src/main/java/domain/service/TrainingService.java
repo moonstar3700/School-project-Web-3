@@ -12,7 +12,6 @@ public interface TrainingService {
     List<Training> getAll();
     void update(Training training);
     void delete(int trainingid);
-    ArrayList<Integer> getDurations();
     List<Training> getAllFiltered(String filter);
-    ArrayList<Integer> getDurationsFiltered();
+
 }

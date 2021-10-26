@@ -80,9 +80,6 @@ public class AppService {
         trainings.delete(trainingid);
     }
 
-    public ArrayList<Integer> getDurations() {
-        return trainings.getDurations();
-    }
 
     public Match searchMatches(String home, String away, String group) {
         return matches.search(home, away, group);
@@ -90,7 +87,4 @@ public class AppService {
 
     public List<Training> getAllTrainingsFilter(String filter){return trainings.getAllFiltered(filter);}
 
-    public ArrayList<Integer> getDurationsFilter() {
-        return trainings.getDurations();
-    }
 }

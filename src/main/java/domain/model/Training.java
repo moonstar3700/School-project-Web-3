@@ -39,9 +39,9 @@ public class Training {
 
     }
 
-    /*public void calculateTime(){
-        this.duration = (int) MINUTES.between(getStart(), getEnd());
-    }*/
+    public int calculateTime(){
+        return (int) MINUTES.between(getStart(), getEnd());
+    }
 
     public int getTrainingId() {
         return trainingId;

@@ -67,7 +67,7 @@
                     <td>${training.date}</td>
                     <td>${training.start}</td>
                     <td>${training.end}</td>
-                    <td>${allTrainingdurations[status.index]}</td>
+                    <td>${training.calculateTime()}</td>
                     <td><a id="edit" href="Controller?command=ToEditTraining&trainingid=${training.trainingId}">Edit</a></td>
                     <td><a id="delete" href="Controller?command=ConfirmTrainingDelete&trainingid=${training.trainingId}">Delete</a></td>
                 </tr>
