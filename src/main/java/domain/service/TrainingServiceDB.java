@@ -83,40 +83,42 @@ public class TrainingServiceDB implements TrainingService{
 
     @Override
     public List<Training> getAllFiltered(String filter) {
-        String query = String.format("SELECT * from %s.training order by ? desc;", schema);
+        //String query = String.format("SELECT * from %s.training order by (?) asc;", schema);
+        String query;
         PreparedStatement statementInsert = null;
-        int index = 1;
         List<Training> lijst = new ArrayList<>();
         try {
+            switch (filter){
+                case "training_id":
+                     query = String.format("SELECT * from %s.training order by training_id asc;", schema);
+                    break;
+                case "training_date":
+                     query = String.format("SELECT * from %s.training order by training_date asc;", schema);
+                    break;
+                case "training_start":
+                     query = String.format("SELECT * from %s.training order by training_start asc;", schema);
+                    break;
+                case "training_end":
+                     query = String.format("SELECT * from %s.training order by training_end asc;", schema);
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + filter);
+            }
             statementInsert = connection.prepareStatement(query);
-            statementInsert.setString(1, filter);
             ResultSet resultSet = statementInsert.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("training_id");
                 LocalDate date = resultSet.getDate("training_date").toLocalDate();
                 LocalTime start = resultSet.getTime("training_start").toLocalTime();
                 LocalTime end = resultSet.getTime("training_end").toLocalTime();
-                //int duration = (int) MINUTES.between(start, end);
 
-                //int duration2 = resultSet.getInt("duration");
                 int user_id = resultSet.getInt("user_id");
                 Training training = new Training(id, date, start, end, user_id);
-                //trainingsfiltered.put(index, training);
                 lijst.add(training);
-
-                index++;
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
-        for (Training t: lijst){
-            System.out.println(t.getTrainingId());
-            System.out.println(t.getDate());
-            System.out.println(t.getStart());
-            System.out.println(t.getEnd());
-        }
-        //return new ArrayList<Training>(trainingsfiltered.values());
         return lijst;
     }
 
