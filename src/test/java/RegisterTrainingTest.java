@@ -1,7 +1,14 @@
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
+
+import java.time.LocalDate;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class RegisterTrainingTest {
     private WebDriver driver;
@@ -23,4 +30,25 @@ public class RegisterTrainingTest {
     public void clean() {
         driver.quit();
     }*/
+
+    @Test
+    public void test_TrainingRegister_filled_in_correctly(){
+
+        IndexPage index = PageFactory.initElements(driver, IndexPage.class);
+        index.login();
+
+        RegisterTrainingPage registerpage = PageFactory.initElements(driver, RegisterTrainingPage.class);
+
+        registerpage.setDate("09/09/2020");
+        registerpage.setStart("09:01");
+        registerpage.setDate("10:31");
+        /*registerpage.register();
+
+        /*assertEquals("Training overview",registerpage.getTitle());
+
+        TrainingOverviewPage overviewPage = PageFactory.initElements(driver, TrainingOverviewPage.class);
+        assertTrue(overviewPage.containsString("09/09/2020"));
+        assertTrue(overviewPage.containsString("09:01"));
+        assertTrue(overviewPage.containsString("10:31"));*/
+    }
 }

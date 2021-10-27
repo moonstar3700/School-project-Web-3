@@ -7,7 +7,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta charset="UTF-8">
-    <title>Overview</title>
+    <title>Training overview</title>
     <link rel="stylesheet" type="text/css" href="css/style3.css">
 </head>
 
@@ -27,6 +27,8 @@
             <div class="grid1">
             </div>
         </div>
+        <c:if test="${not empty user}">
+
 
         <c:if test="${not empty errors}">
             <div class="alert alert-danger">
@@ -40,13 +42,13 @@
 
         <c:if test="${not empty allTrainings}">
             <form method="POST" action="Controller?command=TrainingOverview" novalidate="novalidate">
-                <p><select name="filter" id="filter">
+                <p><label for="filter">Sort by</label><select name="filter" id="filter">
                     <option value="training_id">id</option>
                     <option value="training_date">date</option>
                     <option value="training_start">start time</option>
                     <option value="training_end">end time</option>
                 </select></p>
-                <p><input type="submit" id="filterButton" value="Filter"></p>
+                <p><input type="submit" id="filterButton" value="sort"></p>
             </form>
             <table>
             <thead>
@@ -78,6 +80,11 @@
 
         <c:if test="${empty allTrainings}">
             <p>Er zijn momenteel geen Trainingen geregistreerd. U kan <a href="registertraining.jsp">hier Trainingen toevoegen</a>.</p>
+        </c:if>
+        </c:if>
+        <c:if test="${empty user}">
+            <section class="notloggedpanel" ><p>U moet ingelogd zijn om een wedstrijd aan te maken.</p></section>
+
         </c:if>
     </main>
     <footer>

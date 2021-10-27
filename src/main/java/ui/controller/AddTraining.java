@@ -8,8 +8,10 @@ import domain.model.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,11 +30,11 @@ public class AddTraining extends RequestHandler{
         User user = (User) session.getAttribute("user");
         training.setCreator(user);
         training.setCreatorId(user);
-        checkTraining(training, request, response, errors);
+        checkTraining(training, request, response, errors, user);
 
         if (errors.size() == 0) {
             try {
-                service.addTraining(training);
+                service.addTraining(training, user);
                 return "Controller?command=TrainingOverview";
             }
             catch (DomainException exc ) {
@@ -57,31 +59,40 @@ public class AddTraining extends RequestHandler{
             training.forceDate(date);
             errors.add(exc.getMessage());
         }
+        catch (DateTimeParseException e){
+            errors.add(e.getMessage());
+        }
     }
     private void setStart(Training training, HttpServletRequest request, HttpServletResponse response, ArrayList<String> errors) {
-        LocalTime start = LocalTime.parse(request.getParameter("start"));
         try {
+            LocalTime start = LocalTime.parse(request.getParameter("start"));
             training.setStart(start);
             request.setAttribute("startPreviousValue", start);
         }
         catch (DomainException exc) {
             errors.add(exc.getMessage());
         }
+        catch (DateTimeParseException e){
+            errors.add("Bad input for start time");
+        }
     }
 
     private void setEnd(Training training, HttpServletRequest request, HttpServletResponse response, ArrayList<String> errors) {
-        LocalTime end = LocalTime.parse(request.getParameter("end"));
         try {
+            LocalTime end = LocalTime.parse(request.getParameter("end"));
             training.setEnd(end);
             request.setAttribute("endPreviousValue", end);
         }
         catch (DomainException exc) {
             errors.add(exc.getMessage());
         }
+        catch (DateTimeParseException e){
+            errors.add("Bad input for end time");
+        }
     }
 
-    private void checkTraining(Training training, HttpServletRequest request, HttpServletResponse response, ArrayList<String> errors){
-            List<Training> list = service.getAllTrainings();
+    private void checkTraining(Training training, HttpServletRequest request, HttpServletResponse response, ArrayList<String> errors, User user){
+            List<Training> list = service.getAllTrainings(user);
             try {
                 for (Training item: list){
                     if (item.getUserID() == training.getUserID()){

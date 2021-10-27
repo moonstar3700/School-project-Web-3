@@ -60,16 +60,16 @@ public class AppService {
         matches.update(match);
     }
 
-    public void addTraining(Training training) {
-        trainings.add(training);
+    public void addTraining(Training training, User user) {
+        trainings.add(training, user);
     }
 
     public Training getTraining(int trainingid) {
         return trainings.get(trainingid);
     }
 
-    public List<Training> getAllTrainings() {
-        return trainings.getAll();
+    public List<Training> getAllTrainings(User user) {
+        return trainings.getAll(user);
     }
 
     public void updateTraining(Training training) {
@@ -85,6 +85,6 @@ public class AppService {
         return matches.search(home, away, group);
     }
 
-    public List<Training> getAllTrainingsFilter(String filter){return trainings.getAllFiltered(filter);}
+    public List<Training> getAllTrainingsFilter(String filter, User user){return trainings.getAllFiltered(filter, user);}
 
 }

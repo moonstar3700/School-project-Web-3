@@ -28,9 +28,9 @@ public class TrainingServiceDB implements TrainingService{
     }
 
     @Override
-    public void add(Training training) {
+    public void add(Training training, User user) {
         String query = String.format("insert into %s.training (training_date, training_start, training_end, user_id) values (?,?,?,?)", schema);
-        List<Training> list = getAll();
+        List<Training> list = getAll(user);
         for (Training t: list){
             if (training.getDate().equals(t.getDate())&&training.getStart().equals(t.getStart())&&training.getEnd().equals(t.getEnd())){
                 throw new DbException("Training already exists");
@@ -59,11 +59,12 @@ public class TrainingServiceDB implements TrainingService{
     }
 
     @Override
-    public List<Training> getAll() {
-        String query = String.format("SELECT * from %s.training order by training_id asc;", schema);
+    public List<Training> getAll(User user) {
+        String query = String.format("SELECT * from %s.training where user_id = ? order by training_id asc;", schema);
         PreparedStatement statementInsert = null;
         try {
             statementInsert = connection.prepareStatement(query);
+            statementInsert.setInt(1, user.getUserid());
             ResultSet resultSet = statementInsert.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("training_id");
@@ -82,7 +83,7 @@ public class TrainingServiceDB implements TrainingService{
     }
 
     @Override
-    public List<Training> getAllFiltered(String filter) {
+    public List<Training> getAllFiltered(String filter, User user) {
         //String query = String.format("SELECT * from %s.training order by (?) asc;", schema);
         String query;
         PreparedStatement statementInsert = null;
@@ -90,21 +91,22 @@ public class TrainingServiceDB implements TrainingService{
         try {
             switch (filter){
                 case "training_id":
-                     query = String.format("SELECT * from %s.training order by training_id asc;", schema);
+                     query = String.format("SELECT * from %s.training where user_id = ? order by training_id asc;", schema);
                     break;
                 case "training_date":
-                     query = String.format("SELECT * from %s.training order by training_date asc;", schema);
-                    break;
+                     query = String.format("SELECT * from %s.training where user_id = ? order by training_date, training_start asc;", schema);
+                     break;
                 case "training_start":
-                     query = String.format("SELECT * from %s.training order by training_start asc;", schema);
-                    break;
+                     query = String.format("SELECT * from %s.training where user_id = ? order by training_start;", schema);
+                     break;
                 case "training_end":
-                     query = String.format("SELECT * from %s.training order by training_end asc;", schema);
-                    break;
+                     query = String.format("SELECT * from %s.training where user_id = ? order by training_end, training_start asc;", schema);
+                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + filter);
             }
             statementInsert = connection.prepareStatement(query);
+            statementInsert.setInt(1, user.getUserid());
             ResultSet resultSet = statementInsert.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("training_id");

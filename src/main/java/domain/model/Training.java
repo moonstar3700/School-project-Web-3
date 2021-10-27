@@ -101,11 +101,11 @@ public class Training {
         if (end == null) {
             throw new DomainException("No end time selected");
         }
-        if (getDate().isEqual(LocalDate.now())){
+
             if (end.isBefore(this.start) || end.equals(this.start)){
                 throw new DomainException("End time must come after start time");
             }
-        }
+
         this.end = end;
     }
 

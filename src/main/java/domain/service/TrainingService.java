@@ -2,16 +2,17 @@ package domain.service;
 
 import domain.model.Match;
 import domain.model.Training;
+import domain.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public interface TrainingService {
-    void add(Training training);
+    void add(Training training, User user);
     Training get(int training);
-    List<Training> getAll();
+    List<Training> getAll(User user);
     void update(Training training);
     void delete(int trainingid);
-    List<Training> getAllFiltered(String filter);
+    List<Training> getAllFiltered(String filter, User user);
 
 }

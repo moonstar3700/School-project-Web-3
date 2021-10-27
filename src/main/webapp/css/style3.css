@@ -46,6 +46,11 @@ header h1 {
     margin: 0;
 }
 
+#filter{
+    width: 9rem;
+    padding: 3px;
+}
+
 .maintitle {
     background-color: #131415;
     margin: 0;
