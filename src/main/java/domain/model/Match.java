@@ -23,14 +23,14 @@ public class Match {
         setAway(away);
     }
 
-    public Match(int id, LocalDate date, LocalTime time, String home, String away, User user, Group group) {
+    public Match(int id, LocalDate date, LocalTime time, String home, String away, User user, String group) {
         this.matchid = id;
         this.date = date;
         this.time = time;
         this.home = home;
         this.away = away;
         this.creator = user;
-        this.group = group;
+        setGroup(group);
         //alleen gebruikt voor match uit db, zodat datum fout niet gegooid wordt.
     }
 
