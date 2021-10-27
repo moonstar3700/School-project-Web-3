@@ -1,4 +1,3 @@
-import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,13 +6,11 @@ import org.openqa.selenium.support.FindBy;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+public class TrainingOverviewPage extends Page{
 
-public class OverviewPage extends Page{
-    public OverviewPage(WebDriver driver) {
+    public TrainingOverviewPage(WebDriver driver) {
         super(driver);
-        this.driver.get(path + "Controller?command=Overview");
+        this.driver.get(path + "Controller?command=TrainingOverview");
     }
 
     public boolean containsString(String string) {
@@ -34,6 +31,5 @@ public class OverviewPage extends Page{
 
     public void findKnop(String string){
         driver.findElement(By.id(string)).click();
-    }
-
+}
 }

@@ -1,18 +1,14 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public class RegisterTest {
+public class RegisterUserTest {
     private WebDriver driver;
     private String path = "http://localhost:8080/Controller";
 
@@ -37,7 +33,7 @@ public class RegisterTest {
     public void test_ARegister_AllFieldsFilledInCorrectly_UserIsRegistered_and_RoleIsTrainer() {
         //submitForm("Jan", "Janssens", "jan.janssens@hotmail.com" , "1234");
 
-        RegisterPage registerpage = PageFactory.initElements(driver, RegisterPage.class);
+        RegisterUserPage registerpage = PageFactory.initElements(driver, RegisterUserPage.class);
         registerpage.setFirstname("Jan");
         registerpage.setlastName("Janssens");
         registerpage.setEmail("jan.janssens@hotmail.com");
@@ -46,7 +42,7 @@ public class RegisterTest {
 
         assertEquals("Home",registerpage.getTitle());
 
-        OverviewPage overviewPage = PageFactory.initElements(driver, OverviewPage.class);
+        UserOverviewPage overviewPage = PageFactory.initElements(driver, UserOverviewPage.class);
         assertTrue(overviewPage.containsString("Jan"));
         assertTrue(overviewPage.containsString("Janssens"));
         assertTrue(overviewPage.containsString("jan.janssens@hotmail.com"));
@@ -58,7 +54,7 @@ public class RegisterTest {
     public void test_Register_FirstNameNotFilledIn_ErrorMessageGivenForFirstNameAndOtherFieldsValueKept(){
         //submitForm("", "Janssens", "jan.janssens@hotmail.com", "1234");
 
-        RegisterPage registerpage = PageFactory.initElements(driver, RegisterPage.class);
+        RegisterUserPage registerpage = PageFactory.initElements(driver, RegisterUserPage.class);
         registerpage.setFirstname("");
         registerpage.setlastName("Janssens");
         registerpage.setEmail("jan.janssens@hotmail.com");
@@ -77,7 +73,7 @@ public class RegisterTest {
     public void test_Register_LastNameNotFilledIn_ErrorMessageGivenForLastNameAndOtherFieldsValueKept(){
         //submitForm("Jan", "", "jan.janssens@hotmail.com", "1234");
 
-        RegisterPage registerpage = PageFactory.initElements(driver, RegisterPage.class);
+        RegisterUserPage registerpage = PageFactory.initElements(driver, RegisterUserPage.class);
         registerpage.setFirstname("Jan");
         registerpage.setlastName("");
         registerpage.setEmail("jan.janssens@hotmail.com");
@@ -96,7 +92,7 @@ public class RegisterTest {
     public void test_Register_EmailNotFilledIn_ErrorMessageGivenForEmailAndOtherFieldsValueKept(){
         //submitForm("Jan", "Janssens", "", "1234");
 
-        RegisterPage registerpage = PageFactory.initElements(driver, RegisterPage.class);
+        RegisterUserPage registerpage = PageFactory.initElements(driver, RegisterUserPage.class);
         registerpage.setFirstname("Jan");
         registerpage.setlastName("Janssens");
         registerpage.setEmail("");
@@ -117,7 +113,7 @@ public class RegisterTest {
     public void test_Register_PasswordNotFilledIn_ErrorMessageGivenForEmailAndOtherFieldsValueKept(){
         //submitForm("Jan", "Janssens", "jan.janssens@hotmail.com", "");
 
-        RegisterPage registerpage = PageFactory.initElements(driver, RegisterPage.class);
+        RegisterUserPage registerpage = PageFactory.initElements(driver, RegisterUserPage.class);
         registerpage.setFirstname("Jan");
         registerpage.setlastName("Janssens");
         registerpage.setEmail("jan.janssens@hotmail.com");
@@ -136,7 +132,7 @@ public class RegisterTest {
     public void test_Register_UserAlreadyExists_ErrorMessageGiven(){
         //submitForm("Pieter", "Pieters", "pieter.pieters@hotmail.com", "1234");
 
-        RegisterPage registerpage = PageFactory.initElements(driver, RegisterPage.class);
+        RegisterUserPage registerpage = PageFactory.initElements(driver, RegisterUserPage.class);
         registerpage.setFirstname("Jan");
         registerpage.setlastName("Janssens");
         registerpage.setEmail("jan.janssens@hotmail.com");
@@ -155,14 +151,14 @@ public class RegisterTest {
     @Test
     public void test_User_verwijderen(){
 
-        RegisterPage registerpage = PageFactory.initElements(driver, RegisterPage.class);
+        RegisterUserPage registerpage = PageFactory.initElements(driver, RegisterUserPage.class);
         registerpage.setFirstname("Bob");
         registerpage.setlastName("Bobbens");
         registerpage.setEmail("bob@hotmail.com");
         registerpage.setPassword("1234");
         registerpage.register();
 
-        OverviewPage overviewPage = PageFactory.initElements(driver, OverviewPage.class);
+        UserOverviewPage overviewPage = PageFactory.initElements(driver, UserOverviewPage.class);
         assertTrue(overviewPage.containsString("bob@hotmail.com"));
         overviewPage.findKnopInTable("delete");
         overviewPage.findKnop("delete");
@@ -173,14 +169,14 @@ public class RegisterTest {
     @Test
     public void test_User_verwijderen_annuleren(){
 
-        RegisterPage registerpage = PageFactory.initElements(driver, RegisterPage.class);
+        RegisterUserPage registerpage = PageFactory.initElements(driver, RegisterUserPage.class);
         registerpage.setFirstname("Bob");
         registerpage.setlastName("Bobbens");
         registerpage.setEmail("bob@hotmail.com");
         registerpage.setPassword("1234");
         registerpage.register();
 
-        OverviewPage overviewPage = PageFactory.initElements(driver, OverviewPage.class);
+        UserOverviewPage overviewPage = PageFactory.initElements(driver, UserOverviewPage.class);
         assertTrue(overviewPage.containsString("bob@hotmail.com"));
         overviewPage.findKnopInTable("delete");
         overviewPage.findKnop("cancel");
@@ -211,14 +207,14 @@ public class RegisterTest {
 
     @Test
     public void test_User_email_aanpassen(){
-        RegisterPage registerpage = PageFactory.initElements(driver, RegisterPage.class);
+        RegisterUserPage registerpage = PageFactory.initElements(driver, RegisterUserPage.class);
         registerpage.setFirstname("Ham");
         registerpage.setlastName("Hammens");
         registerpage.setEmail("Ham@hotmail.com");
         registerpage.setPassword("1234");
         registerpage.register();
 
-        EditPage editPage = PageFactory.initElements(driver, EditPage.class);
+        EditUserPage editPage = PageFactory.initElements(driver, EditUserPage.class);
         editPage.setEmail("bam@hotmail.com");
         editPage.findKnop("edit");
         assertTrue(editPage.containsString("bam@hotmail.com"));
@@ -227,21 +223,21 @@ public class RegisterTest {
 
     @Test
     public void test_user_email_aanpassen_naar_bestaande_email_geeft_errorMessage(){
-        RegisterPage registerpage = PageFactory.initElements(driver, RegisterPage.class);
+        RegisterUserPage registerpage = PageFactory.initElements(driver, RegisterUserPage.class);
         registerpage.setFirstname("John");
         registerpage.setlastName("Johnson");
         registerpage.setEmail("John@hotmail.com");
         registerpage.setPassword("1234");
         registerpage.register();
 
-        RegisterPage registerpage2 = PageFactory.initElements(driver, RegisterPage.class);
+        RegisterUserPage registerpage2 = PageFactory.initElements(driver, RegisterUserPage.class);
         registerpage2.setFirstname("Ban");
         registerpage2.setlastName("Babbens");
         registerpage2.setEmail("bab@hotmail.com");
         registerpage2.setPassword("1234");
         registerpage2.register();
 
-        EditPage editPage = PageFactory.initElements(driver, EditPage.class);
+        EditUserPage editPage = PageFactory.initElements(driver, EditUserPage.class);
         editPage.setEmail("John@hotmail.com");
         editPage.findKnop("edit");
         assertEquals("Edit",editPage.getTitle());
@@ -250,14 +246,14 @@ public class RegisterTest {
 
     @Test
     public void test_User_updaten_en_emailveld_leeg_laten_geeft_errorMessage(){
-        RegisterPage registerpage = PageFactory.initElements(driver, RegisterPage.class);
+        RegisterUserPage registerpage = PageFactory.initElements(driver, RegisterUserPage.class);
         registerpage.setFirstname("Jason");
         registerpage.setlastName("Jasons");
         registerpage.setEmail("Jason@hotmail.com");
         registerpage.setPassword("1234");
         registerpage.register();
 
-        EditPage editPage = PageFactory.initElements(driver, EditPage.class);
+        EditUserPage editPage = PageFactory.initElements(driver, EditUserPage.class);
         editPage.setEmail("");
         editPage.findKnop("edit");
         assertEquals("Edit",editPage.getTitle());
