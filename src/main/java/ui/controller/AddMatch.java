@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class AddMatch extends RequestHandler {
@@ -67,7 +68,13 @@ public class AddMatch extends RequestHandler {
     }
 
     private void setDate(Match match, HttpServletRequest request, HttpServletResponse response, ArrayList<String> errors) {
-        LocalDate date = LocalDate.parse(request.getParameter("date"));
+        LocalDate date = null;
+        try {
+            date = LocalDate.parse(request.getParameter("date"));
+        } catch (DateTimeParseException exc) {
+
+        }
+
         try {
             match.setDate(date);
             request.setAttribute("datePreviousValue", date);
@@ -78,7 +85,13 @@ public class AddMatch extends RequestHandler {
     }
 
     private void setTime(Match match, HttpServletRequest request, HttpServletResponse response, ArrayList<String> errors) {
-        LocalTime time = LocalTime.parse(request.getParameter("time"));
+        LocalTime time = null;
+        try {
+            time = LocalTime.parse(request.getParameter("time"));
+        } catch (DateTimeParseException exc) {
+
+        }
+
         try {
             match.setTime(time);
             request.setAttribute("timePreviousValue", time);

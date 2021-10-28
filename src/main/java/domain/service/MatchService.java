@@ -12,4 +12,6 @@ public interface MatchService {
     void update(Match match);
 
     Match search(String home, String away, String group);
+
+    void delete(int matchid);
 }

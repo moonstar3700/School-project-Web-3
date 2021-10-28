@@ -76,10 +76,28 @@ public class MatchServiceDB implements MatchService {
                 String home = resultSet.getString("home");
                 String away = resultSet.getString("away");
                 int userid = resultSet.getInt("user_id");
-                String groupstring = resultSet.getString("match_group");
+                String group = resultSet.getString("match_group");
                 String winner = resultSet.getString("winner");
                 User user = null;
-                try {
+                String queryu = String.format("SELECT * from %s.user where user_id = ?;", schema);
+                PreparedStatement preparedStatement = connection.prepareStatement(queryu);
+                preparedStatement.setInt(1, userid);
+                ResultSet resultSetUser = preparedStatement.executeQuery();
+                while (resultSetUser.next()) {
+                    int uid = resultSetUser.getInt("user_id");
+                    String email = resultSetUser.getString("email");
+                    String password = resultSetUser.getString("password");
+                    String firstname = resultSetUser.getString("firstname");
+                    String lastname = resultSetUser.getString("lastname");
+                    String ugroup = resultSetUser.getString("group");
+                    String role = resultSetUser.getString("role");
+                    user = new User(uid, email, password, firstname, lastname, ugroup, role);
+                }
+                if (user == null) {
+                    user = new User("deleted@user.com", "deleted", "Deleted", "User", Group.ELITE);
+                }
+
+           /*     try {
                     String queryu = String.format("SELECT * from %s.user where user_id = ?;", schema);
                     PreparedStatement preparedStatement = connection.prepareStatement(queryu);
                         preparedStatement.setInt(1, userid);
@@ -97,9 +115,8 @@ public class MatchServiceDB implements MatchService {
 
                 } catch (NullPointerException exc) {
                     user = new User("deleted@user.com", "deleted", "Deleted", "User", Group.ELITE);
-                }
-                user.setGroup(groupstring);
-                Group group = user.getGroup();
+                } */
+
                 Match match = new Match(id, matchDate, matchTime, home, away, user, group);
                 if (winner != null) {
                     LocalDate winnerregistration = resultSet.getDate("winnerregistration").toLocalDate();
@@ -126,7 +143,7 @@ public class MatchServiceDB implements MatchService {
         }
         List<Match> matchList= getAll();   //new ArrayList<Match>(matches.values());
         for (Match m : matchList) {
-            if (m.getHome().equals(match.getHome()) && m.getAway().equals(match.getAway()) && m.getGroup() == match.getGroup()) {
+            if (m.getHome().equals(match.getHome()) && m.getAway().equals(match.getAway()) && m.getGroup() == match.getGroup() && match.getMatchid() != m.getMatchid()) {
                 throw new DbException("Match already exists");
             }
         }
@@ -184,6 +201,18 @@ public class MatchServiceDB implements MatchService {
             throwables.printStackTrace();
         }
         return match;
+    }
+
+    @Override
+    public void delete(int matchid) {
+        String query = String.format("delete from %s.match where match_id = ?", schema);
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, matchid);
+            preparedStatement.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
 

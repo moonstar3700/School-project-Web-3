@@ -87,4 +87,7 @@ public class AppService {
 
     public List<Training> getAllTrainingsFilter(String filter, User user){return trainings.getAllFiltered(filter, user);}
 
+    public void deleteMatch(int matchid) {
+        matches.delete(matchid);
+    }
 }

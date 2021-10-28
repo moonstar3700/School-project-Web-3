@@ -7,7 +7,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta charset="UTF-8">
-    <title>Overview</title>
+    <title>Match Overview</title>
     <link rel="stylesheet" type="text/css" href="css/style3.css">
 </head>
 
@@ -62,6 +62,7 @@
                             </c:if>
                             <th>Creator</th>
                             <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -81,6 +82,7 @@
                             <td>${match.creator.firstName} ${match.creator.lastName}</td>
                             <td><a id="edit1" href="Controller?command=ToEditMatch&matchid=${match.matchid}">Edit</a>
                             </td>
+                            <td><a id="delete1" href="Controller?command=ConfirmMatchDelete&matchid=${match.matchid}">Delete</a></td>
                         </tr>
                         </tbody>
                     </table>
@@ -104,6 +106,7 @@
                             <th>Registered on</th>
                             <th>Creator</th>
                             <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -124,6 +127,7 @@
                             </c:if>
                             <td>${match.creator.firstName} ${match.creator.lastName}</td>
                             <td><a id="edit2" href="Controller?command=ToEditMatch&matchid=${match.matchid}">Edit</a>
+                            <td><a id="delete2" href="Controller?command=ConfirmMatchDelete&matchid=${match.matchid}">Delete</a></td>
                             </td>
                         </tr>
                         </tbody>
@@ -147,6 +151,7 @@
                             <th>Registered on</th>
                             <th>Creator</th>
                             <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -167,6 +172,7 @@
                             </c:if>
                             <td>${match.creator.firstName} ${match.creator.lastName}</td>
                             <td><a id="edit3" href="Controller?command=ToEditMatch&matchid=${match.matchid}">Edit</a>
+                            <td><a id="delete3" href="Controller?command=ConfirmMatchDelete&matchid=${match.matchid}">Delete</a></td>
                             </td>
                         </tr>
 

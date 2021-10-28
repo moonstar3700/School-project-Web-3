@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Error</title>
+    <title>Not Found</title>
     <link rel="stylesheet" type="text/css" href="css/style3.css">
 </head>
 
