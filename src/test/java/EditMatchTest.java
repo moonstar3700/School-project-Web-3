@@ -32,14 +32,14 @@ public class EditMatchTest {
 
     @Test
     public void test_AEdit_MatchIsMovedToDateInFuture_MatchIsEdited() {
-      /*  IndexPage index = PageFactory.initElements(driver, IndexPage.class);
+        IndexPage index = PageFactory.initElements(driver, IndexPage.class);
         index.login();
         RegisterMatchPage registerMatchPage = PageFactory.initElements(driver, RegisterMatchPage.class);
         registerMatchPage.setHome("Dojo Kamiyama");
         registerMatchPage.setAway("Dojo Testen");
         registerMatchPage.setDate("05052025");
         registerMatchPage.setTime("1500PM");
-        registerMatchPage.register(); */
+        registerMatchPage.register();
 
         EditMatchPage editMatchPage = PageFactory.initElements(driver, EditMatchPage.class);
         editMatchPage.setDate("04042025");
