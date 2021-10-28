@@ -3,6 +3,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.ArrayList;
+
 public class EditTrainingPage extends TrainingOverviewPage{
 
     @FindBy(id="date")
@@ -35,13 +37,23 @@ public class EditTrainingPage extends TrainingOverviewPage{
     }
 
     public boolean hasErrorMessage (String message) {
-        WebElement errorMsg = driver.findElement(By.cssSelector("div.alert-danger ul li"));
+
+        WebElement errorMsg = driver.findElement(By.cssSelector(""));
         return (message.equals(errorMsg.getText()));
     }
 
     public boolean hasErrorMessageLocator(String message) {
-        String locator = "div.alert-danger ul li:nth-child(2)";
-        WebElement error = driver.findElement(By.cssSelector(locator));
-        return (message.equals(error.getText()));
+        //String locator = "div.alert-danger ul li:nth-child(2)";
+        //WebElement error = driver.findElement(By.cssSelector(locator));
+        //return (message.equals(error.getText()));
+
+        ArrayList<WebElement> listItems=(ArrayList<WebElement>) driver.findElements(By.cssSelector("div.alert-danger ul li"));
+        boolean found=false;
+        for (WebElement listItem:listItems) {
+            if (listItem.getText().contains(message)) {
+                found=true;
+            }
+        }
+        return found;
     }
 }

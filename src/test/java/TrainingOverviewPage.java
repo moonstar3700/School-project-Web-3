@@ -3,6 +3,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,5 +43,16 @@ public class TrainingOverviewPage extends Page{
 
         //ArrayList<String> memberNums = new ArrayList<String>();
 
+    }
+    public boolean sortedorder() {
+        ArrayList<WebElement> listItems=(ArrayList<WebElement>) driver.findElements(By.cssSelector("table tr > td:nth-child(2)"));
+        for (int i = 1; i < listItems.size(); i++) {
+            LocalDate d1 = LocalDate.parse(listItems.get(i-1).getText());
+            LocalDate d2 = LocalDate.parse(listItems.get(i).getText());
+            if (d1.isAfter(d2)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

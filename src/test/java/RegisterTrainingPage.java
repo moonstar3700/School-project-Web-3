@@ -57,7 +57,20 @@ public class RegisterTrainingPage extends Page{
         return (message.equals(errorMsg.getText()));
     }
 
+    public boolean hasErrorMessageLocator(String message) {
+        //String locator = "div.alert-danger ul li:nth-child(2)";
+        //WebElement error = driver.findElement(By.cssSelector(locator));
+        //return (message.equals(error.getText()));
 
+        ArrayList<WebElement> listItems=(ArrayList<WebElement>) driver.findElements(By.cssSelector("div.alert-danger ul li"));
+        boolean found=false;
+        for (WebElement listItem:listItems) {
+            if (listItem.getText().contains(message)) {
+                found=true;
+            }
+        }
+        return found;
+    }
 
 
 }
