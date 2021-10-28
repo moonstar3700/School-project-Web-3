@@ -134,7 +134,7 @@ public class TrainingServiceDB implements TrainingService{
         String query = String.format("update %s.training set training_date = ?, training_start = ?, training_end = ? where training_id = ?", schema);
         List<Training> list = getAll(user);
         for (Training t: list){
-            if (training.getDate().equals(t.getDate())&&training.getStart().equals(t.getStart())&&training.getEnd().equals(t.getEnd())){
+            if (training.getDate().equals(t.getDate()) && training.getStart().equals(t.getStart()) && training.getEnd().equals(t.getEnd()) && training.getTrainingId() != (t.getTrainingId())){
                 throw new DomainException("Training already exists");
             }
         }
