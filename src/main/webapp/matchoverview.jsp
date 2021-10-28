@@ -40,9 +40,9 @@
 
         <c:if test="${not empty allMatches}">
             
-            <p><a href="searchMatch.jsp">Zoek een wedstrijd</a></p>
+            <p id="zoekp"><a href="searchMatch.jsp" id="zoek">Zoek een wedstrijd</a></p>
 
-            <h3>Elite</h3>
+            <h3 class="matchtitle">Elite</h3>
             <c:forEach var="match" items="${allMatches}">
                 <c:if test="${match.group eq 'ELITE'}">
                     <table>
@@ -90,7 +90,7 @@
                 </c:if>
             </c:forEach>
 
-            <h3>Youth</h3>
+            <h3 class="matchtitle">Youth</h3>
 
             <c:forEach var="match" items="${allMatches}">
                 <c:if test="${match.group eq 'YOUTH'}">
@@ -135,7 +135,7 @@
                 </c:if>
             </c:forEach>
 
-            <h3>Recreation</h3>
+            <h3 class="matchtitle">Recreation</h3>
 
             <c:forEach var="match" items="${allMatches}">
                 <c:if test="${match.group eq 'RECREATION'}">

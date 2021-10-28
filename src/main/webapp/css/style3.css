@@ -109,6 +109,27 @@ form {
     margin: 30px 0;
 }
 
+.matchtitle{
+    color: whitesmoke;
+    margin-left: 10%;
+    font-size: 30px;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+
+}
+
+#zoekp{
+    font-size: 18px;
+    text-align: center;
+}
+#zoek{
+    color: #C1D8FF;
+}
+#zoek:hover {
+    color: #42FE10;
+}
+
+
 label,
 input,
 textarea {
@@ -293,6 +314,12 @@ input[type="submit"]:hover {
     section {
         grid-column: 2;
         margin-left: 0%;
+    }
+
+    #notloggedpanel{
+        max-width: 65% ;
+        text-align: center;
+        margin-left: 18%;
     }
 
     .maintitle {

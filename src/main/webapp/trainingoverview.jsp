@@ -83,7 +83,7 @@
         </c:if>
         </c:if>
         <c:if test="${empty user}">
-            <section class="notloggedpanel" ><p>U moet ingelogd zijn om een wedstrijd aan te maken.</p></section>
+            <section class="notloggedpanel" ><p>U moet ingelogd zijn om Trainingen te kunnen zien.</p></section>
 
         </c:if>
     </main>
