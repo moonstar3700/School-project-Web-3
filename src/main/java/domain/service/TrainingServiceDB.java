@@ -1,5 +1,6 @@
 package domain.service;
 
+import domain.model.DomainException;
 import domain.model.Training;
 import domain.model.User;
 import util.DBConnectionService;
@@ -33,7 +34,7 @@ public class TrainingServiceDB implements TrainingService{
         List<Training> list = getAll(user);
         for (Training t: list){
             if (training.getDate().equals(t.getDate())&&training.getStart().equals(t.getStart())&&training.getEnd().equals(t.getEnd())){
-                throw new DbException("Training already exists");
+                throw new DomainException("Training already exists");
             }
         }
         try {
@@ -53,7 +54,7 @@ public class TrainingServiceDB implements TrainingService{
     public Training get(int trainingid) {
         Training training = trainings.get(trainingid);
         if (training == null) {
-            throw new DbException("Training does not exist.");
+            throw new DomainException("Training does not exist.");
         }
         return training;
     }
@@ -125,12 +126,18 @@ public class TrainingServiceDB implements TrainingService{
     }
 
     @Override
-    public void update(Training training) {
+    public void update(Training training, User user) {
         if (training == null){
-            throw new DbException("No training given");
+            throw new DomainException("");
         }
         int trainingid = training.getTrainingId();
         String query = String.format("update %s.training set training_date = ?, training_start = ?, training_end = ? where training_id = ?", schema);
+        List<Training> list = getAll(user);
+        for (Training t: list){
+            if (training.getDate().equals(t.getDate())&&training.getStart().equals(t.getStart())&&training.getEnd().equals(t.getEnd())){
+                throw new DomainException("Training already exists");
+            }
+        }
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setDate(1, Date.valueOf(training.getDate()));

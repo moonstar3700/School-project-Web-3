@@ -72,8 +72,8 @@ public class AppService {
         return trainings.getAll(user);
     }
 
-    public void updateTraining(Training training) {
-        trainings.update(training);
+    public void updateTraining(Training training, User user) {
+        trainings.update(training, user);
     }
 
     public void deleteTraining(int trainingid) {

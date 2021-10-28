@@ -32,4 +32,15 @@ public class TrainingOverviewPage extends Page{
     public void findKnop(String string){
         driver.findElement(By.id(string)).click();
 }
+
+    public boolean lookAtFirstElement(String string){
+        String locator = "#container > main:nth-child(3) > table:nth-child(3) > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(2)";
+        WebElement topdate = driver.findElement(By.cssSelector(locator));
+
+        return string.equals(locator);
+        //List<WebElement> dates = driver.findElements(By.cssSelector(locator));
+
+        //ArrayList<String> memberNums = new ArrayList<String>();
+
+    }
 }

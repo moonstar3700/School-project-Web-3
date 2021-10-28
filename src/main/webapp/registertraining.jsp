@@ -37,7 +37,7 @@
                             </div>
                         </c:if>
 
-                            <p>Hier kan u nieuwe wedstrijden toevoegen. Wedstrijden worden altijd toegevoegd voor uw eigen groep.</p>
+                            <p>Hier kan u nieuwe Trainingen toevoegen.</p>
 
                         <form method="POST" action="Controller?command=AddTraining" novalidate="novalidate">
                             <!-- novalidate in order to be able to run tests correctly -->

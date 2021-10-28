@@ -50,7 +50,14 @@ public class AddTraining extends RequestHandler{
     }
 
     private void setDate(Training training, HttpServletRequest request, HttpServletResponse response, ArrayList<String> errors) {
-        LocalDate date = LocalDate.parse(request.getParameter("date"));
+        LocalDate date = null;
+        try {
+           date = LocalDate.parse(request.getParameter("date"));
+        }
+        catch (DateTimeParseException e){
+            errors.add("");
+        }
+
         try {
             training.setDate(date);
             request.setAttribute("datePreviousValue", date);

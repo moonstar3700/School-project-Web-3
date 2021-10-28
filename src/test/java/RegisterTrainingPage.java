@@ -5,6 +5,8 @@ import org.openqa.selenium.support.FindBy;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RegisterTrainingPage extends Page{
 
@@ -24,8 +26,8 @@ public class RegisterTrainingPage extends Page{
 
     public void setDate(String d) {
         date.clear();
-        LocalDate localDate = LocalDate.parse(d, formatter);
-        //date.sendKeys(formatter.format());
+        //LocalDate localDate = LocalDate.parse(d, formatter);
+        date.sendKeys(d);
     }
 
     public void setStart(String s) {
@@ -35,7 +37,7 @@ public class RegisterTrainingPage extends Page{
 
     public void setEnd(String e) {
         end.clear();
-        end.sendKeys();
+        end.sendKeys(e);
     }
 
 
@@ -54,6 +56,8 @@ public class RegisterTrainingPage extends Page{
         WebElement errorMsg = driver.findElement(By.cssSelector("div.alert-danger ul li"));
         return (message.equals(errorMsg.getText()));
     }
+
+
 
 
 }

@@ -89,7 +89,7 @@ public class Training {
         if (start == null) {
             throw new DomainException("No start time selected");
         }
-        if (getDate().isEqual(LocalDate.now())){
+        if (getDate() != null && getDate().isEqual(LocalDate.now())){
             if (start.isAfter(LocalTime.now())){
                 throw new DomainException("Start time can't be in the future");
             }
@@ -127,10 +127,12 @@ public class Training {
     }
 
     public void checkTrainingMoment(Training training){
-        if (getDate().isEqual(training.getDate())){
-            if ((training.getStart().isAfter(getStart()) && training.getStart().isBefore(getEnd())) || (training.getEnd().isAfter(getStart()) && training.getEnd().isBefore(getEnd())) || training.getStart().isBefore(getStart()) && training.getEnd().isAfter(getEnd())){
-                throw new DomainException("Other training already exists in this timeframe");
-            } // more checks if start or end is the same
-        }
+       if (training.getDate() != null){
+           if (getDate().isEqual(training.getDate())){
+               if ((training.getStart().isAfter(getStart()) && training.getStart().isBefore(getEnd())) || (training.getEnd().isAfter(getStart()) && training.getEnd().isBefore(getEnd())) || training.getStart().isBefore(getStart()) && training.getEnd().isAfter(getEnd())){
+               throw new DomainException("Other training already exists in this timeframe");
+           } // more checks if start or end is the same
+       }
+       }
     }
 }

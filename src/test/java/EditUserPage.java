@@ -44,4 +44,6 @@ public class EditUserPage extends UserOverviewPage {
         WebElement errorMsg = driver.findElement(By.cssSelector("div.alert-danger ul li"));
         return (message.equals(errorMsg.getText()));
     }
+
+
 }

@@ -11,7 +11,7 @@ public interface TrainingService {
     void add(Training training, User user);
     Training get(int training);
     List<Training> getAll(User user);
-    void update(Training training);
+    void update(Training training, User user);
     void delete(int trainingid);
     List<Training> getAllFiltered(String filter, User user);
 

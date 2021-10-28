@@ -36,7 +36,7 @@ public class EditTraining extends RequestHandler{
 
         if (errors.size() == 0) {
             try {
-                service.updateTraining(training);
+                service.updateTraining(training, user);
                 return "Controller?command=TrainingOverview";
             }
             catch (Exception exc ) {
@@ -52,7 +52,13 @@ public class EditTraining extends RequestHandler{
     }
 
     private void setDate(Training training, HttpServletRequest request, HttpServletResponse response, ArrayList<String> errors) {
-        LocalDate date = LocalDate.parse(request.getParameter("date"));
+        LocalDate date = null;
+        try {
+            date = LocalDate.parse(request.getParameter("date"));
+        }
+        catch (DateTimeParseException e){
+            errors.add("");
+        }
         try {
             training.setDate(date);
             request.setAttribute("date", date);

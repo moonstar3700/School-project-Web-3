@@ -66,12 +66,12 @@
             <c:forEach var="training" items="${allTrainings}" varStatus="status">
                 <tr>
                     <td>${training.trainingId}</td>
-                    <td>${training.date}</td>
+                    <td class="datecheck">${training.date}</td>
                     <td>${training.start}</td>
                     <td>${training.end}</td>
                     <td>${training.calculateTime()}</td>
                     <td><a id="edit" href="Controller?command=ToEditTraining&trainingid=${training.trainingId}">Edit</a></td>
-                    <td><a id="delete" href="Controller?command=ConfirmTrainingDelete&trainingid=${training.trainingId}">Delete</a></td>
+                    <td><a id="delete" href="Controller?command=DeleteTraining&trainingid=${training.trainingId}">Delete</a></td>
                 </tr>
             </c:forEach>
             </tbody>
