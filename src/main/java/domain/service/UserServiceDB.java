@@ -120,7 +120,7 @@ public class UserServiceDB implements UserService {
         }
         List<User> userList = new ArrayList<User>(users.values());
         for (User u : userList) {
-            if (u.getEmail().equals(user.getEmail())) {
+            if (u.getEmail().equals(user.getEmail()) && u.getUserid() != user.getUserid()) {
                 throw new DbException("Email already in use");
             }
         }
