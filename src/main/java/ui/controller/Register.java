@@ -28,6 +28,7 @@ public class Register extends RequestHandler {
                 service.add(user);
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
+                response.sendRedirect("index.jsp");
                 return "index.jsp";
             }
             catch (Exception exc ) {
