@@ -117,5 +117,5 @@ public class RegisterTrainingTest {
         overview.lookAtFirstElement("01010001");
     }
 
-    //Er zijn geen unhappy path testen voor de sorteer functie
+    //Er zijn geen unhappy path testen voor de sorteer functie --> er zijn geen trainingen om te soorteren
 }
