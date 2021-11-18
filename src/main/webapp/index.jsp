@@ -50,7 +50,7 @@
             <c:if test="${empty user}">
                 <form method="POST" action="Controller?command=Login" novalidate>
                     <p><label for="email">Email</label><input type="email" id="email" name="email" required value="<c:out value='${emailPreviousValue}'/>"></p>
-                    <p><label for="password">Password</label><input type="password" id="password" name="password" required>
+                    <p><label for="password">Password</label><input type="password" id="password" name="password" value ="<c:out value=""/>" required>
                     <p><input type="submit" id="login" value="Login"></p>
                 </form>
             </c:if>
