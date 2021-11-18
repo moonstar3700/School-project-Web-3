@@ -41,10 +41,10 @@
 
                         <form method="POST" action="Controller?command=AddMatch" novalidate="novalidate">
                             <!-- novalidate in order to be able to run tests correctly -->
-                            <p><label for="home">Home Team</label><input type="text" id="home" name="home" required value="${homePreviousValue}"> </p>
-                            <p><label for="away">Away Team</label><input type="text" id="away" name="away" required value="${awayPreviousValue}"> </p>
-                            <p><label for="date">Date</label><input type="date" id="date" name="date" required value="${datePreviousValue}"></p>
-                            <p><label for="time">Time</label><input type="time" id="time" name="time" required value="${timePreviousValue}"> </p>
+                            <p><label for="home">Home Team</label><input type="text" id="home" name="home" required value="<c:out value='${homePreviousValue}'/>"></p>
+                            <p><label for="away">Away Team</label><input type="text" id="away" name="away" required value="<c:out value='${awayPreviousValue}'/>"></p>
+                            <p><label for="date">Date</label><input type="date" id="date" name="date" required value="<c:out value='${datePreviousValue}'/>"></p>
+                            <p><label for="time">Time</label><input type="time" id="time" name="time" required value="<c:out value='${timePreviousValue}'/>"></p>
                             <p><input type="submit" id="addMatch" value="Add Match"></p>
 
                         </form>

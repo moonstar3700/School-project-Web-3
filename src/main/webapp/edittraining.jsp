@@ -37,9 +37,9 @@
             <p> ID: ${trainingid}</p>
             <form method="POST" action="Controller?command=EditTraining&trainingid=${trainingid}" novalidate="novalidate">
                 <!-- novalidate in order to be able to run tests correctly -->
-                <p><label for="date">Date</label><input type="date" id="date" name="date" required value="${date}"> </p>
-                <p><label for="start">Start time</label><input type="time" id="start" name="start" required value="${start}"> </p>
-                <p><label for="end">End time</label><input type="time" id="end" name="end" required value="${end}"></p>
+                <p><label for="date">Date</label><input type="date" id="date" name="date" required value="<c:out value='${date}'/>" > </p>
+                <p><label for="start">Start time</label><input type="time" id="start" name="start" required value="<c:out value='${start}'/> " > </p>
+                <p><label for="end">End time</label><input type="time" id="end" name="end" required value="<c:out value='${end}'/>" ></p>
                 <p><input type="submit" id="editTraining" value="Edit Training"></p>
 
             </form>

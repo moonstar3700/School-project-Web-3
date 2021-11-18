@@ -46,9 +46,9 @@
                       novalidate="novalidate">
                     <!-- novalidate in order to be able to run tests correctly -->
                     <p><label for="home2">Home Team</label><input type="text" id="home2" name="home" required
-                                                                  value="${home}"></p>
+                                                                 value="<c:out value='${home}'/>"></p>
                     <p><label for="away2">Away Team</label><input type="text" id="away2" name="away" required
-                                                                  value="${away}"></p>
+                                                                 value="<c:out value='${away}'/>"></p>
                     <p>Date: ${date}</p>
                     <p>Time: ${time}</p>
                     <p>Winner:</p>
@@ -72,13 +72,13 @@
                 <p> ID: ${matchid}</p>
                 <form method="POST" action="Controller?command=EditMatch&matchid=${matchid}" novalidate="novalidate">
                     <p><label for="home1">Home Team</label><input type="text" id="home1" name="home" required
-                                                                  value="${home}"></p>
+                                                                 value="<c:out value='${home}'/>"></p>
                     <p><label for="away1">Away Team</label><input type="text" id="away1" name="away" required
-                                                                  value="${away}"></p>
+                                                                 value="<c:out value='${away}'/>"></p>
                     <p><label for="date">Date</label><input type="date" id="date" name="date" required
-                                                            value="${date}"></p>
+                                                           value="<c:out value='${date}'/>"></p>
                     <p><label for="time">Time</label><input type="time" id="time" name="time" required
-                                                            value="${time}"></p>
+                                                           value="<c:out value='${time}'/>" ></p>
                     <p><input type="submit" id="editmatch1" value="Edit"></p>
 
                 </form>
