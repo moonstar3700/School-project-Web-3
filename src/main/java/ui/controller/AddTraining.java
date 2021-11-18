@@ -8,6 +8,7 @@ import domain.model.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -35,9 +36,10 @@ public class AddTraining extends RequestHandler{
         if (errors.size() == 0) {
             try {
                 service.addTraining(training, user);
+                response.sendRedirect("Controller?command=TrainingOverview&confirmation=succes");
                 return "Controller?command=TrainingOverview";
             }
-            catch (DomainException exc ) {
+            catch (DomainException | IOException exc ) {
                 errors.add(exc.getMessage());
                 request.setAttribute("errors", errors);
                 return "registertraining.jsp";

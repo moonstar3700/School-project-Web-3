@@ -4,6 +4,7 @@ import domain.model.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class Delete extends RequestHandler{
     @Override
@@ -17,6 +18,11 @@ public class Delete extends RequestHandler{
             return "Controller?command=UserOverview";
         }
         service.delete(userid);
+        try {
+            response.sendRedirect("Controller?command=UserOverview&confirmation=succesDelete");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return "Controller?command=UserOverview";
     }
 }

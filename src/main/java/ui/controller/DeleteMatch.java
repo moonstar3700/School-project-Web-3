@@ -2,6 +2,7 @@ package ui.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class DeleteMatch extends RequestHandler{
     @Override
@@ -15,6 +16,11 @@ public class DeleteMatch extends RequestHandler{
             return "Controller?command=MatchOverview";
         }
         service.deleteMatch(matchid);
+        try {
+            response.sendRedirect("Controller?command=MatchOverview&confirmation=succesDelete");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return "Controller?command=MatchOverview";
     }
 }

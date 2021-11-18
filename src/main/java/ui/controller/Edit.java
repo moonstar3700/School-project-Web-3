@@ -32,6 +32,7 @@ public class Edit extends RequestHandler{
         if (errors.size() == 0) {
             try {
                 service.update(user);
+                response.sendRedirect("Controller?command=UserOverview&confirmation=succesEdit");
                 return "Controller?command=UserOverview";
             }
             catch (Exception exc ) {

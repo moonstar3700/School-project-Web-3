@@ -37,6 +37,7 @@ public class EditTraining extends RequestHandler{
         if (errors.size() == 0) {
             try {
                 service.updateTraining(training, user);
+                response.sendRedirect("Controller?command=TrainingOverview&confirmation=succesEdit");
                 return "Controller?command=TrainingOverview";
             }
             catch (Exception exc ) {

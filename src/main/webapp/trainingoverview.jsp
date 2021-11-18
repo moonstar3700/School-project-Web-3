@@ -27,8 +27,22 @@
             <div class="grid1">
             </div>
         </div>
+
+
+
         <c:if test="${not empty user}">
 
+            <c:if test="${param.confirmation eq 'succes'}">
+                <p>Training werd succesvol toegevoegd.</p>
+            </c:if>
+
+            <c:if test="${param.confirmation eq 'succesEdit'}">
+                <p>Training werd succesvol aangepast.</p>
+            </c:if>
+
+            <c:if test="${param.confirmation eq 'succesDelete'}">
+                <p>Training werd succesvol verwijderd.</p>
+            </c:if>
 
         <c:if test="${not empty errors}">
             <div class="alert alert-danger">

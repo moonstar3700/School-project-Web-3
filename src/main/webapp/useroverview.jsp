@@ -28,6 +28,18 @@
                         </div>
                     </div>
 
+                    <c:if test="${param.confirmation eq 'succes'}">
+                        <p>User werd succesvol toegevoegd.</p>
+                    </c:if>
+
+                    <c:if test="${param.confirmation eq 'succesEdit'}">
+                        <p>User werd succesvol aangepast.</p>
+                    </c:if>
+
+                    <c:if test="${param.confirmation eq 'succesDelete'}">
+                        <p>User werd succesvol verwijderd.</p>
+                    </c:if>
+
                     <c:if test="${not empty errors}">
                         <div class="alert alert-danger">
                             <ul>

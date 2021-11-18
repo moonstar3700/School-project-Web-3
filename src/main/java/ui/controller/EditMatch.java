@@ -6,6 +6,7 @@ import domain.model.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -40,8 +41,9 @@ public class EditMatch extends RequestHandler {
         if (errors.size() == 0) {
             try {
                 service.updateMatch(match);
+                response.sendRedirect("Controller?command=MatchOverview&confirmation=succesEdit");
                 return "Controller?command=MatchOverview";
-            } catch (DomainException exc) {
+            } catch (DomainException | IOException exc) {
                 errors.add(exc.getMessage());
                 request.setAttribute("errors", errors);
                 return "editMatch.jsp";

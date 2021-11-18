@@ -8,6 +8,7 @@ import domain.service.DbException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -31,9 +32,10 @@ public class AddMatch extends RequestHandler {
         if (errors.size() == 0) {
             try {
                 service.addMatch(match);
+                response.sendRedirect("Controller?command=MatchOverview&confirmation=succes");
                 return "Controller?command=MatchOverview";
             }
-            catch (DbException exc ) {
+            catch (DbException | IOException exc ) {
                 errors.add(exc.getMessage());
                 request.setAttribute("errors", errors);
                 return "registermatch.jsp";

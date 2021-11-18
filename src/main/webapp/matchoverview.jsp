@@ -28,6 +28,18 @@
             </div>
         </div>
 
+        <c:if test="${param.confirmation eq 'succes'}">
+            <p>Match werd succesvol toegevoegd.</p>
+        </c:if>
+
+        <c:if test="${param.confirmation eq 'succesEdit'}">
+            <p>Match werd succesvol aangepast.</p>
+        </c:if>
+
+        <c:if test="${param.confirmation eq 'succesDelete'}">
+            <p>Match werd succesvol verwijderd.</p>
+        </c:if>
+
         <c:if test="${not empty errors}">
             <div class="alert alert-danger">
                 <ul>
