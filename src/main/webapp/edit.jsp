@@ -38,11 +38,11 @@
             <form method="POST" action="Controller?command=Edit&userid=${userid}" novalidate="novalidate">
                 <!-- novalidate in order to be able to run tests correctly -->
                 <p><label for="firstName">First Name</label><input type="text" id="firstName" name="firstName" required
-                                                                   value="${firstName}"></p>
+                                                                   value="<c:out value='${firstName}'/>"></p>
                 <p><label for="lastName">Last Name</label><input type="text" id="lastName" name="lastName" required
-                                                                 value="${lastName}"></p>
+                                                                 value="<c:out value='${lastName}'/>"</p>
                 <p><label for="email">Email</label><input type="email" id="email" name="email" required
-                                                          value="${email}"></p>
+                                                         value="<c:out value='${email}'/>" value='${email}'></p>
                 <p><label for="role">Role</label>
                     <select id="role" name="role">
                         <c:choose>
