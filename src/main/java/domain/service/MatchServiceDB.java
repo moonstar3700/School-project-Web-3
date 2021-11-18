@@ -1,12 +1,10 @@
 package domain.service;
 
-import domain.model.DomainException;
 import domain.model.Group;
 import domain.model.Match;
 import domain.model.User;
 import util.DBConnectionService;
 
-import javax.validation.constraints.Null;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
@@ -201,6 +199,27 @@ public class MatchServiceDB implements MatchService {
             throwables.printStackTrace();
         }
         return match;
+    }
+
+    @Override
+    public ArrayList<Match> searchByDate(LocalDate date) {
+        String query = String.format("SELECT * from %s.match where date = ?", schema);
+        ArrayList<Match> matches = new ArrayList<Match>();
+        try {
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setDate(1, Date.valueOf(date));
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("match_id");
+                Match match = matches.get(id);
+                matches.add(match);
+
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return matches;
     }
 
     @Override

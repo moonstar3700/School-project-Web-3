@@ -4,6 +4,7 @@ import domain.model.Match;
 import domain.model.Training;
 import domain.model.User;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,6 +84,10 @@ public class AppService {
 
     public Match searchMatches(String home, String away, String group) {
         return matches.search(home, away, group);
+    }
+
+    public ArrayList<Match> searchMatchesByDate(LocalDate date) {
+        return matches.searchByDate(date);
     }
 
     public List<Training> getAllTrainingsFilter(String filter, User user){return trainings.getAllFiltered(filter, user);}

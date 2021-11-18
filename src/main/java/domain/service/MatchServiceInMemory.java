@@ -5,6 +5,7 @@ import domain.model.Match;
 import domain.model.Role;
 import domain.model.User;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,6 +56,11 @@ public class MatchServiceInMemory implements MatchService{
 
     @Override
     public Match search(String home, String away, String group) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<Match> searchByDate(LocalDate date) {
         return null;
     }
 

@@ -7,7 +7,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta charset="UTF-8">
-    <title>Edit</title>
+    <title>Search</title>
     <link rel="stylesheet" type="text/css" href="css/style3.css">
 </head>
 
@@ -33,6 +33,8 @@
                     </ul>
                 </div>
             </c:if>
+
+            <p>Zoek een specifieke wedstrijd</p>
 
             <form method="POST" action="Controller?command=SearchMatch" novalidate="novalidate"><p><label for="home">Home
                 Team</label><input type="text" id="home" name="home"
@@ -69,6 +71,13 @@
                     </select>
                 </p>
                 <p><input type="submit" id="searchMatch" value="Search"></p></form>
+
+            <p>Zoek wedstrijden van een bepaalde datum</p>
+
+            <form method="POST" action="Controller?command=SearchMatchByDate" novalidate="novalidate">
+                <p><label for="date">Date</label><input type="date" id="date" name="date" required
+                                                        value="<c:out value='${datePreviousValue}'/>"></p>
+                <p><input type="submit" id="searchMatch2" value="Search"></p></form>
 
 
         </section>
