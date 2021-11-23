@@ -28,6 +28,14 @@
             </div>
         </div>
 
+        <c:if test="${not empty notAuthorized}">
+            <section>
+                <p>
+                    ${notAuthorized}
+                </p>
+            </section>
+
+        </c:if>
 
 
         <c:if test="${not empty user}">
