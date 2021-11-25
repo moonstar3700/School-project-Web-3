@@ -19,7 +19,8 @@ public class SearchMatchByDate extends RequestHandler {
                 if (foundMatches.size() == 0) {
                     return "notFound.jsp";
                 } else{
-                    request.setAttribute("foundMatch", foundMatches);
+                    request.setAttribute("foundMatches", foundMatches);
+                    request.setAttribute("date", date);
                     return "matchFoundByDate.jsp";
                 }
             }
