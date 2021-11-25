@@ -27,6 +27,9 @@
             <div class="grid1">
             </div>
         </div>
+        <section>
+            ${user.userid}
+        </section>
 
         <c:if test="${param.confirmation eq 'succes'}">
             <p>Match werd succesvol toegevoegd.</p>
@@ -73,8 +76,11 @@
                                 <th>Winner</th>
                             </c:if>
                             <th>Creator</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <c:if test="${empty notAuthorized}">
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </c:if>
+
                         </tr>
                         </thead>
                         <tbody>
@@ -92,9 +98,11 @@
                                 <td>Nog result yet</td>
                             </c:if>
                             <td>${match.creator.firstName} ${match.creator.lastName}</td>
+                            <c:if test="${user.userid eq match.creator.userid || (user.group eq 'ELITE' && user.role eq 'COORDINATOR') || user.role eq 'ADMIN'}">
                             <td><a id="edit1" href="Controller?command=ToEditMatch&matchid=${match.matchid}">Edit</a>
                             </td>
                             <td><a id="delete1" href="Controller?command=ConfirmMatchDelete&matchid=${match.matchid}">Delete</a></td>
+                            </c:if>
                         </tr>
                         </tbody>
                     </table>
@@ -117,8 +125,11 @@
                             <th>Winner</th>
                             <th>Registered on</th>
                             <th>Creator</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <c:if test="${empty notAuthorized}">
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </c:if>
+
                         </tr>
                         </thead>
                         <tbody>
@@ -138,9 +149,11 @@
                                 <td>Deze match heeft nog geen geregistreerd resultaat</td>
                             </c:if>
                             <td>${match.creator.firstName} ${match.creator.lastName}</td>
+                            <c:if test="${user.userid eq match.creator.userid || (user.group eq 'YOUTH' && user.role eq 'COORDINATOR') || user.role eq 'ADMIN'}">
                             <td><a id="edit2" href="Controller?command=ToEditMatch&matchid=${match.matchid}">Edit</a>
                             <td><a id="delete2" href="Controller?command=ConfirmMatchDelete&matchid=${match.matchid}">Delete</a></td>
                             </td>
+                            </c:if>
                         </tr>
                         </tbody>
                     </table>
@@ -162,8 +175,10 @@
                             <th>Winner</th>
                             <th>Registered on</th>
                             <th>Creator</th>
+                            <c:if test="${empty notAuthorized}">
                             <th>Edit</th>
                             <th>Delete</th>
+                            </c:if>
                         </tr>
                         </thead>
                         <tbody>
@@ -183,9 +198,11 @@
                                 <td>Deze match heeft nog geen geregistreerd resultaat</td>
                             </c:if>
                             <td>${match.creator.firstName} ${match.creator.lastName}</td>
+                            <c:if test="${user.userid eq match.creator.userid || (user.group eq 'RECREATION' && user.role eq 'COORDINATOR') || user.role eq 'ADMIN'}">
                             <td><a id="edit3" href="Controller?command=ToEditMatch&matchid=${match.matchid}">Edit</a>
                             <td><a id="delete3" href="Controller?command=ConfirmMatchDelete&matchid=${match.matchid}">Delete</a></td>
                             </td>
+                            </c:if>
                         </tr>
 
                         </tbody>

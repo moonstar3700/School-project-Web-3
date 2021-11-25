@@ -17,11 +17,11 @@ public class TrainingOverview extends RequestHandler{
         HttpSession session = request.getSession();
         User log = (User) session.getAttribute("user");
         Role[] roles = {Role.TRAINER};
-        //try {
-            checkRole(request, roles);
-        /*}catch (NotAuthorizedException e){
+        try {
+            Utility.checkRole(request, roles);
+        }catch (NotAuthorizedException e){
             request.setAttribute("notAuthorized", "You are not authorized to look at this page.");
-        }*/
+        }
 
         if (log != null) {
             if (filter != null){
@@ -34,7 +34,7 @@ public class TrainingOverview extends RequestHandler{
         return "trainingoverview.jsp";
     }
 
-    public static void checkRole(HttpServletRequest request, Role[] roles) {
+    /*public static void checkRole(HttpServletRequest request, Role[] roles) {
         // read user from session
         // if users role is different from given roles
         //      throw NotAuthorizedException
@@ -50,5 +50,5 @@ public class TrainingOverview extends RequestHandler{
         if (!found)
             request.setAttribute("notAuthorized", "You are not authorized to look at this page.");
 
-    }
+    }*/
 }

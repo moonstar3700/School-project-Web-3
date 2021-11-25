@@ -113,6 +113,12 @@ public class UserServiceDB implements UserService {
         return new ArrayList<User>(users.values());
     }
 
+    /*@Override
+    public List<User> getAllGroup() {
+        Map<Integer, User> usersGroup = new HashMap<Integer, User>();
+
+    }*/
+
     @Override
     public void update(User user) {
         if (user == null) {

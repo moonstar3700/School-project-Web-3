@@ -28,6 +28,13 @@
                         </div>
                     </div>
 
+                    <c:if test="${not empty notAuthorized}">
+                        <section>
+                            <p>${notAuthorized}</p>
+                        </section>
+                    </c:if>
+                    <c:if test="${empty notAuthorized}">
+
                     <c:if test="${param.confirmation eq 'succes'}">
                         <p>User werd succesvol toegevoegd.</p>
                     </c:if>
@@ -84,6 +91,7 @@
 
                     <c:if test="${empty allUsers}">
                     <p>Er zijn momenteel geen gebruikers geregistreerd. U kan zich <a href="register.jsp">hier registeren</a>.</p>
+                    </c:if>
                     </c:if>
                 </main>
                 <footer>

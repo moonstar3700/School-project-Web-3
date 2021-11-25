@@ -36,7 +36,7 @@
             </section>
 
         </c:if>
-
+        <c:if test="${empty notAuthorized}">
 
         <c:if test="${not empty user}">
 
@@ -99,15 +99,18 @@
             </tbody>
         </table>
         </c:if>
+        </c:if>
 
         <c:if test="${empty allTrainings}">
-            <p>Er zijn momenteel geen Trainingen geregistreerd. U kan <a href="registertraining.jsp">hier Trainingen toevoegen</a>.</p>
-        </c:if>
-        </c:if>
-        <c:if test="${empty user}">
-            <section class="notloggedpanel" ><p>U moet ingelogd zijn om Trainingen te kunnen zien.</p></section>
+            <section>
+                <p>Er zijn momenteel geen Trainingen geregistreerd. U kan <a href="registertraining.jsp">hier Trainingen toevoegen</a>.</p>
+            </section>
 
         </c:if>
+        </c:if>
+        <%--<c:if test="${empty user}">
+            <section class="notloggedpanel" ><p>U moet ingelogd zijn om Trainingen te kunnen zien.</p></section>
+        </c:if>--%>
     </main>
     <footer>
         <p>
