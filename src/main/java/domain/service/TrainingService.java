@@ -4,6 +4,7 @@ import domain.model.Match;
 import domain.model.Training;
 import domain.model.User;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,4 +16,5 @@ public interface TrainingService {
     void delete(int trainingid);
     List<Training> getAllFiltered(String filter, User user);
 
+    ArrayList<Training> searchByDate(LocalDate date, User user);
 }

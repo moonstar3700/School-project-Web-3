@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-public class SearchMatchPage extends UserOverviewPage {
+public class SearchMatchPage extends Page {
     @FindBy(id="home")
     private WebElement home;
     @FindBy(id= "away")
@@ -34,8 +34,18 @@ public class SearchMatchPage extends UserOverviewPage {
         group.selectByVisibleText("Recreation");
     }
 
+    public void setDate(String d) {
+        date.clear();
+        date.sendKeys(d);
+    }
+
     public void search() {
         WebElement button = driver.findElement(By.id("searchMatch"));
+        button.click();
+    }
+
+    public void search2() {
+        WebElement button = driver.findElement(By.id("searchMatch2"));
         button.click();
     }
 

@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 public class UserOverviewPage extends Page{
     public UserOverviewPage(WebDriver driver) {
         super(driver);
-        this.driver.get(path + "Controller?command=Overview");
+        this.driver.get(path + "Controller?command=UserOverview");
     }
 
     public boolean containsString(String string) {

@@ -19,7 +19,7 @@
     <div class="grid1">
     </div>
     <section>
-    <p>Volgende wedstrijden worden gespeeld op ${match.date}:</p>
+    <p>Volgende wedstrijden worden gespeeld op ${date}:</p>
         <h3 class="matchtitle">Elite</h3>
         <c:forEach var="match" items="${foundMatches}">
             <c:if test="${match.group eq 'ELITE'}">
@@ -65,7 +65,7 @@
 
         <h3 class="matchtitle">Youth</h3>
 
-        <c:forEach var="match" items="${allMatches}">
+        <c:forEach var="match" items="${foundMatches}">
             <c:if test="${match.group eq 'YOUTH'}">
                 <table>
                     <thead>
@@ -105,7 +105,7 @@
 
         <h3 class="matchtitle">Recreation</h3>
 
-        <c:forEach var="match" items="${allMatches}">
+        <c:forEach var="match" items="${foundMatches}">
             <c:if test="${match.group eq 'RECREATION'}">
                 <table>
                     <thead>

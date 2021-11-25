@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class SearchMatchTest {
+public class SearchMatchByDateTest {
     private WebDriver driver;
     private String path = "http://localhost:8080/Controller";
 
@@ -34,34 +34,30 @@ public class SearchMatchTest {
         index.login();
         RegisterMatchPage registerMatchPage = PageFactory.initElements(driver, RegisterMatchPage.class);
         registerMatchPage.setHome("Dojo Kamiyama");
-        registerMatchPage.setAway("Dojo Testje");
+        registerMatchPage.setAway("Dojo Testie");
         registerMatchPage.setDate("05052025");
         registerMatchPage.setTime("1500PM");
         registerMatchPage.register();
 
         SearchMatchPage searchMatchPage = PageFactory.initElements(driver, SearchMatchPage.class);
-        searchMatchPage.setHome("Dojo Kamiyama");
-        searchMatchPage.setAway("Dojo Testje");
-        searchMatchPage.selectGroup("Recreation");
+        searchMatchPage.setDate("05-05-2025");
 
 
-       SearchFoundPage searchFoundPage = PageFactory.initElements(driver, SearchFoundPage.class);
+       SearchFoundByDatePage searchFoundByDatePage = PageFactory.initElements(driver, SearchFoundByDatePage.class);
 
-        assertTrue(searchFoundPage.containsString("Dojo Kamiyama"));
-        assertTrue(searchFoundPage.containsString("Dojo Testje"));
-        assertTrue(searchFoundPage.containsString("2025-05-05"));
-        assertTrue(searchFoundPage.containsString("15:00"));
-        assertTrue(searchFoundPage.containsString("RECREATION"));
+        assertTrue(searchFoundByDatePage.containsString("Dojo Kamiyama"));
+        assertTrue(searchFoundByDatePage.containsString("Dojo Testie"));
+        assertTrue(searchFoundByDatePage.containsString("2025-05-05"));
+        assertTrue(searchFoundByDatePage.containsString("15:00"));
+        assertTrue(searchFoundByDatePage.containsString("RECREATION"));
     }
 
     @Test
     public void test_SearchMatch_AllFieldsFilledInCorrectly_MatchDoesNotExist() {
 
         SearchMatchPage searchMatchPage = PageFactory.initElements(driver, SearchMatchPage.class);
-        searchMatchPage.setHome("Deze wedstrijd bestaat sowieso niet");
-        searchMatchPage.setAway("Hij is volledig onbestaand");
-        searchMatchPage.selectGroup("Recreation");
-        searchMatchPage.search();
+        searchMatchPage.setDate("08-08-1412");
+        searchMatchPage.search2();
 
         assertEquals("Not Found", searchMatchPage.getTitle());
     }

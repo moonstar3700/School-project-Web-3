@@ -203,8 +203,8 @@ public class MatchServiceDB implements MatchService {
 
     @Override
     public ArrayList<Match> searchByDate(LocalDate date) {
-        String query = String.format("SELECT * from %s.match where date = ?", schema);
-        ArrayList<Match> matches = new ArrayList<Match>();
+        String query = String.format("SELECT * from %s.match where matchdate = ?", schema);
+        ArrayList<Match> foundMatches = new ArrayList<Match>();
         try {
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -213,13 +213,13 @@ public class MatchServiceDB implements MatchService {
             while (resultSet.next()) {
                 int id = resultSet.getInt("match_id");
                 Match match = matches.get(id);
-                matches.add(match);
+                foundMatches.add(match);
 
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return matches;
+        return foundMatches;
     }
 
     @Override

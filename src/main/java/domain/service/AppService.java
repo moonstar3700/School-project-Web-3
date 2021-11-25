@@ -90,6 +90,10 @@ public class AppService {
         return matches.searchByDate(date);
     }
 
+    public ArrayList<Training> searchTrainingsByDate(LocalDate date, User user) {
+        return trainings.searchByDate(date, user);
+    }
+
     public List<Training> getAllTrainingsFilter(String filter, User user){return trainings.getAllFiltered(filter, user);}
 
     public void deleteMatch(int matchid) {
