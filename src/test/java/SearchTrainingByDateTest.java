@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class SearchMatchTest {
+public class SearchTrainingByDateTest {
     private WebDriver driver;
     private String path = "http://localhost:8080/Controller";
 
@@ -29,39 +29,33 @@ public class SearchMatchTest {
     }
 
     @Test
-    public void test_SearchMatch_AllFieldsFilledInCorrectly_MatchIsFound() {
+    public void test_SearchTraining_AllFieldsFilledInCorrectly_TrainingIsFound() {
         IndexPage index = PageFactory.initElements(driver, IndexPage.class);
         index.login();
-        RegisterMatchPage registerMatchPage = PageFactory.initElements(driver, RegisterMatchPage.class);
-        registerMatchPage.setHome("Dojo Kamiyama");
-        registerMatchPage.setAway("Dojo Testje");
-        registerMatchPage.setDate("05052025");
-        registerMatchPage.setTime("1500PM");
-        registerMatchPage.register();
+        RegisterTrainingPage registerpage = PageFactory.initElements(driver, RegisterTrainingPage.class);
 
-        SearchMatchPage searchMatchPage = PageFactory.initElements(driver, SearchMatchPage.class);
-        searchMatchPage.setHome("Dojo Kamiyama");
-        searchMatchPage.setAway("Dojo Testje");
-        searchMatchPage.selectGroup("Recreation");
+        registerpage.setDate("05052015");
+        registerpage.setStart("09:00");
+        registerpage.setEnd("10:30");
+        registerpage.register();
+
+        SearchTrainingPage searchTrainingPage = PageFactory.initElements(driver, SearchTrainingPage.class);
+        searchTrainingPage.setDate("05-05-2015");
 
 
-       SearchFoundPage searchFoundPage = PageFactory.initElements(driver, SearchFoundPage.class);
+        SearchTrainingFoundByDatePage searchTrainingFoundByDatePage = PageFactory.initElements(driver, SearchTrainingFoundByDatePage.class);
 
-        assertTrue(searchFoundPage.containsString("Dojo Kamiyama"));
-        assertTrue(searchFoundPage.containsString("Dojo Testje"));
-        assertTrue(searchFoundPage.containsString("2025-05-05"));
-        assertTrue(searchFoundPage.containsString("15:00"));
-        assertTrue(searchFoundPage.containsString("RECREATION"));
+        assertTrue(searchTrainingFoundByDatePage.containsString("2015-05-05"));
+        assertTrue(searchTrainingFoundByDatePage.containsString("9:00"));
+        assertTrue(searchTrainingFoundByDatePage.containsString("10:30"));
     }
 
     @Test
     public void test_SearchMatch_AllFieldsFilledInCorrectly_MatchDoesNotExist() {
 
         SearchMatchPage searchMatchPage = PageFactory.initElements(driver, SearchMatchPage.class);
-        searchMatchPage.setHome("Deze wedstrijd bestaat sowieso niet");
-        searchMatchPage.setAway("Hij is volledig onbestaand");
-        searchMatchPage.selectGroup("Recreation");
-        searchMatchPage.search();
+        searchMatchPage.setDate("08-08-1412");
+        searchMatchPage.search2();
 
         assertEquals("Not Found", searchMatchPage.getTitle());
     }

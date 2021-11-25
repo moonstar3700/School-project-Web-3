@@ -3,7 +3,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class RegisterMatchPage extends UserOverviewPage {
+public class RegisterMatchPage extends Page {
     @FindBy(id = "home")
     private WebElement home;
     @FindBy(id = "away")
