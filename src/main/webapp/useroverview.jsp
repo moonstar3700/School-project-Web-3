@@ -82,8 +82,11 @@
                                     <td>${user.email}</td>
                                     <td>${user.group}</td>
                                     <td>${user.role}</td>
-                                    <td><a id="edit" href="Controller?command=ToEdit&userid=${user.userid}">Edit</a></td>
-                                    <td><a id="delete" href="Controller?command=ConfirmDelete&userid=${user.userid}">Delete</a></td>
+                                    <c:if test="${sessionScope.user.userid eq user.userid || admin eq true || (coordinator eq true && sessionScope.user.group eq user.group)}">
+                                        <td><a id="edit" href="Controller?command=ToEdit&userid=${user.userid}">Edit</a></td>
+                                        <td><a id="delete" href="Controller?command=ConfirmDelete&userid=${user.userid}">Delete</a></td>
+                                    </c:if>
+
                                 </tr>
                             </c:forEach>
                         </tbody>

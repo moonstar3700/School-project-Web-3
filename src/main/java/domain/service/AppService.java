@@ -28,6 +28,8 @@ public class AppService {
         return users.getAll();
     }
 
+    public List<User> getAllGroup(User user){return users.getAllGroup(user);}
+
     public void update(User user) {
         users.update(user);
     }

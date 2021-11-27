@@ -1,5 +1,6 @@
 package domain.service;
 
+import domain.model.Group;
 import domain.model.User;
 import util.DBConnectionService;
 
@@ -113,11 +114,44 @@ public class UserServiceDB implements UserService {
         return new ArrayList<User>(users.values());
     }
 
-    /*@Override
-    public List<User> getAllGroup() {
+    @Override
+    public List<User> getAllGroup(User userloged) {
         Map<Integer, User> usersGroup = new HashMap<Integer, User>();
+        String query = "";
+        if (userloged.getGroup() == Group.ELITE){
+             query = String.format("SELECT * from %s.user where \"group\" = 'ELITE' order by user_id;", schema);
+        }
+        else if (userloged.getGroup() == Group.RECREATION){
+             query = String.format("SELECT * from %s.user where \"group\" = 'RECREATION' order by user_id;", schema);
+        }
+        else {
+             query = String.format("SELECT * from %s.user where \"group\" = 'YOUTH' order by user_id;", schema);
+        }
+        PreparedStatement statementInsert = null;
+        try {
+            statementInsert = connection.prepareStatement(query);
+            ResultSet resultSet = statementInsert.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("user_id");
+                String email = resultSet.getString("email");
+                String password = resultSet.getString("password");
+                String firstname = resultSet.getString("firstname");
+                String lastname = resultSet.getString("lastname");
+                String group = resultSet.getString("group");
+                String role = resultSet.getString("role");
+                User user = new User(id, email, password, firstname, lastname, group, role);
+                usersGroup.put(id, user);
+            }
 
-    }*/
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<User>(usersGroup.values());
+    }
 
     @Override
     public void update(User user) {

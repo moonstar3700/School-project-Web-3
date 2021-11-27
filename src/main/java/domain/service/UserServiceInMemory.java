@@ -34,6 +34,11 @@ public class UserServiceInMemory implements UserService{
         return new ArrayList<User>(users.values());
     }
 
+    @Override
+    public List<User> getAllGroup(User userloged) {
+        return null;
+    }
+
     public void add(User user) {
         if (user == null) {
             throw new DbException("No user given");

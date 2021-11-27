@@ -9,7 +9,7 @@ public interface UserService {
     void add(User user);
     User get(int userid);
     List<User> getAll();
-    //List<User> getAllGroup();
+    List<User> getAllGroup(User userloged);
     void update(User user);
     void delete(int userid);
     User checkEmail(String email);
