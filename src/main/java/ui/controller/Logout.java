@@ -10,6 +10,12 @@ public class Logout extends RequestHandler{
     public String handleRequest(HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
         session.invalidate();
+        try {
+            response.sendRedirect("index.jsp");
+        } catch (Exception exc){
+
+        }
+
         return "index.jsp";
     }
 

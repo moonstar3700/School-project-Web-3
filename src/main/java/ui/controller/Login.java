@@ -22,6 +22,7 @@ public class Login extends RequestHandler {
                 if (user.isCorrectPassword(password)) {
                     HttpSession session = request.getSession();
                     session.setAttribute("user", user);
+                    response.sendRedirect("index.jsp");
                     return "index.jsp";
                 } else {
                     errors.add("Incorrect password");

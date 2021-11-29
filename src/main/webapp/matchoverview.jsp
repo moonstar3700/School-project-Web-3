@@ -27,9 +27,6 @@
             <div class="grid1">
             </div>
         </div>
-        <section>
-            ${user.userid}
-        </section>
 
         <c:if test="${param.confirmation eq 'succes'}">
             <p>Match werd succesvol toegevoegd.</p>
