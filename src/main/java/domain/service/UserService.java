@@ -10,6 +10,7 @@ public interface UserService {
     User get(int userid);
     List<User> getAll();
     List<User> getAllGroup(User userloged);
+    List<User> getAllGroupWithTraining(User userloged);
     void update(User user);
     void delete(int userid);
     User checkEmail(String email);

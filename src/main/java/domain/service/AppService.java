@@ -30,6 +30,8 @@ public class AppService {
 
     public List<User> getAllGroup(User user){return users.getAllGroup(user);}
 
+    public List<User> getAllGroupWithTraining(User userloged){return users.getAllGroupWithTraining(userloged);}
+
     public void update(User user) {
         users.update(user);
     }

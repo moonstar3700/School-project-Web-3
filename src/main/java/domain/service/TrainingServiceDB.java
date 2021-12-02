@@ -62,6 +62,7 @@ public class TrainingServiceDB implements TrainingService {
 
     @Override
     public List<Training> getAll(User user) {
+        trainings.clear();
         String query = String.format("SELECT * from %s.training where user_id = ? order by training_id asc;", schema);
         PreparedStatement statementInsert = null;
         try {

@@ -75,32 +75,68 @@
                 </select></p>
                 <p><input type="submit" id="filterButton" value="sort"></p>
             </form>
-            <table>
-            <thead>
-            <tr>
-                <th>TrainingID</th>
-                <th>Date</th>
-                <th>Start</th>
-                <th>End</th>
-                <th>Duration (in min)</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="training" items="${allTrainings}" varStatus="status">
-                <tr>
-                    <td>${training.trainingId}</td>
-                    <td class="datecheck">${training.date}</td>
-                    <td>${training.start}</td>
-                    <td>${training.end}</td>
-                    <td>${training.calculateTime()}</td>
-                    <td><a id="edit" href="Controller?command=ToEditTraining&trainingid=${training.trainingId}">Edit</a></td>
-                    <td><a id="delete" href="Controller?command=DeleteTraining&trainingid=${training.trainingId}">Delete</a></td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
+            <c:choose>
+                <c:when test="${search != null}">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>TrainingID</th>
+                            <th>Date</th>
+                            <th>Start</th>
+                            <th>End</th>
+                            <th>Duration (in min)</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="training" items="${allSearchedTrainings}" varStatus="status">
+                            <tr>
+                                <td>${training.trainingId}</td>
+                                <td class="datecheck">${training.date}</td>
+                                <td>${training.start}</td>
+                                <td>${training.end}</td>
+                                <td>${training.calculateTime()}</td>
+                                <td><a id="edit1" href="Controller?command=ToEditTraining&trainingid=${training.trainingId}">Edit</a></td>
+                                <td><a id="delete2" href="Controller?command=DeleteTraining&trainingid=${training.trainingId}">Delete</a></td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </c:when>
+                <c:otherwise>
+                    <c:forEach var="trainingen" items="${allTrainings}">
+                        <h2>${trainingen.key.lastName}</h2>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>TrainingID</th>
+                                <th>Date</th>
+                                <th>Start</th>
+                                <th>End</th>
+                                <th>Duration (in min)</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="training" items="${trainingen.value}" varStatus="status">
+                                <tr>
+                                    <td>${training.trainingId}</td>
+                                    <td class="datecheck">${training.date}</td>
+                                    <td>${training.start}</td>
+                                    <td>${training.end}</td>
+                                    <td>${training.calculateTime()}</td>
+                                    <td><a id="edit" href="Controller?command=ToEditTraining&trainingid=${training.trainingId}">Edit</a></td>
+                                    <td><a id="delete" href="Controller?command=DeleteTraining&trainingid=${training.trainingId}">Delete</a></td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </c:forEach>
+
+                </c:otherwise>
+            </c:choose>
         </c:if>
         </c:if>
 
