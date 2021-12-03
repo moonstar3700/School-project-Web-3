@@ -32,6 +32,8 @@ public class AppService {
 
     public List<User> getAllGroupWithTraining(User userloged){return users.getAllGroupWithTraining(userloged);}
 
+    public List<User> getAllWithTraining(){return users.getAllWithTraining();}
+
     public void update(User user) {
         users.update(user);
     }
@@ -76,6 +78,8 @@ public class AppService {
     public List<Training> getAllTrainings(User user) {
         return trainings.getAll(user);
     }
+
+    public List<Training> getAllTrainingsZonderUser(){return trainings.getAllZonderUser();}
 
     public void updateTraining(Training training, User user) {
         trainings.update(training, user);

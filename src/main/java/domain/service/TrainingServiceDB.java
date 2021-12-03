@@ -86,6 +86,32 @@ public class TrainingServiceDB implements TrainingService {
     }
 
     @Override
+    public List<Training> getAllZonderUser(){
+        trainings.clear();
+        String query = String.format("select user_id, training_id, training_date, training_start, training_end from %s.training \n" +
+                "left outer join %s.user using(user_id)\n" +
+                "where email is null", schema, schema);
+        PreparedStatement statementInsert = null;
+        try {
+            statementInsert = connection.prepareStatement(query);;
+            ResultSet resultSet = statementInsert.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("training_id");
+                LocalDate date = resultSet.getDate("training_date").toLocalDate();
+                LocalTime start = resultSet.getTime("training_start").toLocalTime();
+                LocalTime end = resultSet.getTime("training_end").toLocalTime();
+
+                int user_id = resultSet.getInt("user_id");
+                Training training = new Training(id, date, start, end, user_id);
+                trainings.put(id, training);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return new ArrayList<Training>(trainings.values());
+    }
+
+    @Override
     public List<Training> getAllFiltered(String filter, User user) {
         //String query = String.format("SELECT * from %s.training order by (?) asc;", schema);
         String query;

@@ -11,6 +11,7 @@ public interface UserService {
     List<User> getAll();
     List<User> getAllGroup(User userloged);
     List<User> getAllGroupWithTraining(User userloged);
+    List<User> getAllWithTraining();
     void update(User user);
     void delete(int userid);
     User checkEmail(String email);

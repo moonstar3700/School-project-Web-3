@@ -44,6 +44,11 @@ public class UserServiceInMemory implements UserService{
         return null;
     }
 
+    @Override
+    public List<User> getAllWithTraining() {
+        return null;
+    }
+
     public void add(User user) {
         if (user == null) {
             throw new DbException("No user given");

@@ -43,6 +43,17 @@ public class TrainingOverview extends RequestHandler{
                     trainingen.put(u, trainingenUser);
                 }
                 request.setAttribute("allTrainings", trainingen);
+            }else if (log.getRole() == Role.ADMIN){
+                List<User> users = service.getAllWithTraining();
+                for(User u: users){
+                    List<Training> trainingenUser = service.getAllTrainings(u);
+                    trainingen.put(u, trainingenUser);
+                }
+                User mock = new User();
+                mock.setLastName("Trainingen zonder user");
+                List<Training> trainingenZonderUser = service.getAllTrainingsZonderUser();
+                trainingen.put(mock, trainingenZonderUser);
+                request.setAttribute("allTrainings", trainingen);
             }
         }
         return "trainingoverview.jsp";

@@ -154,24 +154,47 @@ public class UserServiceDB implements UserService {
     }
 
     @Override
-    public List<User> getAllGroupWithTraining(User userloged){
+    public List<User> getAllWithTraining(){
         Map<Integer, User> usersGroup = new HashMap<Integer, User>();
-        String query = "";
-        if (userloged.getGroup() == Group.ELITE){
-            query = String.format("select u.user_id, email, \"password\", firstname, lastname, \"group\", role  from groep1_17.user u\n" +
-                    "inner join %s.training t on u.user_id = t.user_id where \"group\" = 'ELITE' order by lastname, firstname, user_id", schema);
-        }
-        else if (userloged.getGroup() == Group.RECREATION){
-            query = String.format("select u.user_id, email, \"password\", firstname, lastname, \"group\", role  from groep1_17.user u\n" +
-                    "inner join %s.training t on u.user_id = t.user_id where \"group\" = 'RECREATION' order by lastname, firstname, user_id", schema);
-        }
-        else {
-            query = String.format("select u.user_id, email, \"password\", firstname, lastname, \"group\", role  from groep1_17.user u\n" +
-                    "inner join %s.training t on u.user_id = t.user_id where \"group\" = 'YOUTH' order by lastname, firstname, user_id", schema);
-        }
+
+        String query = String.format("select u.user_id, email, \"password\", firstname, lastname, \"group\", role  from %s.user u\n" +
+                "inner join %s.training t on u.user_id = t.user_id order by lastname, firstname, user_id", schema, schema);
         PreparedStatement statementInsert = null;
         try {
             statementInsert = connection.prepareStatement(query);
+            ResultSet resultSet = statementInsert.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("user_id");
+                String email = resultSet.getString("email");
+                String password = resultSet.getString("password");
+                String firstname = resultSet.getString("firstname");
+                String lastname = resultSet.getString("lastname");
+                String group = resultSet.getString("group");
+                String role = resultSet.getString("role");
+                User user = new User(id, email, password, firstname, lastname, group, role);
+                usersGroup.put(id, user);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<User>(usersGroup.values());
+    }
+
+    @Override
+    public List<User> getAllGroupWithTraining(User userloged){
+        Map<Integer, User> usersGroup = new HashMap<Integer, User>();
+
+        String query = String.format("select u.user_id, email, \"password\", firstname, lastname, \"group\", role  from %s.user u\n" +
+                    "inner join %s.training t on u.user_id = t.user_id where \"group\" = ? order by lastname, firstname, user_id", schema, schema);
+
+        PreparedStatement statementInsert = null;
+        try {
+            statementInsert = connection.prepareStatement(query);
+            statementInsert.setString(1, String.valueOf(userloged.getGroup()));
             ResultSet resultSet = statementInsert.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("user_id");
