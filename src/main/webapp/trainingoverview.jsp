@@ -76,7 +76,7 @@
                 <p><input type="submit" id="filterButton" value="sort"></p>
             </form>
                     <c:forEach var="trainingen" items="${allTrainings}">
-                        <h2>${trainingen.key.lastName}</h2>
+                        <h2 class="TOtitle">${trainingen.key.lastName}</h2>
                         <table>
                             <thead>
                             <tr>

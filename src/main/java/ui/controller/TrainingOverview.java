@@ -21,12 +21,7 @@ public class TrainingOverview extends RequestHandler{
         String filter = request.getParameter("filter");
         HttpSession session = request.getSession();
         User log = (User) session.getAttribute("user");
-        /** simpeler maken
-         */
-        Role[] roles = {Role.TRAINER, Role.COORDINATOR, Role.ADMIN};
-        try {
-            Utility.checkRole(request, roles);
-        }catch (NotAuthorizedException e){
+        if (log == null) {
             request.setAttribute("notAuthorized", "You are not authorized to look at this page.");
         }
         if (log != null) {
