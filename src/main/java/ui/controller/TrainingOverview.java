@@ -21,6 +21,8 @@ public class TrainingOverview extends RequestHandler{
         String filter = request.getParameter("filter");
         HttpSession session = request.getSession();
         User log = (User) session.getAttribute("user");
+        /** simpeler maken
+         */
         Role[] roles = {Role.TRAINER, Role.COORDINATOR, Role.ADMIN};
         try {
             Utility.checkRole(request, roles);
@@ -28,32 +30,54 @@ public class TrainingOverview extends RequestHandler{
             request.setAttribute("notAuthorized", "You are not authorized to look at this page.");
         }
         if (log != null) {
-            if (filter != null && log.getRole() == Role.TRAINER){
-                request.setAttribute("allTrainings", trainingen.put(log, service.getAllTrainingsFilter(filter, log)));
-            }
-            else if (log.getRole() == Role.TRAINER){
-                List<Training> trainingenUser = service.getAllTrainings(log);
-                trainingen.put(log, trainingenUser);
-                request.setAttribute("allTrainings", trainingen);
-            }
-            else if (log.getRole() == Role.COORDINATOR){
-                List<User> users = service.getAllGroupWithTraining(log);
-                for(User u: users){
-                    List<Training> trainingenUser = service.getAllTrainings(u);
-                    trainingen.put(u, trainingenUser);
+            if (filter != null){
+                if (log.getRole() == Role.TRAINER){
+                    List<Training> trainingenUser = service.getAllTrainingsFilter(filter, log);
+                    trainingen.put(log, trainingenUser);
+                    request.setAttribute("allTrainings", trainingen);
                 }
-                request.setAttribute("allTrainings", trainingen);
-            }else if (log.getRole() == Role.ADMIN){
-                List<User> users = service.getAllWithTraining();
-                for(User u: users){
-                    List<Training> trainingenUser = service.getAllTrainings(u);
-                    trainingen.put(u, trainingenUser);
+                else if (log.getRole() == Role.COORDINATOR){
+                    List<User> users = service.getAllGroupWithTraining(log);
+                    for(User u: users){
+                        List<Training> trainingenUser = service.getAllTrainingsFilter(filter, u);
+                        trainingen.put(u, trainingenUser);
+                    }
+                    request.setAttribute("allTrainings", trainingen);
                 }
-                User mock = new User();
-                mock.setLastName("Trainingen zonder user");
-                List<Training> trainingenZonderUser = service.getAllTrainingsZonderUser();
-                trainingen.put(mock, trainingenZonderUser);
-                request.setAttribute("allTrainings", trainingen);
+                else if (log.getRole() == Role.ADMIN) {
+                    List<User> users = service.getAllWithTraining();
+                    for(User u: users){
+                        List<Training> trainingenUser = service.getAllTrainings(u);
+                        trainingen.put(u, trainingenUser);
+                    }
+                    User mock = new User();
+                    mock.setLastName("Trainingen zonder user");
+                }
+            } else {
+                if (log.getRole() == Role.TRAINER){
+                    List<Training> trainingenUser = service.getAllTrainings(log);
+                    trainingen.put(log, trainingenUser);
+                    request.setAttribute("allTrainings", trainingen);
+                }
+                else if (log.getRole() == Role.COORDINATOR){
+                    List<User> users = service.getAllGroupWithTraining(log);
+                    for(User u: users){
+                        List<Training> trainingenUser = service.getAllTrainings(u);
+                        trainingen.put(u, trainingenUser);
+                    }
+                    request.setAttribute("allTrainings", trainingen);
+                }else if (log.getRole() == Role.ADMIN){
+                    List<User> users = service.getAllWithTraining();
+                    for(User u: users){
+                        List<Training> trainingenUser = service.getAllTrainings(u);
+                        trainingen.put(u, trainingenUser);
+                    }
+                    User mock = new User();
+                    mock.setLastName("Trainingen zonder user");
+                    List<Training> trainingenZonderUser = service.getAllTrainingsZonderUser();
+                    trainingen.put(mock, trainingenZonderUser);
+                    request.setAttribute("allTrainings", trainingen);
+                }
             }
         }
         return "trainingoverview.jsp";

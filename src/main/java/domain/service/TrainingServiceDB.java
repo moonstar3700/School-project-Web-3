@@ -23,6 +23,7 @@ public class TrainingServiceDB implements TrainingService {
     private UserServiceDB users;
     private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+
     public TrainingServiceDB() {
 
         this.connection = DBConnectionService.getDBConnection();
@@ -152,6 +153,12 @@ public class TrainingServiceDB implements TrainingService {
         }
         return lijst;
     }
+
+    @Override
+    public List<Training> getAllZonderUserFiltered(String filter, User user) {
+        return null;
+    }
+
 
     @Override
     public ArrayList<Training> searchByDate(LocalDate date, User user) {

@@ -16,6 +16,6 @@ public interface TrainingService {
     void update(Training training, User user);
     void delete(int trainingid);
     List<Training> getAllFiltered(String filter, User user);
-
+    List<Training> getAllZonderUserFiltered(String filter, User user);
     ArrayList<Training> searchByDate(LocalDate date, User user);
 }
