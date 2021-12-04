@@ -38,6 +38,8 @@
         </c:if>
         <c:if test="${empty notAuthorized}">
 
+            <p id="zoekp"><a href="searchTraining.jsp" id="zoek">Zoek een training</a></p>
+
         <c:if test="${not empty user}">
 
             <c:if test="${param.confirmation eq 'succes'}">
@@ -55,7 +57,6 @@
             </c:if>
 
         <c:if test="${not empty errors}">
-            <p id="zoekp"><a href="searchTraining.jsp" id="zoek">Zoek een training</a></p>
             <div class="alert alert-danger">
                 <ul>
                     <c:forEach items="${errors}" var="error">

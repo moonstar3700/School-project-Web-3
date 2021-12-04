@@ -31,7 +31,7 @@ public class SearchMatchPage extends Page {
 
     public void selectGroup(String g) {
         Select group = new Select(driver.findElement(By.id("group")));
-        group.selectByVisibleText("Recreation");
+        group.selectByVisibleText(g);
     }
 
     public void setDate(String d) {

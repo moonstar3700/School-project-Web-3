@@ -17,11 +17,11 @@ public class RegisterUserTest {
         //System.setProperty("webdriver.chrome.driver", "/Users/.../web3pers/chromedriver");
         // windows: gebruik dubbele \\ om pad aan te geven
         // hint: zoek een werkende test op van web 2 ...
-        //System.setProperty("webdriver.chrome.driver", "C:/Users/Sarah/Toegepaste Informatica/1ste Fase/Webontwikkeling 2/chromedriver.exe");
-         System.setProperty("webdriver.chrome.driver", "D:\\informatica cursus\\IT 2de jaar\\Web 3\\chrome driver\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:/Users/Sarah/Toegepaste Informatica/1ste Fase/Webontwikkeling 2/chromedriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "D:\\informatica cursus\\IT 2de jaar\\Web 3\\chrome driver\\chromedriver.exe");
         driver = new ChromeDriver();
-        // driver.get("http://localhost:8080/Groep1_17_war_exploded/register.jsp");
-         driver.get("http://localhost:8080/Groep1_17_war2/register.jsp");
+        driver.get("http://localhost:8080/Groep1_17_war_exploded/register.jsp");
+        //driver.get("http://localhost:8080/Groep1_17_war2/register.jsp");
     }
 
     @After
@@ -40,7 +40,10 @@ public class RegisterUserTest {
         registerpage.setPassword("1234");
         registerpage.register();
 
-        assertEquals("Home",registerpage.getTitle());
+        //assertEquals("Home",registerpage.getTitle());
+
+        IndexPage index = PageFactory.initElements(driver, IndexPage.class);
+        index.login();
 
         UserOverviewPage overviewPage = PageFactory.initElements(driver, UserOverviewPage.class);
         assertTrue(overviewPage.containsString("Jan"));
@@ -149,7 +152,35 @@ public class RegisterUserTest {
     }
 
     @Test
+    public void test_User_verwijderen_annuleren(){
+        // als bob bestaat wordt hij ingelogd, anders wordt hij eerst geregistreerd
+        IndexPage index = PageFactory.initElements(driver, IndexPage.class);
+        index.setEmail("bob@hotmail.com");
+        index.setPassword("1234");
+        index.login2();
+
+        RegisterUserPage registerpage = PageFactory.initElements(driver, RegisterUserPage.class);
+        registerpage.setFirstname("Bob");
+        registerpage.setlastName("Bobbens");
+        registerpage.setEmail("bob@hotmail.com");
+        registerpage.setPassword("1234");
+        registerpage.register();
+
+        UserOverviewPage overviewPage = PageFactory.initElements(driver, UserOverviewPage.class);
+        assertTrue(overviewPage.containsString("bob@hotmail.com"));
+        overviewPage.findKnopInTable("delete");
+        overviewPage.findKnop("cancel");
+
+        assertTrue(overviewPage.containsString("bob@hotmail.com"));
+    }
+
+    @Test
     public void test_User_verwijderen(){
+        // als bob bestaat wordt hij ingelogd, anders wordt hij eerst geregistreerd
+        IndexPage index = PageFactory.initElements(driver, IndexPage.class);
+        index.setEmail("bob@hotmail.com");
+        index.setPassword("1234");
+        index.login2();
 
         RegisterUserPage registerpage = PageFactory.initElements(driver, RegisterUserPage.class);
         registerpage.setFirstname("Bob");
@@ -166,23 +197,7 @@ public class RegisterUserTest {
         assertTrue(!overviewPage.containsString("bob@hotmail.com"));
 
     }
-    @Test
-    public void test_User_verwijderen_annuleren(){
 
-        RegisterUserPage registerpage = PageFactory.initElements(driver, RegisterUserPage.class);
-        registerpage.setFirstname("Bob");
-        registerpage.setlastName("Bobbens");
-        registerpage.setEmail("bob@hotmail.com");
-        registerpage.setPassword("1234");
-        registerpage.register();
-
-        UserOverviewPage overviewPage = PageFactory.initElements(driver, UserOverviewPage.class);
-        assertTrue(overviewPage.containsString("bob@hotmail.com"));
-        overviewPage.findKnopInTable("delete");
-        overviewPage.findKnop("cancel");
-
-        assertTrue(overviewPage.containsString("bob@hotmail.com"));
-    }
 
     /*@Test
     public void test_naar_confirm_delete_gaan_en_van_pagina_wisselen(){
@@ -207,6 +222,11 @@ public class RegisterUserTest {
 
     @Test
     public void test_User_email_aanpassen(){
+        IndexPage index = PageFactory.initElements(driver, IndexPage.class);
+        index.setEmail("Ham@hotmail.com");
+        index.setPassword("1234");
+        index.login2();
+
         RegisterUserPage registerpage = PageFactory.initElements(driver, RegisterUserPage.class);
         registerpage.setFirstname("Ham");
         registerpage.setlastName("Hammens");
@@ -223,6 +243,7 @@ public class RegisterUserTest {
 
     @Test
     public void test_user_email_aanpassen_naar_bestaande_email_geeft_errorMessage(){
+
         RegisterUserPage registerpage = PageFactory.initElements(driver, RegisterUserPage.class);
         registerpage.setFirstname("John");
         registerpage.setlastName("Johnson");
@@ -237,6 +258,11 @@ public class RegisterUserTest {
         registerpage2.setPassword("1234");
         registerpage2.register();
 
+        IndexPage index = PageFactory.initElements(driver, IndexPage.class);
+        index.setEmail("bab@hotmail.com");
+        index.setPassword("1234");
+        index.login2();
+
         EditUserPage editPage = PageFactory.initElements(driver, EditUserPage.class);
         editPage.setEmail("John@hotmail.com");
         editPage.findKnop("edit");
@@ -246,6 +272,11 @@ public class RegisterUserTest {
 
     @Test
     public void test_User_updaten_en_emailveld_leeg_laten_geeft_errorMessage(){
+        IndexPage index = PageFactory.initElements(driver, IndexPage.class);
+        index.setEmail("Jason@hotmail.com");
+        index.setPassword("1234");
+        index.login2();
+
         RegisterUserPage registerpage = PageFactory.initElements(driver, RegisterUserPage.class);
         registerpage.setFirstname("Jason");
         registerpage.setlastName("Jasons");

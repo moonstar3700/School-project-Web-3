@@ -39,7 +39,6 @@ public class MatchOverviewTest {
         assertTrue(overviewPage.containsString("Away"));
         assertTrue(overviewPage.containsString("Winner"));
         assertTrue(overviewPage.containsString("Creator"));
-        assertTrue(overviewPage.containsString("Edit"));
 
     }
 

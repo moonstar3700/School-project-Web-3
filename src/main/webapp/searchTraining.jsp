@@ -24,6 +24,14 @@
         <div class="grid1">
         </div>
         <section>
+            <c:if test="${not empty notAuthorized}">
+                <section>
+                    <p>
+                            ${notAuthorized}
+                    </p>
+                </section>
+
+            </c:if>
             <c:if test="${not empty errors}">
                 <div class="alert alert-danger">
                     <ul>
@@ -34,13 +42,15 @@
                 </div>
             </c:if>
 
+            <c:if test="${empty notAuthorized}">
+
             <p>Zoek trainingen van een bepaalde datum</p>
 
             <form method="POST" action="Controller?command=SearchTrainingByDate" novalidate="novalidate">
                 <p><label for="date">Date</label><input type="date" id="date" name="date" required
                                                         value="<c:out value='${datePreviousValue}'/>"></p>
                 <p><input type="submit" id="searchTraining" value="Search"></p></form>
-
+            </c:if>
 
         </section>
 

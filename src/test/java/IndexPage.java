@@ -31,4 +31,9 @@ public class IndexPage extends Page{
         WebElement button=driver.findElement(By.id("login"));
         button.click();
     }
+
+    public void login2(){
+        WebElement button=driver.findElement(By.id("login"));
+        button.click();
+    }
 }

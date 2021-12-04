@@ -119,13 +119,13 @@ public class UserServiceDB implements UserService {
         Map<Integer, User> usersGroup = new HashMap<Integer, User>();
         String query = "";
         if (userloged.getGroup() == Group.ELITE){
-             query = String.format("SELECT * from %s.user where \"group\" = 'ELITE' order by user_id;", schema);
+             query = String.format("SELECT * from %s.user where lower(\"group\") = lower('ELITE') order by user_id;", schema);
         }
         else if (userloged.getGroup() == Group.RECREATION){
-             query = String.format("SELECT * from %s.user where \"group\" = 'RECREATION' order by user_id;", schema);
+             query = String.format("SELECT * from %s.user where lower(\"group\") = lower('RECREATION') order by user_id;", schema);
         }
         else {
-             query = String.format("SELECT * from %s.user where \"group\" = 'YOUTH' order by user_id;", schema);
+             query = String.format("SELECT * from %s.user where lower(\"group\") = lower('YOUTH') order by user_id;", schema);
         }
         PreparedStatement statementInsert = null;
         try {

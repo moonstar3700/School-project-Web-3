@@ -2,6 +2,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -28,6 +29,12 @@ public class TrainingOverviewPage extends Page{
     public void findKnopInTable(String string){
         List<WebElement> links = driver.findElements(By.id(string));
         links.get(links.size()-1).click();
+    }
+
+    public void selectSort(String s) {
+        Select sort = new Select(driver.findElement(By.id("filter")));
+        sort.selectByVisibleText(s);
+        findKnop("filterButton");
     }
 
     public void findKnop(String string){

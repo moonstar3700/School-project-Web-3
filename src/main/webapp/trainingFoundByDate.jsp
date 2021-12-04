@@ -31,14 +31,31 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="training" items="${foundTrainings}" varStatus="status">
-                <tr>
-                    <td>${training.trainingId}</td>
-                    <td class="datecheck">${training.date}</td>
-                    <td>${training.start}</td>
-                    <td>${training.end}</td>
-                    <td>${training.calculateTime()}</td>
-                </tr>
+            <c:forEach var="trainingen" items="${allTrainings}">
+                <h2 class="TOtitle">${trainingen.key.lastName}</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>TrainingID</th>
+                        <th>Date</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Duration (in min)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="training" items="${trainingen.value}" varStatus="status">
+                        <tr>
+                            <td>${training.trainingId}</td>
+                            <td class="datecheck">${training.date}</td>
+                            <td>${training.start}</td>
+                            <td>${training.end}</td>
+                            <td>${training.calculateTime()}</td>
+
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
             </c:forEach>
             </tbody>
         </table>

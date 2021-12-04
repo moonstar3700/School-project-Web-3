@@ -16,7 +16,7 @@ public class EditUserPage extends UserOverviewPage {
 
     public EditUserPage(WebDriver driver) {
         super(driver);
-        this.driver.get(path + "Controller?command=Overview");
+        this.driver.get(path + "Controller?command=UserOverview");
         findKnopInTable("edit");
     }
 

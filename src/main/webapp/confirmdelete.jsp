@@ -23,7 +23,7 @@
     </div>
     <section>
         <p>Are you sure you want to delete user ${firstName} ${lastName} (userid ${userid}, group ${group})?</p>
-        <form class="left" action="Controller?command=Overview" method="POST">
+        <form class="left" action="Controller?command=UserOverview" method="POST">
             <input id="cancel" type="submit" value="No"/>
         </form>
         <form class="right" action="Controller?command=Delete&userid=${userid}" method="POST">

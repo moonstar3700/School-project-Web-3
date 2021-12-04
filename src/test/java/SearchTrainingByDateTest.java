@@ -51,13 +51,14 @@ public class SearchTrainingByDateTest {
     }
 
     @Test
-    public void test_SearchMatch_AllFieldsFilledInCorrectly_MatchDoesNotExist() {
+    public void test_SearchTraining_AllFieldsFilledInCorrectly_TrainingDoesNotExist() {
+        IndexPage index = PageFactory.initElements(driver, IndexPage.class);
+        index.login();
+        SearchTrainingPage searchTrainingPage = PageFactory.initElements(driver, SearchTrainingPage.class);
+        searchTrainingPage.setDate("05-05-1015");
+        searchTrainingPage.search();
 
-        SearchMatchPage searchMatchPage = PageFactory.initElements(driver, SearchMatchPage.class);
-        searchMatchPage.setDate("08-08-1412");
-        searchMatchPage.search2();
-
-        assertEquals("Not Found", searchMatchPage.getTitle());
+        assertEquals("Not Found", searchTrainingPage.getTitle());
     }
 
 

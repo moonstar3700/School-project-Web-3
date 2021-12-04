@@ -18,7 +18,7 @@ public class ToEdit extends RequestHandler {
         }
         catch (Exception exc ) {
             request.setAttribute("errors", exc.getMessage());
-            return "Controller?command=Overview";
+            return "Controller?command=UserOverview";
         }
         User user = service.get(userid);
         String firstName = user.getFirstName();
