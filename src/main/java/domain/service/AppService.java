@@ -34,6 +34,11 @@ public class AppService {
 
     public List<User> getAllWithTraining(){return users.getAllWithTraining();}
 
+    public List<User> getAllGroupWithTrainingOnDate(LocalDate date, User userloged){return users.getAllGroupWithTrainingOnDate( date,  userloged);}
+
+    public List<User> getAllWithTrainingOnDate(LocalDate date){return users.getAllWithTrainingOnDate(date);}
+
+
     public void update(User user) {
         users.update(user);
     }
@@ -82,6 +87,8 @@ public class AppService {
     public List<Training> getAllTrainingsZonderUser(){return trainings.getAllZonderUser();}
 
     public List<Training> getAllTrainingsZonderUserFiltered(String filter){return trainings.getAllZonderUserFiltered(filter);}
+
+    public List<Training> getAllZonderUserOnDate(LocalDate date){return  trainings.getAllZonderUserOnDate(date);}
 
     public void updateTraining(Training training, User user) {
         trainings.update(training, user);

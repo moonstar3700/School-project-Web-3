@@ -6,6 +6,7 @@ import domain.model.User;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,6 +47,16 @@ public class UserServiceInMemory implements UserService{
 
     @Override
     public List<User> getAllWithTraining() {
+        return null;
+    }
+
+    @Override
+    public List<User> getAllGroupWithTrainingOnDate(LocalDate date, User userloged) {
+        return null;
+    }
+
+    @Override
+    public List<User> getAllWithTrainingOnDate(LocalDate date) {
         return null;
     }
 

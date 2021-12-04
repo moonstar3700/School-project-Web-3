@@ -20,17 +20,6 @@
     </div>
     <section>
         <p>Volgende trainingen vonden plaats op ${date}:</p>
-        <table>
-            <thead>
-            <tr>
-                <th>TrainingID</th>
-                <th>Date</th>
-                <th>Start</th>
-                <th>End</th>
-                <th>Duration (in min)</th>
-            </tr>
-            </thead>
-            <tbody>
             <c:forEach var="trainingen" items="${allTrainings}">
                 <h2 class="TOtitle">${trainingen.key.lastName}</h2>
                 <table>
@@ -57,10 +46,6 @@
                     </tbody>
                 </table>
             </c:forEach>
-            </tbody>
-        </table>
-
-
     </section>
 
 

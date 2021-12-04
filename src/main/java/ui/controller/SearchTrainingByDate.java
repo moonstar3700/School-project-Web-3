@@ -18,27 +18,34 @@ public class SearchTrainingByDate extends RequestHandler {
         LocalDate date = LocalDate.parse(request.getParameter("date"));
         HttpSession session = request.getSession();
         User log = (User) session.getAttribute("user");
-        if (log == null) {
-            request.setAttribute("notAuthorized", "You are not authorized to look at this page.");
-        }
+
 
         try {
+            if (log == null) {
+                request.setAttribute("notAuthorized", "You are not authorized to look at this page.");
+            }
             if (log.getRole() == Role.TRAINER) {
                 List<Training> trainingenUser = service.searchTrainingsByDate(date, log);
                 trainingen.put(log, trainingenUser);
                 request.setAttribute("allTrainings", trainingen);
             } else if (log.getRole() == Role.COORDINATOR) {
-                List<User> users = service.getAllGroupWithTraining(log);
+                List<User> users = service.getAllGroupWithTrainingOnDate(date, log);
                 for (User u : users) {
                     List<Training> trainingenUser = service.searchTrainingsByDate(date, u);
                     trainingen.put(u, trainingenUser);
                 }
                 request.setAttribute("allTrainings", trainingen);
             } else if (log.getRole() == Role.ADMIN) {
-                List<User> users = service.getAllWithTraining();
+                List<User> users = service.getAllWithTrainingOnDate(date);
                 for (User u : users) {
                     List<Training> trainingenUser = service.searchTrainingsByDate(date, u);
                     trainingen.put(u, trainingenUser);
+                }
+                List<Training> trainingenNoUser = service.getAllZonderUserOnDate(date);
+                if (trainingenNoUser.size() != 0){
+                    User mock = new User();
+                    mock.setLastName("Trainingen zonder user");
+                    trainingen.put(mock, trainingenNoUser);
                 }
                 request.setAttribute("allTrainings", trainingen);
             }

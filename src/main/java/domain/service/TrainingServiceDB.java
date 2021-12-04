@@ -111,6 +111,32 @@ public class TrainingServiceDB implements TrainingService {
         }
         return new ArrayList<Training>(trainings.values());
     }
+    @Override
+    public List<Training> getAllZonderUserOnDate(LocalDate date){
+        trainings.clear();
+        String query = String.format("select user_id, training_id, training_date, training_start, training_end from %s.training \n" +
+                "left outer join %s.user using(user_id)\n" +
+                "where email is null and training_date = ? ", schema, schema);
+        PreparedStatement statementInsert = null;
+        try {
+            statementInsert = connection.prepareStatement(query);
+            statementInsert.setDate(1, Date.valueOf(date));
+            ResultSet resultSet = statementInsert.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("training_id");
+                LocalDate date1 = resultSet.getDate("training_date").toLocalDate();
+                LocalTime start = resultSet.getTime("training_start").toLocalTime();
+                LocalTime end = resultSet.getTime("training_end").toLocalTime();
+
+                int user_id = resultSet.getInt("user_id");
+                Training training = new Training(id, date1, start, end, user_id);
+                trainings.put(id, training);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return new ArrayList<Training>(trainings.values());
+    }
 
     @Override
     public List<Training> getAllFiltered(String filter, User user) {
@@ -208,6 +234,7 @@ public class TrainingServiceDB implements TrainingService {
 
     @Override
     public ArrayList<Training> searchByDate(LocalDate date, User user) {
+        trainings.clear();
         String query = String.format("SELECT * from %s.training where training_date = ? and user_id = ?", schema);
         ArrayList<Training> foundTrainings = new ArrayList<Training>();
         try {
@@ -217,8 +244,15 @@ public class TrainingServiceDB implements TrainingService {
             preparedStatement.setInt(2, user.getUserid());
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
+                //int id = resultSet.getInt("training_id");
+                //Training training = trainings.get(id);
                 int id = resultSet.getInt("training_id");
-                Training training = trainings.get(id);
+                LocalDate date1 = resultSet.getDate("training_date").toLocalDate();
+                LocalTime start = resultSet.getTime("training_start").toLocalTime();
+                LocalTime end = resultSet.getTime("training_end").toLocalTime();
+
+                int user_id = resultSet.getInt("user_id");
+                Training training = new Training(id, date1, start, end, user_id);
                 foundTrainings.add(training);
 
             }

@@ -6,10 +6,8 @@ import util.DBConnectionService;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -187,7 +185,6 @@ public class UserServiceDB implements UserService {
     @Override
     public List<User> getAllGroupWithTraining(User userloged){
         Map<Integer, User> usersGroup = new HashMap<Integer, User>();
-
         String query = String.format("select u.user_id, email, \"password\", firstname, lastname, \"group\", role  from %s.user u\n" +
                     "inner join %s.training t on u.user_id = t.user_id where \"group\" = ? order by lastname, firstname, user_id", schema, schema);
 
@@ -195,6 +192,68 @@ public class UserServiceDB implements UserService {
         try {
             statementInsert = connection.prepareStatement(query);
             statementInsert.setString(1, String.valueOf(userloged.getGroup()));
+            ResultSet resultSet = statementInsert.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("user_id");
+                String email = resultSet.getString("email");
+                String password = resultSet.getString("password");
+                String firstname = resultSet.getString("firstname");
+                String lastname = resultSet.getString("lastname");
+                String group = resultSet.getString("group");
+                String role = resultSet.getString("role");
+                User user = new User(id, email, password, firstname, lastname, group, role);
+                usersGroup.put(id, user);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<User>(usersGroup.values());
+    }
+    @Override
+    public List<User> getAllGroupWithTrainingOnDate(LocalDate date, User userloged){
+        Map<Integer, User> usersGroup = new HashMap<Integer, User>();
+        String query = String.format("select u.user_id, email, \"password\", firstname, lastname, \"group\", role  from %s.user u\n" +
+                "inner join %s.training t on u.user_id = t.user_id where \"group\" = ? and training_date = ? order by lastname, firstname, user_id", schema, schema);
+        PreparedStatement statementInsert = null;
+        try {
+            statementInsert = connection.prepareStatement(query);
+            statementInsert.setString(1, String.valueOf(userloged.getGroup()));
+            statementInsert.setDate(2, Date.valueOf(date));
+            ResultSet resultSet = statementInsert.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("user_id");
+                String email = resultSet.getString("email");
+                String password = resultSet.getString("password");
+                String firstname = resultSet.getString("firstname");
+                String lastname = resultSet.getString("lastname");
+                String group = resultSet.getString("group");
+                String role = resultSet.getString("role");
+                User user = new User(id, email, password, firstname, lastname, group, role);
+                usersGroup.put(id, user);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<User>(usersGroup.values());
+    }
+
+    @Override
+    public List<User> getAllWithTrainingOnDate(LocalDate date) {
+        Map<Integer, User> usersGroup = new HashMap<Integer, User>();
+        String query = String.format("select u.user_id, email, \"password\", firstname, lastname, \"group\", role  from %s.user u\n" +
+                "inner join %s.training t on u.user_id = t.user_id where training_date = ? order by lastname, firstname, user_id", schema, schema);
+        PreparedStatement statementInsert = null;
+        try {
+            statementInsert = connection.prepareStatement(query);
+            statementInsert.setDate(1, Date.valueOf(date));
             ResultSet resultSet = statementInsert.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("user_id");

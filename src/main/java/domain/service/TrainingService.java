@@ -13,6 +13,7 @@ public interface TrainingService {
     Training get(int training);
     List<Training> getAll(User user);
     List<Training> getAllZonderUser();
+    List<Training> getAllZonderUserOnDate(LocalDate date);
     void update(Training training, User user);
     void delete(int trainingid);
     List<Training> getAllFiltered(String filter, User user);
