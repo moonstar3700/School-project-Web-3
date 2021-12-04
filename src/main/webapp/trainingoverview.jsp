@@ -97,7 +97,7 @@
                                     <td>${training.start}</td>
                                     <td>${training.end}</td>
                                     <td>${training.calculateTime()}</td>
-                                    <c:if test="${sessionScope.user.userid eq training.creator || sessionScope.user.role eq 'ADMIN'}">
+                                    <c:if test="${sessionScope.user.userid eq training.userID || sessionScope.user.role eq 'ADMIN'}">
                                         <td><a id="edit" href="Controller?command=ToEditTraining&trainingid=${training.trainingId}">Edit</a></td>
                                         <td><a id="delete" href="Controller?command=DeleteTraining&trainingid=${training.trainingId}">Delete</a></td>
                                     </c:if>
