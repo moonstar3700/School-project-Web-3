@@ -81,6 +81,8 @@ public class AppService {
 
     public List<Training> getAllTrainingsZonderUser(){return trainings.getAllZonderUser();}
 
+    public List<Training> getAllTrainingsZonderUserFiltered(String filter){return trainings.getAllZonderUserFiltered(filter);}
+
     public void updateTraining(Training training, User user) {
         trainings.update(training, user);
     }

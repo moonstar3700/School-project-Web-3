@@ -52,6 +52,9 @@ public class TrainingOverview extends RequestHandler{
                     }
                     User mock = new User();
                     mock.setLastName("Trainingen zonder user");
+                    List<Training> trainingenZonderUser = service.getAllTrainingsZonderUserFiltered(filter);
+                    trainingen.put(mock, trainingenZonderUser);
+                    request.setAttribute("allTrainings", trainingen);
                 }
             } else {
                 if (log.getRole() == Role.TRAINER){
