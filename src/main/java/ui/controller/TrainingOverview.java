@@ -21,6 +21,7 @@ public class TrainingOverview extends RequestHandler{
         String filter = request.getParameter("filter");
         HttpSession session = request.getSession();
         User log = (User) session.getAttribute("user");
+        boolean emptyData = false;
         if (log == null) {
             request.setAttribute("notAuthorized", "You are not authorized to look at this page.");
         }
@@ -28,11 +29,13 @@ public class TrainingOverview extends RequestHandler{
             if (filter != null){
                 if (log.getRole() == Role.TRAINER){
                     List<Training> trainingenUser = service.getAllTrainingsFilter(filter, log);
+                    if (trainingenUser.size() == 0) {emptyData = true;}
                     trainingen.put(log, trainingenUser);
                     request.setAttribute("allTrainings", trainingen);
                 }
                 else if (log.getRole() == Role.COORDINATOR){
                     List<User> users = service.getAllGroupWithTraining(log);
+                    if (users.size() == 0) {emptyData = true;}
                     for(User u: users){
                         List<Training> trainingenUser = service.getAllTrainingsFilter(filter, u);
                         trainingen.put(u, trainingenUser);
@@ -41,6 +44,7 @@ public class TrainingOverview extends RequestHandler{
                 }
                 else if (log.getRole() == Role.ADMIN) {
                     List<User> users = service.getAllWithTraining();
+                    if (users.size() == 0) {emptyData = true;}
                     for(User u: users){
                         List<Training> trainingenUser = service.getAllTrainings(u);
                         trainingen.put(u, trainingenUser);
@@ -54,11 +58,13 @@ public class TrainingOverview extends RequestHandler{
             } else {
                 if (log.getRole() == Role.TRAINER){
                     List<Training> trainingenUser = service.getAllTrainings(log);
+                    if (trainingenUser.size() == 0) {emptyData = true;}
                     trainingen.put(log, trainingenUser);
                     request.setAttribute("allTrainings", trainingen);
                 }
                 else if (log.getRole() == Role.COORDINATOR){
                     List<User> users = service.getAllGroupWithTraining(log);
+                    if (users.size() == 0) {emptyData = true;}
                     for(User u: users){
                         List<Training> trainingenUser = service.getAllTrainings(u);
                         trainingen.put(u, trainingenUser);
@@ -66,6 +72,7 @@ public class TrainingOverview extends RequestHandler{
                     request.setAttribute("allTrainings", trainingen);
                 }else if (log.getRole() == Role.ADMIN){
                     List<User> users = service.getAllWithTraining();
+                    if (users.size() == 0) {emptyData = true;}
                     for(User u: users){
                         List<Training> trainingenUser = service.getAllTrainings(u);
                         trainingen.put(u, trainingenUser);
@@ -78,6 +85,7 @@ public class TrainingOverview extends RequestHandler{
                 }
             }
         }
+        request.setAttribute("emptytable", emptyData);
         return "trainingoverview.jsp";
     }
 

@@ -66,7 +66,7 @@
             </div>
         </c:if>
 
-        <c:if test="${not empty allTrainings}">
+        <c:if test="${emptytable == false}">
             <form method="POST" action="Controller?command=TrainingOverview" novalidate="novalidate">
                 <p><label for="filter">Sort by</label><select name="filter" id="filter">
                     <option value="training_id">id</option>
@@ -111,7 +111,7 @@
         </c:if>
         </c:if>
 
-        <c:if test="${empty allTrainings}">
+        <c:if test="${emptytable eq true}">
             <section>
                 <p>Er zijn momenteel geen Trainingen geregistreerd. U kan <a href="registertraining.jsp">hier Trainingen toevoegen</a>.</p>
             </section>

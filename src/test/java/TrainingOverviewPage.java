@@ -41,16 +41,34 @@ public class TrainingOverviewPage extends Page{
         driver.findElement(By.id(string)).click();
 }
 
-    public boolean lookAtFirstElement(String string){
-        String locator = "#container > main:nth-child(3) > table:nth-child(3) > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(2)";
-        WebElement topdate = driver.findElement(By.cssSelector(locator));
+    public boolean lookAtFirstElementDate(String string){
+        //String locator = "#container > main:nth-child(3) > table:nth-child(3) > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(2)";
+        //WebElement topdate = driver.findElement(By.cssSelector(locator));
+        WebElement topdate = driver.findElement(By.xpath("//*[@id=\"container\"]/main/table/tbody/tr[1]/td[2]"));
+        String value = topdate.getText();
+        System.out.println(value);
+        return string.equals(value);
 
-        return string.equals(locator);
+        //return string.equals(locator);
         //List<WebElement> dates = driver.findElements(By.cssSelector(locator));
 
         //ArrayList<String> memberNums = new ArrayList<String>();
 
     }
+    public boolean lookAtFirstElementStartTime(String string){
+        //String locator = "#container > main > table > tbody > tr:nth-child(1) > td.datecheck";
+        //WebElement topdate = driver.findElement(By.cssSelector(locator));
+
+        WebElement topdate = driver.findElement(By.xpath("//*[@id=\"container\"]/main/table/tbody/tr[1]/td[3]"));
+        String value = topdate.getText();
+        System.out.println(value);
+        return string.equals(value);
+        //List<WebElement> dates = driver.findElements(By.cssSelector(locator));
+
+        //ArrayList<String> memberNums = new ArrayList<String>();
+
+    }
+
     public boolean sortedorder() {
         ArrayList<WebElement> listItems=(ArrayList<WebElement>) driver.findElements(By.cssSelector("table tr > td:nth-child(2)"));
         for (int i = 1; i < listItems.size(); i++) {
@@ -62,4 +80,6 @@ public class TrainingOverviewPage extends Page{
         }
         return true;
     }
+
+
 }

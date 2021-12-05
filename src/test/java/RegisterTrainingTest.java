@@ -19,8 +19,8 @@ public class RegisterTrainingTest {
         //System.setProperty("webdriver.chrome.driver", "/Users/.../web3pers/chromedriver");
         // windows: gebruik dubbele \\ om pad aan te geven
         // hint: zoek een werkende test op van web 2 ...
-        System.setProperty("webdriver.chrome.driver", "C:/Users/Sarah/Toegepaste Informatica/1ste Fase/Webontwikkeling 2/chromedriver.exe");
-        //System.setProperty("webdriver.chrome.driver", "D:\\informatica cursus\\IT 2de jaar\\Web 3\\chrome driver\\chromedriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "C:/Users/Sarah/Toegepaste Informatica/1ste Fase/Webontwikkeling 2/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "D:\\informatica cursus\\IT 2de jaar\\Web 3\\chrome driver\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("http://localhost:8080/Groep1_17_war_exploded/registertraining.jsp");
         //driver.get("http://localhost:8080/Groep1_17_war2/registertraining.jsp");
@@ -101,22 +101,5 @@ public class RegisterTrainingTest {
 
     }
 
-    @Test
-    public void test_sort_by_dates_gives_list_sorted_by_date(){
-        IndexPage index = PageFactory.initElements(driver, IndexPage.class);
-        index.login();
 
-        RegisterTrainingPage registerpage = PageFactory.initElements(driver, RegisterTrainingPage.class);
-
-        registerpage.setDate("01010001");
-        registerpage.setStart("09:05");
-        registerpage.setEnd("10:31");
-        registerpage.register();
-
-        TrainingOverviewPage overview = PageFactory.initElements(driver, TrainingOverviewPage.class);
-        overview.selectSort("date");
-        overview.lookAtFirstElement("0001-01-01");
-    }
-
-    //Er zijn geen unhappy path testen voor de sorteer functie --> er zijn geen trainingen om te soorteren
 }

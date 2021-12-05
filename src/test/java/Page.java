@@ -6,8 +6,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public abstract class Page {
     WebDriver driver;
-     //String path = "http://localhost:8080/Groep1_17_war2/";
-     String path = "http://localhost:8080/Groep1_17_war_exploded/";
+     String path = "http://localhost:8080/Groep1_17_war2/";
+     //String path = "http://localhost:8080/Groep1_17_war_exploded/";
 
     @Before
     public void setUp() {

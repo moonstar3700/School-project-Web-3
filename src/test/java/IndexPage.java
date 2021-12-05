@@ -36,4 +36,11 @@ public class IndexPage extends Page{
         WebElement button=driver.findElement(By.id("login"));
         button.click();
     }
+
+    public void loginSort(){
+        setEmail("sort.test@hotmail.com");
+        setPassword("123");
+        WebElement button=driver.findElement(By.id("login"));
+        button.click();
+    }
 }
