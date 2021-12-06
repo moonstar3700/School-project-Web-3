@@ -27,6 +27,7 @@ public class Register extends RequestHandler {
             try {
                 service.add(user);
                 HttpSession session = request.getSession();
+                user = service.checkUserMail(user.getEmail());
                 session.setAttribute("user", user);
                 response.sendRedirect("index.jsp");
                 return "index.jsp";

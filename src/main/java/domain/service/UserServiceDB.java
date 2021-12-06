@@ -85,7 +85,7 @@ public class UserServiceDB implements UserService {
     @Override
     public List<User> getAll() {
         String query = String.format("SELECT * from %s.user order by user_id;", schema);
-
+        users.clear();
         PreparedStatement statementInsert = null;
         try {
             statementInsert = connection.prepareStatement(query);

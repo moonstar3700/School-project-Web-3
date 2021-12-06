@@ -62,7 +62,7 @@ public class MatchServiceDB implements MatchService {
     @Override
     public List<Match> getAll() {
         String query = String.format("SELECT * from %s.match order by matchdate, matchtime;", schema);
-
+        matches.clear();
         PreparedStatement statementInsert = null;
         try {
             statementInsert = connection.prepareStatement(query);

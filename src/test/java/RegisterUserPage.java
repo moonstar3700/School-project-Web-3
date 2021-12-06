@@ -68,4 +68,9 @@ public class RegisterUserPage extends Page{
         return password.getAttribute("value").isEmpty();
     }
 
+    public void logout(){
+        WebElement button=driver.findElement(By.id("Logout"));
+        button.click();
+    }
+
 }

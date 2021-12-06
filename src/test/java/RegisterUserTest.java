@@ -17,14 +17,14 @@ public class RegisterUserTest {
         //System.setProperty("webdriver.chrome.driver", "/Users/.../web3pers/chromedriver");
         // windows: gebruik dubbele \\ om pad aan te geven
         // hint: zoek een werkende test op van web 2 ...
-        System.setProperty("webdriver.chrome.driver", "C:/Users/Sarah/Toegepaste Informatica/1ste Fase/Webontwikkeling 2/chromedriver.exe");
-        //System.setProperty("webdriver.chrome.driver", "D:\\informatica cursus\\IT 2de jaar\\Web 3\\chrome driver\\chromedriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "C:/Users/Sarah/Toegepaste Informatica/1ste Fase/Webontwikkeling 2/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "D:\\informatica cursus\\IT 2de jaar\\Web 3\\chrome driver\\chromedriver.exe");
         driver = new ChromeDriver();
-        driver.get("http://localhost:8080/Groep1_17_war_exploded/register.jsp");
-        //driver.get("http://localhost:8080/Groep1_17_war2/register.jsp");
+        //driver.get("http://localhost:8080/Groep1_17_war_exploded/register.jsp");
+        driver.get("http://localhost:8080/Groep1_17_war2/register.jsp");
     }
 
-    @After
+    //@After
     public void clean() {
         driver.quit();
     }
@@ -36,7 +36,7 @@ public class RegisterUserTest {
         RegisterUserPage registerpage = PageFactory.initElements(driver, RegisterUserPage.class);
         registerpage.setFirstname("Jan");
         registerpage.setlastName("Janssens");
-        registerpage.setEmail("jan.janssens@hotmail.com");
+        registerpage.setEmail("jan.janssens5@hotmail.com");
         registerpage.setPassword("1234");
         registerpage.register();
 
@@ -48,7 +48,7 @@ public class RegisterUserTest {
         UserOverviewPage overviewPage = PageFactory.initElements(driver, UserOverviewPage.class);
         assertTrue(overviewPage.containsString("Jan"));
         assertTrue(overviewPage.containsString("Janssens"));
-        assertTrue(overviewPage.containsString("jan.janssens@hotmail.com"));
+        assertTrue(overviewPage.containsString("jan.janssens5@hotmail.com"));
         assertTrue(overviewPage.containsString("TRAINER"));
     }
 
@@ -250,6 +250,8 @@ public class RegisterUserTest {
         registerpage.setEmail("John@hotmail.com");
         registerpage.setPassword("1234");
         registerpage.register();
+        registerpage.logout();
+
 
         RegisterUserPage registerpage2 = PageFactory.initElements(driver, RegisterUserPage.class);
         registerpage2.setFirstname("Ban");

@@ -8,13 +8,13 @@ public class DeleteTraining extends RequestHandler{
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         int trainingid = Integer.parseInt(request.getParameter("trainingid"));
-        try {
+        /*try {
             service.getTraining(trainingid);
         }
         catch (Exception exc) {
             request.setAttribute("errors", exc.getMessage());
             return "Controller?command=TrainingOverview";
-        }
+        }*/
         service.deleteTraining(trainingid);
         try {
             response.sendRedirect("Controller?command=TrainingOverview&confirmation=succesDelete");
