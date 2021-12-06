@@ -36,15 +36,22 @@
                     <c:if test="${empty notAuthorized}">
 
                     <c:if test="${param.confirmation eq 'succes'}">
-                        <p>User werd succesvol toegevoegd.</p>
+                        <section><p>User werd succesvol toegevoegd.</p></section>
+
                     </c:if>
 
                     <c:if test="${param.confirmation eq 'succesEdit'}">
-                        <p>User werd succesvol aangepast.</p>
+                        <section>
+                            <p>User werd succesvol aangepast.</p>
+                        </section>
+
                     </c:if>
 
                     <c:if test="${param.confirmation eq 'succesDelete'}">
-                        <p>User werd succesvol verwijderd.</p>
+                        <section>
+                            <p>User werd succesvol verwijderd.</p>
+                        </section>
+
                     </c:if>
 
                     <c:if test="${not empty errors}">

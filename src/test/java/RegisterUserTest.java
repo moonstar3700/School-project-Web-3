@@ -24,7 +24,7 @@ public class RegisterUserTest {
         driver.get("http://localhost:8080/Groep1_17_war2/register.jsp");
     }
 
-    //@After
+    @After
     public void clean() {
         driver.quit();
     }
@@ -39,6 +39,7 @@ public class RegisterUserTest {
         registerpage.setEmail("jan.janssens5@hotmail.com");
         registerpage.setPassword("1234");
         registerpage.register();
+        registerpage.logout();
 
         //assertEquals("Home",registerpage.getTitle());
 
@@ -138,16 +139,24 @@ public class RegisterUserTest {
         RegisterUserPage registerpage = PageFactory.initElements(driver, RegisterUserPage.class);
         registerpage.setFirstname("Jan");
         registerpage.setlastName("Janssens");
-        registerpage.setEmail("jan.janssens@hotmail.com");
+        registerpage.setEmail("jan.janssens2@hotmail.com");
         registerpage.setPassword("1234");
         registerpage.register();
+        registerpage.logout();
+
+        RegisterUserPage registerpage2 = PageFactory.initElements(driver, RegisterUserPage.class);
+        registerpage2.setFirstname("Jan");
+        registerpage2.setlastName("Janssens");
+        registerpage2.setEmail("jan.janssens2@hotmail.com");
+        registerpage2.setPassword("1234");
+        registerpage2.register();
 
         assertEquals("Sign Up",registerpage.getTitle());
 
         assertTrue(registerpage.hasErrorMessage("Email already in use"));
         assertTrue(registerpage.hasStickyFirstName("Jan"));
         assertTrue(registerpage.hasStickyLastName("Janssens"));
-        assertTrue(registerpage.hasStickyEmail("jan.janssens@hotmail.com"));
+        assertTrue(registerpage.hasStickyEmail("jan.janssens2@hotmail.com"));
 
     }
 
@@ -247,7 +256,7 @@ public class RegisterUserTest {
         RegisterUserPage registerpage = PageFactory.initElements(driver, RegisterUserPage.class);
         registerpage.setFirstname("John");
         registerpage.setlastName("Johnson");
-        registerpage.setEmail("John@hotmail.com");
+        registerpage.setEmail("John1@hotmail.com");
         registerpage.setPassword("1234");
         registerpage.register();
         registerpage.logout();
@@ -266,7 +275,7 @@ public class RegisterUserTest {
         index.login2();
 
         EditUserPage editPage = PageFactory.initElements(driver, EditUserPage.class);
-        editPage.setEmail("John@hotmail.com");
+        editPage.setEmail("John1@hotmail.com");
         editPage.findKnop("edit");
         assertEquals("Edit",editPage.getTitle());
         assertTrue(editPage.hasErrorMessage("Email already in use"));

@@ -43,15 +43,24 @@
         <c:if test="${not empty user}">
 
             <c:if test="${param.confirmation eq 'succes'}">
-                <p>Training werd succesvol toegevoegd.</p>
+                <section>
+                    <p>Training werd succesvol toegevoegd.</p>
+                </section>
+
             </c:if>
 
             <c:if test="${param.confirmation eq 'succesEdit'}">
-                <p>Training werd succesvol aangepast.</p>
+                <section>
+                    <p>Training werd succesvol aangepast.</p>
+                </section>
+
             </c:if>
 
             <c:if test="${param.confirmation eq 'succesDelete'}">
-                <p>Training werd succesvol verwijderd.</p>
+                <section>
+                    <p>Training werd succesvol verwijderd.</p>
+                </section>
+
 
 
             </c:if>

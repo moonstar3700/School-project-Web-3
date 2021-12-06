@@ -1,3 +1,4 @@
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,11 +20,11 @@ public class SortTrainingTest {
         //System.setProperty("webdriver.chrome.driver", "C:/Users/Sarah/Toegepaste Informatica/1ste Fase/Webontwikkeling 2/chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", "D:\\informatica cursus\\IT 2de jaar\\Web 3\\chrome driver\\chromedriver.exe");
         driver = new ChromeDriver();
-        driver.get("http://localhost:8080/Groep1_17_war_exploded/registertraining.jsp");
-        //driver.get("http://localhost:8080/Groep1_17_war2/registertraining.jsp");
+        //driver.get("http://localhost:8080/Groep1_17_war_exploded/registertraining.jsp");
+        driver.get("http://localhost:8080/Groep1_17_war2/registertraining.jsp");
     }
 
-    //@After
+    @After
     public void clean() {
         driver.quit();
     }
