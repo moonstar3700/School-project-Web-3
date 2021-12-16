@@ -20,9 +20,8 @@ header li a:hover {
     color: #42FE10;
 }
 
-header li.hier a {
-    color: #568F46;
-    color: white;
+.actual {
+    color: white
 }
 
 table a {
