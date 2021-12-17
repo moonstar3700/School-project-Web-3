@@ -16,7 +16,9 @@ import java.util.*;
 import static java.time.temporal.ChronoUnit.MINUTES;
 
 public class TrainingServiceDB implements TrainingService {
+    private Training training;
     private final Map<Integer, Training> trainings = new TreeMap<Integer, Training>();
+    private Map<Integer, Training> trainingreserve = new TreeMap<Integer, Training>();
     private final Map<Integer, Training> trainingsfiltered = new TreeMap<Integer, Training>();
     private Connection connection;
     private String schema;
@@ -53,7 +55,32 @@ public class TrainingServiceDB implements TrainingService {
     }
 
     @Override
-    public Training get(int trainingid) {
+    public Training get(int trainingid){
+        String query = String.format("SELECT * from %s.training where training_id = ? order by training_id asc;", schema);
+        PreparedStatement statementInsert = null;
+        try {
+            statementInsert = connection.prepareStatement(query);
+            statementInsert.setInt(1, trainingid);
+            ResultSet resultSet = statementInsert.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("training_id");
+                LocalDate date = resultSet.getDate("training_date").toLocalDate();
+                LocalTime start = resultSet.getTime("training_start").toLocalTime();
+                LocalTime end = resultSet.getTime("training_end").toLocalTime();
+
+                int user_id = resultSet.getInt("user_id");
+                Training found = new Training(id, date, start, end, user_id);
+                this.training = found;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return training;
+    }
+
+
+
+    public Training get2(int trainingid) {
         Training training = trainings.get(trainingid);
         if (training == null) {
             throw new DomainException("Training does not exist.");

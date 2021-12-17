@@ -9,6 +9,7 @@
     <meta charset="UTF-8">
     <title>Training overview</title>
     <link rel="stylesheet" type="text/css" href="css/style3.css">
+    <script src="JS/TrainingFilter.js"></script>
 </head>
 
 <body>
@@ -60,10 +61,16 @@
                 <section>
                     <p>Training werd succesvol verwijderd.</p>
                 </section>
-
-
-
             </c:if>
+
+            <section>
+                <p>sort with Javascript</p>
+                   <li><a onclick="sortTable(0)">ID</a></li>
+                    <a>Date</a>
+                    <a>start</a>
+                    <a>end</a>
+                    <a>duration</a>
+            </section>
 
         <c:if test="${not empty errors}">
             <div class="alert alert-danger">
@@ -87,14 +94,14 @@
             </form>
                     <c:forEach var="trainingen" items="${allTrainings}">
                         <h2 class="TOtitle">${trainingen.key.lastName}</h2>
-                        <table>
+                        <table id="${trainingen.key.userid}"}>
                             <thead>
                             <tr>
-                                <th>TrainingID</th>
+                                <th onclick="sortTable(${trainingen.key.userid}, 0)">TrainingID</th>
                                 <th>Date</th>
                                 <th>Start</th>
                                 <th>End</th>
-                                <th>Duration (in min)</th>
+                                <th onclick="sortTable(${trainingen.key.userid}, 4)">Duration (in min)</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </tr>

@@ -49,10 +49,13 @@ public class TrainingOverview extends RequestHandler{
                         List<Training> trainingenUser = service.getAllTrainings(u);
                         trainingen.put(u, trainingenUser);
                     }
-                    User mock = new User();
-                    mock.setLastName("Trainingen zonder user");
                     List<Training> trainingenZonderUser = service.getAllTrainingsZonderUserFiltered(filter);
-                    trainingen.put(mock, trainingenZonderUser);
+                    if (trainingenZonderUser.size() != 0) {
+                        User mock = new User();
+                        mock.setLastName("Trainingen zonder user");
+                        trainingen.put(mock, trainingenZonderUser);
+                    }
+
                     request.setAttribute("allTrainings", trainingen);
                 }
             } else {
@@ -77,10 +80,13 @@ public class TrainingOverview extends RequestHandler{
                         List<Training> trainingenUser = service.getAllTrainings(u);
                         trainingen.put(u, trainingenUser);
                     }
-                    User mock = new User();
-                    mock.setLastName("Trainingen zonder user");
                     List<Training> trainingenZonderUser = service.getAllTrainingsZonderUser();
-                    trainingen.put(mock, trainingenZonderUser);
+                    if (trainingenZonderUser.size() != 0){
+                        User mock = new User();
+                        mock.setLastName("Trainingen zonder user");
+                        trainingen.put(mock, trainingenZonderUser);
+                    }
+
                     request.setAttribute("allTrainings", trainingen);
                 }
             }
