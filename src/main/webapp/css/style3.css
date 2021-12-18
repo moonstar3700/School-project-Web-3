@@ -204,6 +204,16 @@ tr {
     text-decoration: none;
 }
 
+.TOtableHeading:hover {
+    color: #42FE10;
+    background-color: #565656;
+    cursor: pointer;
+}
+
+#toh {
+    color: whitesmoke;
+}
+
 footer {
     background-color: #1c1c1c;
     padding-bottom: 4rem;

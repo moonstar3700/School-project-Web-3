@@ -64,12 +64,10 @@
             </c:if>
 
             <section>
-                <p>sort with Javascript</p>
-                   <li><a onclick="sortTable(0)">ID</a></li>
-                    <a>Date</a>
-                    <a>start</a>
-                    <a>end</a>
-                    <a>duration</a>
+                <h1 id="toh">sorteer Opties</h1>
+                <p>Om Alle tabellen te sorteren, gelieve te kiezen waar u op wilt sorteren en op sort te klikken</p>
+                <p>Om een specifieke tabel te filteren (met javascript), gelieve te klikken op de headings TrainingID, Date, Star, End, of op durations
+                van de gewenste tabel. (Deze zullen ondelijnd worden indien erover gehoverd word)</p>
             </section>
 
         <c:if test="${not empty errors}">
@@ -97,11 +95,11 @@
                         <table id="${trainingen.key.userid}"}>
                             <thead>
                             <tr>
-                                <th onclick="sortTable(${trainingen.key.userid}, 0)">TrainingID</th>
-                                <th>Date</th>
-                                <th>Start</th>
-                                <th>End</th>
-                                <th onclick="sortTable(${trainingen.key.userid}, 4)">Duration (in min)</th>
+                                <th class="TOtableHeading" onclick="sortTableNumber(${trainingen.key.userid}, 0)">TrainingID</th>
+                                <th class="TOtableHeading" onclick="sortTableDate(${trainingen.key.userid}, 1)">Date</th>
+                                <th class="TOtableHeading" onclick="sortTableTime(${trainingen.key.userid}, 2)">Start</th>
+                                <th class="TOtableHeading" onclick="sortTableTime(${trainingen.key.userid}, 3)">End</th>
+                                <th class="TOtableHeading" onclick="sortTableNumber(${trainingen.key.userid}, 4)">Duration (in min)</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
