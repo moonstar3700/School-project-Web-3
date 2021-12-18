@@ -48,6 +48,7 @@
                             <p><input type="submit" id="addMatch" value="Add Match"></p>
 
                         </form>
+                            <script src="JS/validateMatch.js"></script>
                         </c:if>
                         <c:if test="${empty user}">
                         <p>U moet ingelogd zijn om een wedstrijd aan te maken.</p>
