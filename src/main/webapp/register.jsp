@@ -9,6 +9,7 @@
             <meta charset="UTF-8">
             <title>Sign Up</title>
             <link rel="stylesheet" type="text/css" href="css/style3.css">
+
         </head>
 
         <body>
@@ -44,6 +45,13 @@
                             <p><label for="lastName">Last Name</label><input type="text" id="lastName" name="lastName" required value="${lastNamePreviousValue}"> </p>
                             <p><label for="email">Email</label><input type="email" id="email" name="email" required value="${emailPreviousValue}"></p>
                             <p><label for="password">Password</label><input type="password" id="password" name="password" required value="${passwordPreviousValue}"> </p>
+                            <meter id="password-meter" min="0" max="4" low="3" value="0"></meter>
+                            <p id="password-text"></p>
+                            <p id="letter" class="invalid">Een <b>lowercase</b> letter</p>
+                            <p id="capital" class="invalid">Een <b>uppercase</b> letter</p>
+                            <p id="number" class="invalid">Een <b>nummer</b></p>
+                            <p id="len" class="invalid">Minimum <b>8 characters</b></p>
+                            <p id="char" class="invalid">Andere characters vb: (, :, ...</p>
                             <p><label for="group">Group</label>
                                 <!-- previous value bij select? -->
                                 <select id="group" name="group">
@@ -76,6 +84,7 @@
                             <p><input type="submit" id="signUp" value="Sign Up"></p>
 
                         </form>
+                        <script src="JS/Register.js"></script>
                     </section>
 
                 </main>
