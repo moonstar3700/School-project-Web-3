@@ -34,6 +34,18 @@
                 </div>
             </c:if>
 
+            <c:if test="${empty user}">
+                <p>U moet ingelogd om gebruikers aan te passen.</p>
+                <c:redirect url="index.jsp"/>
+            </c:if>
+
+            <c:if test="${not empty user}">
+                <c:if test="${empty userid}">
+                    <p>Geen gebruiker geselecteerd om aan te passen.</p>
+                </c:if>
+
+            <c:if test="${not empty userid}">
+
             <p> ID: ${userid}</p>
 
             <form method="POST" action="Controller?command=Edit&userid=${userid}" novalidate="novalidate">
@@ -90,6 +102,8 @@
                 <p><input type="submit" id="edit" value="Edit"></p>
 
             </form>
+            </c:if>
+            </c:if>
         </section>
 
     </main>

@@ -22,6 +22,17 @@
     <div class="grid1">
     </div>
     <section>
+        <c:if test="${empty user}">
+            <p>U moet ingelogd om wedstrijden te verwijderen.</p>
+            <c:redirect url="index.jsp"/>
+        </c:if>
+
+
+        <c:if test="${not empty user}">
+            <c:if test="${empty matchid}">
+                <p>Geen wedstrijd geselecteerd om te verwijderen.</p>
+            </c:if>
+        <c:if test="${not empty matchid}">
         <p>Are you sure you want to delete ${group} match ${home} versus ${away}?</p>
         <form class="left" action="Controller?command=MatchOverview" method="POST">
             <input id="cancel" type="submit" value="No"/>
@@ -29,6 +40,8 @@
         <form class="right" action="Controller?command=DeleteMatch&matchid=${matchid}" method="POST">
             <input id="delete" type="submit" value="Yes"/>
         </form>
+        </c:if>
+        </c:if>
 
     </section>
 

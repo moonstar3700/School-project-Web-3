@@ -34,6 +34,21 @@
                 </div>
             </c:if>
 
+            <c:if test="${empty user}">
+                <p>U moet ingelogd om gebruikers aan te passen.</p>
+                <c:redirect url="index.jsp"/>
+            </c:if>
+
+            <c:if test="${not empty user}">
+            <c:if test="${empty trainingid}">
+                <p>Geen training geselecteerd om aan te passen.</p>
+            </c:if>
+
+
+
+            <c:if test="${not empty user}">
+            <c:if test="${not empty trainingid}">
+
             <p> ID: ${trainingid}</p>
             <form method="POST" action="Controller?command=EditTraining&trainingid=${trainingid}" novalidate="novalidate">
                 <!-- novalidate in order to be able to run tests correctly -->
@@ -43,6 +58,9 @@
                 <p><input type="submit" id="editTraining" value="Edit Training"></p>
 
             </form>
+            </c:if>
+            </c:if>
+            </c:if>
         </section>
 
     </main>

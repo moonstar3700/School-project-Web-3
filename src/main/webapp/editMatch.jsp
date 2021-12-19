@@ -35,6 +35,19 @@
                 </div>
             </c:if>
 
+            <c:if test="${empty user}">
+                <p>U moet ingelogd om gebruikers aan te passen.</p>
+                <c:redirect url="index.jsp"/>
+            </c:if>
+
+            <c:if test="${not empty user}">
+            <c:if test="${empty matchid}">
+                <p>Geen wedstrijd geselecteerd om aan te passen.</p>
+            </c:if>
+
+
+            <c:if test="${not empty matchid}">
+
             <fmt:parseDate value="${date}"  type="date" pattern="yyyy-MM-dd" var="parsedDate" />
             <fmt:formatDate value="${parsedDate}" type="date" pattern="dd-MM-yyyy" var="stdDatum" />
             <jsp:useBean id="now" class="java.util.Date" />
@@ -83,6 +96,8 @@
 
                 </form>
 
+            </c:if>
+            </c:if>
             </c:if>
 
 

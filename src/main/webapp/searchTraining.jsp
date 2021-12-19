@@ -32,6 +32,9 @@
                 </section>
 
             </c:if>
+            <c:if test="${empty user}">
+                <p>U moet ingelogd zijn om een training te zoeken.</p>
+            </c:if>
             <c:if test="${not empty errors}">
                 <div class="alert alert-danger">
                     <ul>
