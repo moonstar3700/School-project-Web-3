@@ -60,7 +60,7 @@ public class Match {
 
     public void setDate(LocalDate date) {
         if (date == null) {
-            throw new DomainException("No date given");
+            throw new DomainException("No or invalid date given");
         }
         if (LocalDate.now().isAfter(date)) {
             throw new DomainException("Match must take place in the future");
@@ -82,7 +82,7 @@ public class Match {
 
     public void setTime(LocalTime time) {
         if (time == null) {
-            throw new DomainException("No time given");
+            throw new DomainException("No or invalid time given");
         }
         this.time = time;
     }
