@@ -14,7 +14,7 @@
         <body>
             <div id="container">
                 <jsp:include page="header.jsp">
-                    <jsp:param name="actual" value="Add Match"/>
+                    <jsp:param name="actual" value="Add Training"/>
                 </jsp:include>
                 <img class="item" src="images/registerfix.jpg" alt="foto dojo">
                 <main class="gridfield">

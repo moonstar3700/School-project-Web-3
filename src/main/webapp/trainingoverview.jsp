@@ -15,7 +15,7 @@
 <body>
 <div id="container">
     <jsp:include page="header.jsp">
-        <jsp:param name="actual" value="Matches"/>
+        <jsp:param name="actual" value="Trainings"/>
     </jsp:include>
     <img class="item" src="images/overviewfix.jpg" alt="foto dojo">
     <main>
@@ -36,6 +36,9 @@
                 </p>
             </section>
 
+        </c:if>
+        <c:if test="${empty user}">
+            <p>U moet ingelogd zijn om trainingen te bekijken.</p>
         </c:if>
         <c:if test="${empty notAuthorized}">
 

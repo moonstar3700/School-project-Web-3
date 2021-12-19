@@ -12,7 +12,7 @@
                 <li><a ${param.actual eq 'Add Match'?"class = actual":""} href="registermatch.jsp">Add Match</a></li>
                 <li><a ${param.actual eq 'Users'?"class = actual":""} href="Controller?command=UserOverview">Users</a></li>
                 <li><a ${param.actual eq 'Trainings'?"class = actual":""} href="Controller?command=TrainingOverview">Trainings</a></li>
-                <li><a ${param.actual eq 'Add Trainings'?"class = actual":""}href="registertraining.jsp">Add training</a></li>
+                <li><a ${param.actual eq 'Add Training'?"class = actual":""}href="registertraining.jsp">Add training</a></li>
             </c:if>
         </ul>
     </nav>
