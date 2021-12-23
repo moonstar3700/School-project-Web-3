@@ -19,7 +19,8 @@
     <div class="grid1">
     </div>
     <section>
-        <p>Volgende trainingen vonden plaats op ${date}:</p>
+        <c:choose><c:when test="empty ${user}"><p>U moet ingelogd zijn om een training te zoeken.</p>
+            <c:redirect url="index.jsp"/></c:when><c:otherwise><p>Volgende trainingen vonden plaats op ${date}:</p>
             <c:forEach var="trainingen" items="${allTrainings}">
                 <h2 class="TOtitle">${trainingen.key.lastName}</h2>
                 <table>
@@ -45,7 +46,8 @@
                     </c:forEach>
                     </tbody>
                 </table>
-            </c:forEach>
+            </c:forEach></c:otherwise></c:choose>
+
     </section>
 
 

@@ -31,6 +31,7 @@
                     <c:if test="${not empty notAuthorized}">
                         <section>
                             <p>${notAuthorized}</p>
+                            <c:redirect url="index.jsp"/>
                         </section>
                     </c:if>
                     <c:if test="${empty notAuthorized}">

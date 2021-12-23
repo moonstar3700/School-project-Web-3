@@ -56,6 +56,7 @@
                         </c:if>
                         <c:if test="${empty user}">
                         <p>U moet ingelogd zijn om een wedstrijd aan te maken.</p>
+                            <c:redirect url="index.jsp"/>
                         </c:if>
                     </section>
 

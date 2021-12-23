@@ -33,12 +33,14 @@
             <section>
                 <p>
                     ${notAuthorized}
+                        <c:redirect url="index.jsp"/>
                 </p>
             </section>
 
         </c:if>
         <c:if test="${empty user}">
             <p>U moet ingelogd zijn om trainingen te bekijken.</p>
+            <c:redirect url="index.jsp"/>
         </c:if>
         <c:if test="${empty notAuthorized}">
 

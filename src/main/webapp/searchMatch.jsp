@@ -42,7 +42,6 @@
                 <p><label for="away">Away Team</label><input type="text" id="away" name="away"
                                                              value="${awayPreviousValue}"></p>
                 <p><label for="group">Group</label>
-                    <!-- previous value bij select? -->
                     <select id="group" name="group">
                         <c:choose>
                             <c:when test="${groupPreviousValue eq 'Recreation'}">
