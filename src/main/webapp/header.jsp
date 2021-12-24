@@ -3,7 +3,7 @@
     <h1> Dojo Kamiyama </h1>
     <nav>
         <ul>
-            <li><a ${param.actual eq 'Home'?"class = actual":""} href="Controller">Home</a></li>
+            <li><a ${param.actual eq 'Home'?"class = actual":""} id="Home" href="Controller">Home</a></li>
             <c:if test="${sessionScope.user eq null}">
                 <li><a ${param.actual eq 'Register'?"class = actual":""} href="register.jsp">Register</a></li>
             </c:if>

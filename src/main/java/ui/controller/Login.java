@@ -52,7 +52,7 @@ public class Login extends RequestHandler {
         } catch (DbException exc) {
             errors.add(exc.getMessage());
         }
-        return user; //waarschijnlijk niet hoe het moet....
+        return user;
     }
 
 
