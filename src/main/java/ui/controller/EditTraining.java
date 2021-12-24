@@ -17,6 +17,7 @@ public class EditTraining extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         ArrayList<String> errors = new ArrayList<String>();
+
         int trainingid;
         try {
 
@@ -33,6 +34,9 @@ public class EditTraining extends RequestHandler {
         }
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "index.jsp";
+        }
         Training training = service.getTraining(trainingid);
         setDate(training, request, response, errors);
         setStart(training, request, response, errors);
