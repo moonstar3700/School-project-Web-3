@@ -37,7 +37,7 @@ public class ToEdit extends RequestHandler {
         }
         User user = service.get(userid);
 
-        if (log.getRole() == Role.ADMIN && log.getUserid() != user.getUserid() || log.getRole() == Role.COORDINATOR && user.getGroup() != log.getGroup()){
+        if (log.getRole() == Role.TRAINER && log.getUserid() != user.getUserid() || log.getRole() == Role.COORDINATOR && user.getGroup() != log.getGroup()){
             request.setAttribute("errors", "U heeft geen authenticatie om deze user aan te passen");
             return "Controller?command=UserOverview";
         }
