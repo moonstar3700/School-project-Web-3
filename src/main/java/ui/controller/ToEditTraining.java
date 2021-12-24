@@ -1,9 +1,12 @@
 package ui.controller;
 
+import domain.model.Role;
 import domain.model.Training;
+import domain.model.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -30,12 +33,19 @@ public class ToEditTraining extends RequestHandler{
             return "Controller?command=TrainingOverview";
         }
 
-        Training training = service.getTraining(trainingid);
-        if (training.getTrainingId() == 0) {
-            request.setAttribute("errors", "Training does not exist");
+        HttpSession session = request.getSession();
+        User log = (User) session.getAttribute("user");
+        if (log == null){
+            request.setAttribute("errors", "u moet ingelogd zijn om trainingen aan te passen");
             return "Controller?command=TrainingOverview";
         }
-        
+        Training training = service.getTraining(trainingid);
+        User eigenaar = service.get(training.getUserID());
+        if (log.getRole() != Role.ADMIN && log.getUserid() != training.getUserID()) {
+            request.setAttribute("errors", "U heeft geen authenticatie rechten voor deze training");
+            return "Controller?command=TrainingOverview";
+        }
+
         request.setAttribute("trainingid", trainingid);
         LocalDate date = training.getDate();
         request.setAttribute("date", date);
