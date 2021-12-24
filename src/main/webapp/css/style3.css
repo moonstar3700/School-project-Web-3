@@ -285,24 +285,24 @@ input[type="submit"]:hover {
     margin-left: 1rem;
 }
 
-.valid {
+.valid2 {
     color: green;
     margin-left: 1rem;
 }
 
-.valid:before {
+.valid2:before {
     position: relative;
     left: -15px;
     content: "✔";
 }
 
-.invalid {
+.invalid2 {
     margin-left: 1rem;
     color: red;
     left: 25px;
 }
 
-.invalid:before {
+.invalid2:before {
     position: relative;
     left: -15px;
     content: "✖";
@@ -435,11 +435,11 @@ meter {
         margin-bottom: 15px;
     }
 
-    .valid{
+    .valid2{
         margin-left: 125px;
     }
 
-    .invalid{
+    .invalid2{
         margin-left: 125px;
     }
 

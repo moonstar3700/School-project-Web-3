@@ -17,18 +17,25 @@ public class ToEditTraining extends RequestHandler{
         } catch (NumberFormatException e) {
             request.setAttribute("errors", "No training selected");
             return "Controller?command=TrainingOverview";
+        } catch (NullPointerException e) {
+            request.setAttribute("errors", "Training bestaat niet");
+            return "Controller?command=TrainingOverview";
         }
 
         request.setAttribute("trainingid", trainingid);
         try {
-            service.getTraining(trainingid);
+            Training train = service.getTraining(trainingid);
+            if (train.getTrainingId() == 0){
+                request.setAttribute("errors", "exc.getMessage()");
+                return "Controller?command=TrainingOverview";
+            }
         }
         catch (Exception exc ) {
             request.setAttribute("errors", exc.getMessage());
             return "Controller?command=TrainingOverview";
         }
         Training training = service.getTraining(trainingid);
-        if (training == null) {
+        if (training.getTrainingId() == 0) {
             request.setAttribute("errors", "Training does not exist");
             return "Controller?command=TrainingOverview";
         }
