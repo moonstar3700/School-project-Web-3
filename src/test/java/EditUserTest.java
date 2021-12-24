@@ -17,8 +17,8 @@ public class EditUserTest {
         //System.setProperty("webdriver.chrome.driver", "/Users/.../web3pers/chromedriver");
         // windows: gebruik dubbele \\ om pad aan te geven
         // hint: zoek een werkende test op van web 2 ...
-        System.setProperty("webdriver.chrome.driver", "C:/Users/Sarah/Toegepaste Informatica/1ste Fase/Webontwikkeling 2/chromedriver.exe");
-        //System.setProperty("webdriver.chrome.driver", "D:\\informatica cursus\\IT 2de jaar\\Web 3\\chrome driver\\chromedriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "C:/Users/Sarah/Toegepaste Informatica/1ste Fase/Webontwikkeling 2/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "D:\\informatica cursus\\IT 2de jaar\\Web 3\\chrome driver\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("http://localhost:8080/Groep1_17_war_exploded/register.jsp");
         //driver.get("http://localhost:8080/Groep1_17_war2/register.jsp");
@@ -70,10 +70,10 @@ public class EditUserTest {
         registerpage2.setPassword("1234");
         registerpage2.register();
 
-        IndexPage index = PageFactory.initElements(driver, IndexPage.class);
-        index.setEmail("bab@hotmail.com");
-        index.setPassword("1234");
-        index.login2();
+        //IndexPage index = PageFactory.initElements(driver, IndexPage.class);
+        //index.setEmail("bab@hotmail.com");
+        //index.setPassword("1234");
+        //index.login2();
 
         EditUserPage editPage = PageFactory.initElements(driver, EditUserPage.class);
         editPage.setEmail("John1@hotmail.com");
