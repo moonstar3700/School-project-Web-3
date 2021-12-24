@@ -3,6 +3,7 @@ package ui.controller;
 import domain.model.DomainException;
 import domain.model.Match;
 import domain.model.User;
+import domain.service.DbException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +19,7 @@ public class EditMatch extends RequestHandler {
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         ArrayList<String> errors = new ArrayList<String>();
         int matchid = Integer.parseInt(request.getParameter("matchid"));
-        request.setAttribute("match", matchid);
+        request.setAttribute("matchid", matchid);
         try {
             service.getMatch(matchid);
         } catch (DomainException exc) {
@@ -43,7 +44,7 @@ public class EditMatch extends RequestHandler {
                 service.updateMatch(match);
                 response.sendRedirect("Controller?command=MatchOverview&confirmation=succesEdit");
                 return "Controller?command=MatchOverview";
-            } catch (DomainException | IOException exc) {
+            } catch (DomainException | IOException | DbException exc) {
                 errors.add(exc.getMessage());
                 request.setAttribute("errors", errors);
                 return "editMatch.jsp";
