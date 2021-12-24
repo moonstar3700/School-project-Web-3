@@ -12,7 +12,6 @@ public class Logout extends RequestHandler{
     public String handleRequest(HttpServletRequest request, HttpServletResponse response){
         ArrayList<String> errors = new ArrayList<String>();
         HttpSession session = request.getSession();
-        session.invalidate();
         try {
             session.invalidate();
             return "index.jsp";
