@@ -18,11 +18,17 @@ public class EditMatch extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         ArrayList<String> errors = new ArrayList<String>();
-        int matchid = Integer.parseInt(request.getParameter("matchid"));
+        int matchid;
+        try {
+            matchid = Integer.parseInt(request.getParameter("matchid"));
+        } catch (NumberFormatException e) {
+            request.setAttribute("errors", "No match selected");
+            return "Controller?command=MatchOverview";
+        }
         request.setAttribute("matchid", matchid);
         try {
             service.getMatch(matchid);
-        } catch (DomainException exc) {
+        } catch (DomainException | DbException exc) {
             request.setAttribute("errors", exc.getMessage());
             return "Controller?command=UserOverview";
         }

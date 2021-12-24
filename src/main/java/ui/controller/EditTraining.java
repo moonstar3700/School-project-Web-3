@@ -13,16 +13,21 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditTraining extends RequestHandler{
+public class EditTraining extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         ArrayList<String> errors = new ArrayList<String>();
-        int trainingid = Integer.parseInt(request.getParameter("trainingid"));
+        int trainingid;
+        try {
+
+        } catch (NumberFormatException e) {
+            request.setAttribute("errors", "training id moet een getal zijn");
+        }
+        trainingid = Integer.parseInt(request.getParameter("trainingid"));
         request.setAttribute("trainingid", trainingid);
         try {
             service.getTraining(trainingid);
-        }
-        catch (Exception exc ) {
+        } catch (Exception exc) {
             request.setAttribute("errors", exc.getMessage());
             return "Controller?command=TrainingOverview";
         }
@@ -39,14 +44,12 @@ public class EditTraining extends RequestHandler{
                 service.updateTraining(training, user);
                 response.sendRedirect("Controller?command=TrainingOverview&confirmation=succesEdit");
                 return "Controller?command=TrainingOverview";
-            }
-            catch (Exception exc ) {
+            } catch (Exception exc) {
                 errors.add(exc.getMessage());
                 request.setAttribute("errors", errors);
                 return "edittraining.jsp";
             }
-        }
-        else {
+        } else {
             request.setAttribute("errors", errors);
             return "edittraining.jsp";
         }
@@ -56,33 +59,29 @@ public class EditTraining extends RequestHandler{
         LocalDate date = null;
         try {
             date = LocalDate.parse(request.getParameter("date"));
-        }
-        catch (DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             errors.add("");
         }
         try {
             training.setDate(date);
             request.setAttribute("date", date);
-        }
-        catch (DomainException exc) {
+        } catch (DomainException exc) {
             training.forceDate(date);
             errors.add(exc.getMessage());
-        }
-        catch (DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             errors.add("date does not have correct input");
         }
     }
+
     private void setStart(Training training, HttpServletRequest request, HttpServletResponse response, ArrayList<String> errors) {
         try {
             LocalTime start = LocalTime.parse(request.getParameter("start"));
             training.setStart(start);
             request.setAttribute("start", start);
-        }
-        catch (DomainException exc) {
+        } catch (DomainException exc) {
             errors.add(exc.getMessage());
             request.setAttribute("start", LocalTime.parse(request.getParameter("start")));
-        }
-        catch (DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             errors.add("Bad input for start time");
         }
     }
@@ -93,25 +92,23 @@ public class EditTraining extends RequestHandler{
             LocalTime end = LocalTime.parse(request.getParameter("end"));
             training.setEnd(end);
             request.setAttribute("end", end);
-        }
-        catch (DomainException exc) {
+        } catch (DomainException exc) {
             errors.add(exc.getMessage());
             request.setAttribute("end", LocalTime.parse(request.getParameter("end")));
-        }
-        catch (DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             errors.add("Bad input for end time");
         }
     }
-    private void checkTraining(Training training, HttpServletRequest request, HttpServletResponse response, ArrayList<String> errors, User user){
+
+    private void checkTraining(Training training, HttpServletRequest request, HttpServletResponse response, ArrayList<String> errors, User user) {
         List<Training> list = service.getAllTrainings(user);
         try {
-            for (Training item: list){
-                if (item.getUserID() == training.getUserID()){
+            for (Training item : list) {
+                if (item.getUserID() == training.getUserID()) {
                     item.checkTrainingMoment(training);
                 }
             }
-        }
-        catch (DomainException exc) {
+        } catch (DomainException exc) {
             errors.add(exc.getMessage());
         }
     }
