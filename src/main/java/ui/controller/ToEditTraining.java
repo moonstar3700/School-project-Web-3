@@ -50,7 +50,7 @@ public class ToEditTraining extends RequestHandler{
         LocalDate date = training.getDate();
         request.setAttribute("date", date);
         LocalTime start = training.getStart();
-        request.setAttribute("Start", start);
+        request.setAttribute("start", start);
         LocalTime end = training.getEnd();
         request.setAttribute("end", end);
         return "edittraining.jsp";

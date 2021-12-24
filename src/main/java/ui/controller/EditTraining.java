@@ -80,6 +80,7 @@ public class EditTraining extends RequestHandler{
         }
         catch (DomainException exc) {
             errors.add(exc.getMessage());
+            request.setAttribute("start", LocalTime.parse(request.getParameter("start")));
         }
         catch (DateTimeParseException e){
             errors.add("Bad input for start time");
@@ -95,6 +96,7 @@ public class EditTraining extends RequestHandler{
         }
         catch (DomainException exc) {
             errors.add(exc.getMessage());
+            request.setAttribute("end", LocalTime.parse(request.getParameter("end")));
         }
         catch (DateTimeParseException e){
             errors.add("Bad input for end time");
