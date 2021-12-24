@@ -18,7 +18,13 @@ public class SearchMatch extends RequestHandler {
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         ArrayList<String> errors = new ArrayList<>();
         String home = request.getParameter("home");
+        if (home.isEmpty()) {
+            errors.add("No home club given");
+        }
         String away = request.getParameter("away");
+        if (away.isEmpty()) {
+            errors.add("No away club given");
+        }
         String group =  request.getParameter("group");
         if (errors.size() == 0) {
             try {
