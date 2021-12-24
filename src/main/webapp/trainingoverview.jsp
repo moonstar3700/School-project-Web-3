@@ -74,9 +74,9 @@
                         <h1 id="toh">sorteer Opties</h1>
                         <p>Om Alle tabellen te sorteren, gelieve te kiezen waar u op wilt sorteren en op sort te
                             klikken</p>
-                        <p>Om een specifieke tabel te filteren (met javascript), gelieve te klikken op de headings
+                        <p>Om een specifieke tabel te filteren (met javascript), gelieve te klikken op de kolomheaders
                             TrainingID, Date, Start, End, of op durations
-                            van de gewenste tabel. (Deze zullen ondelijnd worden indien erover gehoverd word)</p>
+                            van de gewenste tabel. (Deze zullen ondelijnd worden indien erover gehoverd wordt)</p>
                     </section>
                     <div class="alert alert-danger">
                         <ul>

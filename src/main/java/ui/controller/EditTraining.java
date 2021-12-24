@@ -39,7 +39,7 @@ public class EditTraining extends RequestHandler {
             request.setAttribute("errors", exc.getMessage());
             return "Controller?command=TrainingOverview";
         }
-        
+
         Training training = service.getTraining(trainingid);
         setDate(training, request, response, errors);
         setStart(training, request, response, errors);
