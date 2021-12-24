@@ -42,7 +42,6 @@ public class ToEditTraining extends RequestHandler{
         }
 
         Training training = service.getTraining(trainingid);
-        User eigenaar = service.get(training.getUserID());
         if (log.getRole() != Role.ADMIN && log.getUserid() != training.getUserID()) {
             request.setAttribute("errors", "U heeft geen authenticatie rechten voor deze training");
             return "Controller?command=TrainingOverview";

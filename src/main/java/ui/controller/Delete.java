@@ -10,6 +10,8 @@ import java.io.IOException;
 public class Delete extends RequestHandler{
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+
+
         int userid = Integer.parseInt(request.getParameter("userid"));
         try {
             service.get(userid);
