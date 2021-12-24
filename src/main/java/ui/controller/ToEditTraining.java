@@ -15,6 +15,14 @@ public class ToEditTraining extends RequestHandler{
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         int trainingid;
+
+        HttpSession session = request.getSession();
+        User log = (User) session.getAttribute("user");
+        if (log == null){
+            request.setAttribute("errors", "u moet ingelogd zijn om trainingen aan te passen");
+            return "index.jsp";
+        }
+
         try {
             trainingid = Integer.parseInt(request.getParameter("trainingid"));
         } catch (NumberFormatException e) {
@@ -33,12 +41,6 @@ public class ToEditTraining extends RequestHandler{
             return "Controller?command=TrainingOverview";
         }
 
-        HttpSession session = request.getSession();
-        User log = (User) session.getAttribute("user");
-        if (log == null){
-            request.setAttribute("errors", "u moet ingelogd zijn om trainingen aan te passen");
-            return "Controller?command=TrainingOverview";
-        }
         Training training = service.getTraining(trainingid);
         User eigenaar = service.get(training.getUserID());
         if (log.getRole() != Role.ADMIN && log.getUserid() != training.getUserID()) {

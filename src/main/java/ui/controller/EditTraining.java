@@ -17,8 +17,14 @@ public class EditTraining extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         ArrayList<String> errors = new ArrayList<String>();
-
         int trainingid;
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user == null){
+            request.setAttribute("errors", "U moet ingelogd zijn om trainingen aan te passen");
+            return "index.jsp";
+        }
+
         try {
             trainingid = Integer.parseInt(request.getParameter("trainingid"));
         } catch (NumberFormatException e) {
@@ -33,11 +39,7 @@ public class EditTraining extends RequestHandler {
             request.setAttribute("errors", exc.getMessage());
             return "Controller?command=TrainingOverview";
         }
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            return "index.jsp";
-        }
+        
         Training training = service.getTraining(trainingid);
         setDate(training, request, response, errors);
         setStart(training, request, response, errors);
