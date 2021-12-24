@@ -11,7 +11,14 @@ public class ToEditTraining extends RequestHandler{
 
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-        int trainingid = Integer.parseInt(request.getParameter("trainingid"));
+        int trainingid;
+        try {
+            trainingid = Integer.parseInt(request.getParameter("trainingid"));
+        } catch (NumberFormatException e) {
+            request.setAttribute("errors", "No training selected");
+            return "Controller?command=TrainingOverview";
+        }
+
         request.setAttribute("trainingid", trainingid);
         try {
             service.getTraining(trainingid);
@@ -21,6 +28,10 @@ public class ToEditTraining extends RequestHandler{
             return "Controller?command=TrainingOverview";
         }
         Training training = service.getTraining(trainingid);
+        if (training == null) {
+            request.setAttribute("errors", "Training does not exist");
+            return "Controller?command=TrainingOverview";
+        }
         LocalDate date = training.getDate();
         request.setAttribute("date", date);
         LocalTime start = training.getStart();

@@ -11,7 +11,14 @@ public class ToEdit extends RequestHandler {
 
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-        int userid = Integer.parseInt(request.getParameter("userid"));
+        int userid;
+        try  {
+            userid = Integer.parseInt(request.getParameter("userid"));
+        } catch (NumberFormatException e) {
+            request.setAttribute("errors", "No user selected");
+            return "Controller?command=UserOverview";
+        }
+
         request.setAttribute("userid", userid);
         try {
             service.get(userid);
