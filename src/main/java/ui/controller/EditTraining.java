@@ -20,9 +20,10 @@ public class EditTraining extends RequestHandler {
 
         int trainingid;
         try {
-
+            trainingid = Integer.parseInt(request.getParameter("trainingid"));
         } catch (NumberFormatException e) {
             request.setAttribute("errors", "training id moet een getal zijn");
+            return "Controller?command=TrainingOverview";
         }
         trainingid = Integer.parseInt(request.getParameter("trainingid"));
         request.setAttribute("trainingid", trainingid);
