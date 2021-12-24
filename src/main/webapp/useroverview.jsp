@@ -102,7 +102,8 @@
                     </c:if>
 
                     <c:if test="${empty allUsers}">
-                    <p>Er zijn momenteel geen gebruikers geregistreerd. U kan zich <a href="register.jsp">hier registeren</a>.</p>
+                        <section><p>Er zijn momenteel geen gebruikers geregistreerd. U kan zich <a href="register.jsp">hier
+                            registeren</a>.</p></section>
                     </c:if>
                     </c:if>
                 </main>

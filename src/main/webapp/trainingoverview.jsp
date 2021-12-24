@@ -132,7 +132,8 @@
 
         <c:if test="${emptytable eq true}">
             <section>
-                <p>Er zijn momenteel geen Trainingen geregistreerd. U kan <a href="registertraining.jsp">hier Trainingen toevoegen</a>.</p>
+                <section><p>Er zijn momenteel geen Trainingen geregistreerd. U kan <a href="registertraining.jsp">hier
+                    Trainingen toevoegen</a>.</p></section>
             </section>
 
         </c:if>
