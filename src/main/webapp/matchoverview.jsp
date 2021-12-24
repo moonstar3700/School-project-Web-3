@@ -220,8 +220,9 @@
         </c:if>
 
         <c:if test="${empty allMatches}">
-            <p>Er zijn momenteel geen wedstrijden geregistreerd. U kan <a href="registermatch.jsp">hier wedstrijden
-                toevoegen</a>.</p>
+            <section><p>Er zijn momenteel geen wedstrijden geregistreerd. <c:if test="${not empty user}"> U kan <a
+                    href="registermatch.jsp">hier wedstrijden
+                toevoegen</a> .</c:if></p></section>
         </c:if>
     </main>
     <footer>
