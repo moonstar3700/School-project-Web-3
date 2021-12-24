@@ -3,6 +3,7 @@ function sortTableNumber(tableid, collumn){
     var table, rows, switching, i, x, y, shouldSwitch, switchcount = 0;
     table = document.getElementById(tableid);
     switching = true;
+    shouldSwitch = false;
     while (switching) {
         switching = false;
         rows = table.rows;
@@ -24,7 +25,7 @@ function sortTableNumber(tableid, collumn){
             switchcount ++;
         } else {
             if (switchcount == 0) {
-                switching = true;
+                switching = false;
             }
         }
     }
@@ -58,7 +59,7 @@ function sortTableDate(tableid, collumn){
             switchcount ++;
         } else {
             if (switchcount == 0) {
-                switching = true;
+                switching = false;
             }
         }
     }
@@ -92,7 +93,7 @@ function sortTableTime(tableid, collumn){
             switchcount ++;
         } else {
             if (switchcount == 0) {
-                switching = true;
+                switching = false;
             }
         }
     }

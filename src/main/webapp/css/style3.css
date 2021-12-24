@@ -287,24 +287,40 @@ input[type="submit"]:hover {
 
 .valid {
     color: green;
+    margin-left: 1rem;
 }
 
 .valid:before {
     position: relative;
-    left: -35px;
+    left: -15px;
     content: "✔";
 }
 
-/* Add a red text color and an "x" when the requirements are wrong */
 .invalid {
+    margin-left: 1rem;
     color: red;
+    left: 25px;
 }
 
 .invalid:before {
     position: relative;
-    left: -35px;
+    left: -15px;
     content: "✖";
 }
+
+meter {
+    margin: 0 auto 0.5rem;
+    width: 175px;
+    height: 50px;
+    display: inline-block;
+
+
+}
+
+.register-group {
+    margin: 16px auto;
+}
+
 /*desktop*/
 
 
@@ -408,6 +424,27 @@ input[type="submit"]:hover {
 
     .left, .right {
         display: inline-block;
+    }
+
+    meter {
+        margin-left: 110px;
+    }
+
+    #password-text{
+        margin-left: 110px;
+        margin-bottom: 15px;
+    }
+
+    .valid{
+        margin-left: 125px;
+    }
+
+    .invalid{
+        margin-left: 125px;
+    }
+
+    #register-group {
+        margin: 16px auto;
     }
 
     #cancel {
