@@ -285,6 +285,14 @@ input[type="submit"]:hover {
     margin-left: 1rem;
 }
 
+.valid {
+    color: green;
+}
+
+.invalid {
+    color: red;
+}
+
 .valid2 {
     color: green;
     margin-left: 1rem;
