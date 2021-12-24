@@ -65,12 +65,14 @@
                     <p>Date: ${date}</p>
                     <p>Time: ${time}</p>
                     <p>Winner:</p>
-                    <input type="radio" id="winner1"
-                           name="winner" value="home">
+                    <c:choose><c:when test="${winner eq 'away'}"><input type="radio" id="winner1"
+                              name="winner" value="home"></c:when><c:otherwise><input type="radio" id="winner1"
+                                                                                      name="winner" value="home" checked="checked"></c:otherwise></c:choose>
                     <label for="winner1">Home</label>
 
-                    <input type="radio" id="winner2"
-                           name="winner" value="away">
+                    <c:choose><c:when test="${winner eq 'away'}"><input type="radio" id="winner2"
+                                                                   name="winner" value="away" checked="checked"></c:when><c:otherwise><input type="radio" id="winner1"
+                                                                                                                           name="winner" value="away"></c:otherwise></c:choose>
                     <label for="winner2">Away</label>
 
                     <p><input type="submit" id="editmatch2" value="Edit"></p>
