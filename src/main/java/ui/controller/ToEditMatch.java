@@ -37,6 +37,8 @@ public class ToEditMatch extends RequestHandler {
         request.setAttribute("date", date);
         LocalTime time = match.getTime();
         request.setAttribute("time", time);
+        String winner = match.getWinner();
+        request.setAttribute("winner", winner);
         return "editMatch.jsp";
     }
 }
