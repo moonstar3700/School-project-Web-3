@@ -71,11 +71,12 @@ public class TrainingServiceDB implements TrainingService {
                 int user_id = resultSet.getInt("user_id");
                 Training found = new Training(id, date, start, end, user_id);
                 this.training = found;
+                return training;
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return training;
+        throw new DbException("training bestaat niet");
     }
 
 
