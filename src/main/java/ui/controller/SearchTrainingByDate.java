@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,13 @@ public class SearchTrainingByDate extends RequestHandler {
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         ArrayList<String> errors = new ArrayList<>();
         HashMap<User, List<Training>> trainingen = new HashMap<>();
+        try {
+            LocalDate date = LocalDate.parse(request.getParameter("date"));
+        } catch (DateTimeParseException e) {
+            errors.add("Ongeldige datum");
+            request.setAttribute("errors", errors);
+            return "searchTraining.jsp";
+        }
         LocalDate date = LocalDate.parse(request.getParameter("date"));
         HttpSession session = request.getSession();
         User log = (User) session.getAttribute("user");

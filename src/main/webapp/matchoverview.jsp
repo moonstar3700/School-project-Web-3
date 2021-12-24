@@ -158,7 +158,6 @@
                             <c:if test="${user.userid eq match.creator.userid || (user.group eq 'YOUTH' && user.role eq 'COORDINATOR') || user.role eq 'ADMIN'}">
                             <td><a id="edit2" href="Controller?command=ToEditMatch&matchid=${match.matchid}">Edit</a>
                             <td><a id="delete2" href="Controller?command=ConfirmMatchDelete&matchid=${match.matchid}">Delete</a></td>
-                            </td>
                             </c:if>
                         </tr>
                         </tbody>
@@ -207,7 +206,6 @@
                             <c:if test="${user.userid eq match.creator.userid || (user.group eq 'RECREATION' && user.role eq 'COORDINATOR') || user.role eq 'ADMIN'}">
                             <td><a id="edit3" href="Controller?command=ToEditMatch&matchid=${match.matchid}">Edit</a>
                             <td><a id="delete3" href="Controller?command=ConfirmMatchDelete&matchid=${match.matchid}">Delete</a></td>
-                            </td>
                             </c:if>
                         </tr>
 

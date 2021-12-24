@@ -99,7 +99,7 @@
                     </form>
                     <c:forEach var="trainingen" items="${allTrainings}">
                         <h2 class="TOtitle">${trainingen.key.lastName}</h2>
-                        <table id="${trainingen.key.userid}" }>
+                        <table id="${trainingen.key.userid}">
                             <thead>
                             <tr>
                                 <th class="TOtableHeading" onclick="sortTableNumber(${trainingen.key.userid}, 0)">

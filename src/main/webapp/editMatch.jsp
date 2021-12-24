@@ -71,7 +71,7 @@
                     <label for="winner1">Home</label>
 
                     <c:choose><c:when test="${winner eq 'away'}"><input type="radio" id="winner2"
-                                                                   name="winner" value="away" checked="checked"></c:when><c:otherwise><input type="radio" id="winner1"
+                                                                   name="winner" value="away" checked="checked"></c:when><c:otherwise><input type="radio" id="winner2"
                                                                                                                            name="winner" value="away"></c:otherwise></c:choose>
                     <label for="winner2">Away</label>
 
