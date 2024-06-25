@@ -44,7 +44,7 @@ The Sportclub Web Application is designed to manage the activities of a sport cl
 3. **Inject Admin User:**
    - Run the `src/main/java/ui/view/UserView.java` file to inject an admin user into the database.
 
-### Running the Application (in Intellij)
+### Running the Application (with Intellij)
 
 1. Open the project in IntelliJ IDEA.
 2. Build the project to generate the WAR file.
