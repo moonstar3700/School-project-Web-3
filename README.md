@@ -25,6 +25,7 @@ The Sportclub Web Application is designed to manage the activities of a sport cl
 - **PostgreSQL:** Database system used for storing application data.
 - **Apache Tomcat:** Web server and servlet container for deploying the application.
 - **IntelliJ IDEA:** Recommended IDE for creating and running the project.
+- **Selenium:** For automating tests to ensure the application's functionality.
 
 ## Setup Instructions
 
@@ -32,6 +33,7 @@ The Sportclub Web Application is designed to manage the activities of a sport cl
 
 - Install [Apache Tomcat](https://tomcat.apache.org/)
 - Install [PostgreSQL](https://www.postgresql.org/)
+- Install [Selenium WebDriver](https://www.selenium.dev/documentation/webdriver/)
 
 ### Database Setup
 
@@ -57,6 +59,13 @@ The Sportclub Web Application is designed to manage the activities of a sport cl
 - Use the following credentials to log in as the admin:
   - **Email:** admin@admin.be
   - **Password:** t
+ 
+## Testing
+
+- **Selenium Tests:**
+  - Selenium tests are included to automate the testing of the application's functionality.
+  - To run the Selenium tests, ensure you have Selenium WebDriver installed and configured.
+  - Execute the test suite using your preferred method (e.g., through your IDE or a build tool like Maven or Gradle).
 
 ## User Roles and Permissions
 
