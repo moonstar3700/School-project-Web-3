@@ -1,0 +1,44 @@
+CREATE SCHEMA groep1_17;
+
+CREATE SEQUENCE groep1_17.user_id_seq;
+
+CREATE TABLE groep1_17.user
+(   	user_id int NOT NULL DEFAULT nextval('groep1_17.user_id_seq'::regclass),
+	email character varying COLLATE pg_catalog."default" NOT NULL,
+	password character varying COLLATE pg_catalog."default" NOT NULL,
+	firstname character varying COLLATE pg_catalog."default" NOT NULL,
+	lastname character varying COLLATE pg_catalog."default" NOT NULL,
+	"group" character varying COLLATE pg_catalog."default" NOT NULL,
+	role character varying COLLATE pg_catalog."default" NOT NULL,
+	CONSTRAINT user_pkey PRIMARY KEY (user_id, email)
+);
+
+INSERT INTO groep1_17.user ("email", "password","firstname","lastname","group","role") values ('admin@ucll.be','t','ad','min','elite','admin');
+
+CREATE SEQUENCE groep1_17.match_id_seq;
+
+CREATE TABLE groep1_17.match
+(   match_id int NOT NULL DEFAULT nextval('groep1_17.match_id_seq'::regclass),
+    matchDate date NOT NULL,
+    matchTime time NOT NULL,
+    home character varying NOT NULL,
+    away character varying NOT NULL,
+    winnerRegistration date,
+    winner character varying,
+    user_id int NOT NULL,
+    PRIMARY KEY (match_id)
+);
+
+INSERT INTO groep1_17.match (matchDate, matchTime, home, away, user_id) values ('19/10/21','15:00','Dojo Kamiyama','Dojo Test', 1);
+
+CREATE SEQUENCE groep1_17.training_id_seq;
+
+CREATE TABLE groep1_17.training
+(   training_id int NOT NULL DEFAULT nextval('groep1_17.training_id_seq'::regclass),
+    trainingDate date NOT NULL,
+    TrainingStart time NOT NULL,
+ 	TrainingEnd time NOT NULL,
+ 	duration int NOT NULL, 
+ 	user_id int NOT NULL,
+ 	PRIMARY KEY (training_id)
+);
